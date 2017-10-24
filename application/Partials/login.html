@@ -1,38 +1,50 @@
-<div>
+<div class="login">
+<div class="hide">
     <button class="btn btn-primary" ng-click="login()">Login</button>
 </div>
-<div layout="column" ng-cloak="" class="md-block" layout-align="center center">
-    <md-content layout-padding="" class = "md-block">
-        <div>
-          <form name="userForm">
-                <md-input-container class = "md-block" >
-                        <label>E-mail</label>
-                        <input required type = "email" name = "email"
-                           ng-model = "user.email"
-                           minlength = "10" maxlength = "70" ng-pattern = "/^.+@.+\..+$/" />
-                        <div ng-messages = "userForm.email.$error" role = "alert">
-                           <div ng-message-exp = "['required', 'minlength', 'maxlength',
-                              'pattern']">
-                              Your email must be between 10 and 100 characters long and should
-                              be a valid email address.
-                           </div>
-                        </div>
-                     </md-input-container>
-                     <md-input-container class = "md-block">
-                        <label>Password</label>
-                        <input type = "password" name = "password"
-                            ng-model = "user.password"/>
-                       </md-input-container>
-                        <md-input-container class = "md-block">
-                        <label>Your Oraganization ID</label>
-                        <input type = "text" name = "id"
-                            ng-model = "user.id"/>
-                        </md-input-container>
-            <div>
-                <md-button class="md-raised md-primary" layout-md="column" layout-align="center center">Login</md-button>
-            </div>
-     </form>
-        </div>
-      </md-content>
+<div class="paddingTop100">
+<div>
+    <md-content layout="row" layout-align="center center" style="background-color: white">
+        <h1>Login</h1>
+    </md-content>
 </div>
-<div>Change Password</div>
+<div>
+<md-content layout="column" style="background-color: white">
+    <form name="userLogin">
+        <md-input-container layout="row" flex="30" flex-offset="35">
+                <label>E-mail</label>
+                <input type = "email" name = "email"
+                   ng-model = "user.email"
+                 ng-pattern = "/^.+@.+\..+$/" />
+        </md-input-container>
+        <md-input-container layout="row" flex="30" flex-offset="35">
+                <label>Password</label>
+                <input type = "password" name = "password"
+                   ng-model = "user.password"
+                  ng-pattern = "/^.+@.+\..+$/" />
+        </md-input-container>
+        <md-input-container layout="row" flex="30" flex-offset="35">
+                <label>Your Organization ID</label>
+                <input type = "text" name = "id"
+                   ng-model = "user.id"
+                    ng-pattern = "/^.+@.+\..+$/" />
+        </md-input-container>
+    </form>
+</md-content>
+    <div>
+        <md-content layout="row" layout-align="center center" style="background-color: white">
+            <md-button flex="30" class="md-raised md-primary" ng-click="login()">Login</md-button>
+        </md-content>
+    </div>
+    <div class="headerMenu LoginActions">
+        <md-content layout="row" layout-align="center center" style="background-color: white">
+            <ul class="noPadding">
+                <li>Change Password</li>
+                <li>First Time?</li>
+                <li>Forgot Password</li>
+            </ul>
+        </md-content>
+    </div>
+</div>
+</div>
+</div>
