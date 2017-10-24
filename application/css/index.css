@@ -1,14 +1,15 @@
 .body {
 	margin:0px;
 	padding:0px;
+	height:100%;
 }
 .setActiveSideBar {
-	background-color: rgb(245, 246, 248);
+	background-color: #f5f6f8;
 	color:#0935ae;
 	border-left:2px solid #0935ae !important;
 }
 .setActiveHeadBar {
-	background-color: rgb(245, 246, 248);
+	background-color: #f5f6f8;
 	color:#0935ae;
 	border-bottom:2px solid #0935ae !important;
 }
@@ -47,7 +48,6 @@
 	cursor: pointer;
 	font-size: 14px;
 	border-color:black;
-	margin-top:20px;
 }
 .headerMenu.LoginActions ul li{
 	border-color:black;
@@ -76,6 +76,9 @@
 }
 .noPadding{
 	padding:0px !important;
+}
+.noMargin {
+	margin:0px !important;
 }
 .topPadding10{
 	padding-top:10px !important;
@@ -132,6 +135,15 @@
 .login .md-content{
 	background-color: white !important;
 }
-.paddingTop100 {
-	padding-top:100px;
+.paddingTop70 {
+	padding-top:70px;
+}
+.sideNav {
+		width: 114px;
+}
+.dynamicSection {
+	background-color: #f5f6f8;
+}
+.marginBottom30{
+	margin-bottom:30px !important;
 }

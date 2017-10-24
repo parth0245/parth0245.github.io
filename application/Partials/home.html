@@ -1,4 +1,5 @@
-<div class="col-xs-12 header">
+<div layout="column">
+        <div class="col-xs-12 header">
         <div class="col-xs-3 brandName">COMPANY NAME & FINANCIAL YEAR</div>
         <div class="col-xs-9">
                 <div class="col-xs-offset-4 col-xs-4 headerMenu">
@@ -32,6 +33,7 @@
                 <div>{{options.name}}</div>
         </div>
 </div>
+</div><!--
 <div class="col-xs-1 sideMenu noPadding text-center">
         <div ng-repeat="options in sideMenuOptions" ui-sref="{{options.url}}" ng-class="{setActiveSideBar: isActive == '{{options.name}}'}">
                 <div><span class="{{options.glyphClasses}}"></span></div>
@@ -40,4 +42,16 @@
 </div>
 <div class="col-xs-11 noPadding">
         <div ui-view></div>
-</div>
+</div>-->
+
+        <div class="container-fluid noPadding noMargin" layout="row" flex>
+                <md-sidenav md-is-locked-open="true" class="sideNav sideMenu noPadding text-center">
+                        <div ng-repeat="options in sideMenuOptions" ui-sref="{{options.url}}" ng-class="{setActiveSideBar: isActive == '{{options.name}}'}">
+                                <div><span class="{{options.glyphClasses}}"></span></div>
+                                <div>{{options.name}}</div>
+                        </div>
+                </md-sidenav>
+                <md-content id="content" class="dynamicSection" flex>
+                                <div ui-view></div>
+                </md-content>
+        </div>
