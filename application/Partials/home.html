@@ -24,7 +24,7 @@
                 </div>
         </div>
 </div>
-<div class="col-xs-12 subHeader noPadding">
+<div class="col-xs-12 subHeader noPadding"  ng-if="showNavigations">
         <div class="col-xs-1 noPadding">
                 <img src="application/Images/logo.png" height="70" width="114"/>
         </div>
@@ -45,7 +45,7 @@
 </div>-->
 
         <div class="container-fluid noPadding noMargin" layout="row" flex>
-                <md-sidenav md-is-locked-open="true" class="sideNav sideMenu noPadding text-center">
+                <md-sidenav md-is-locked-open="true" class="sideNav sideMenu noPadding text-center" ng-if="showNavigations">
                         <div ng-repeat="options in sideMenuOptions" ui-sref="{{options.url}}" ng-class="{setActiveSideBar: isActive == '{{options.name}}'}">
                                 <div><span class="{{options.glyphClasses}}"></span></div>
                                 <div>{{options.name}}</div>
