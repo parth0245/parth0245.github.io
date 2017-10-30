@@ -14,6 +14,11 @@
       {url : 'Home.Payments', name : 'Payments' , imgSrc : '', glyphClasses : 'glyphicon glyphicon-signal'},
       {url : 'Home.Expense', name : 'Expense' , imgSrc : '', glyphClasses : 'glyphicon glyphicon-signal'},
       {url : 'Home.Journal', name : 'Journal' , imgSrc : '', glyphClasses : 'glyphicon glyphicon-signal'},
-      {url : 'Home.Contra', name : 'Contra' , imgSrc : '', glyphClasses : 'glyphicon glyphicon-signal'},
+      {url : 'Home.Contra', name : 'Contra' , imgSrc : '', glyphClasses : 'glyphicon glyphicon-signal'}
+  ],
+  services : [
+    {
+      serviceA : 'someUrl'
+    }
   ]
 });

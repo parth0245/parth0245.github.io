@@ -19,7 +19,8 @@
 }
 .logoutBtn {
 	border: 1px solid white;
-    color: white;
+	color: white;
+	width:100px;
 }
 .logoutBtn a {
 	font-size: 12px;
@@ -74,23 +75,14 @@
 .borderTrue {
 	border:1px solid black;
 }
-.noPadding{
-	padding:0px !important;
-}
-.noMargin {
-	margin:0px !important;
-}
-.topPadding10{
-	padding-top:10px !important;
-}
-.topPadding5{
-	padding-top:5px !important;
-}
-.topMargin10 {
-	margin-top:10px;
-}
 .subHeader {
 	background-color: #d6d9d9;
+}
+.subHeaderListImg {
+	1width: 9.15%;
+}
+.subHeaderListImg img {
+	width: 114px;
 }
 .subHeaderList {
 	text-align: center;
@@ -135,9 +127,6 @@
 .login .md-content{
 	background-color: white !important;
 }
-.paddingTop70 {
-	padding-top:70px;
-}
 .sideNav {
 		width: 114px;
 }
@@ -147,3 +136,97 @@
 .marginBottom30{
 	margin-bottom:30px !important;
 }
+.sectionSubHeading {
+	padding-top:30px;
+	color : #0935ae;
+}
+.dynamicSection {
+	padding-left:30px;
+}
+.sectionSubSection .glyphicon {
+	color:lightgrey;
+}
+.btn-app-blue-color {
+	color: #fff;
+    background-color: #0935ae;
+    border-color: #2e6da4;
+}
+.btn-app-blue-color:hover {
+	color: #fff;
+    background-color: #0935ae;
+    border-color: #2e6da4;
+}
+.btn-app-white-color {
+	color:#0935ae;
+    background-color: #f5f6f8;;
+    border-color:#ccc;
+}
+.btn-app-white-color:hover {
+	color: #0935ae;
+    background-color: #f5f6f8;
+    border-color:#ccc;
+}
+.btn-app-white-color:focus {
+	color: #0935ae;
+    background-color: #f5f6f8;
+    border-color:#ccc;
+}
+.fontBold {
+	font-weight: bold;
+}
+.mdtTable .theadTrRow{
+	background-color: #e7e9e9;
+}
+.mdtTable .theadTrRow th{
+	text-align: center;
+	color: black !important;
+	border-left:1px solid lightgrey;
+	border-top:1px solid lightgrey;
+	padding:0px;
+	font-weight:bold;
+}
+.mdtTable .theadTrRow th:nth-child(2){
+	border-left:none;
+}
+.mdtTable .tbodyTrRow td{
+	text-align: center;
+	padding:0px;
+	border-left:1px solid#cacdcd
+}
+.mdtTable .tbodyTrRow td:nth-child(2){
+	border-left:none;
+}
+/*Paddings*/
+.noPadding{
+	padding:0px !important;
+}
+.noPaddingRight {
+	padding-right:0px !important;
+}
+.topPadding5{
+	padding-top:5px !important;
+}
+.topPadding10{
+	padding-top:10px !important;
+}
+.topPadding20{
+	padding-top:20px !important;
+}
+.paddingTop70 {
+	padding-top:70px;
+}
+.paddingLeft30 {
+	padding-left: 30px;
+}
+.paddingRight0 {
+	padding-right:0px;
+}
+/*Paddings*/
+/*Margins*/
+.noMargin {
+	margin:0px !important;
+}
+.topMargin10 {
+	margin-top:10px;
+}
+/*Margins*/
