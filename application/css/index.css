@@ -30,15 +30,16 @@
 }
 .headerMenu ul{
 	list-style: none;
-	color:#9caede
+	color:#9caede;
+	margin-top:16px;
 }
 .headerMenu ul li{
 	display: inline;
 	border-right: 1px solid #9caede;
-	padding: 20px 6px;
+	padding: 16px 5px 21px 0px;
 }
 .headerMenu ul li span{
-	padding: 20px 10px 11px;
+	padding: 24px 0px 9px 10px;
     font-size: 14px;
 }
 .headerMenu ul li:first-child{
@@ -79,30 +80,34 @@
 	background-color: #d6d9d9;
 }
 .subHeaderListImg {
-	1width: 9.15%;
+	background-color: grey;
+	text-align: center;
+	border-right: 1px solid grey;
 }
 .subHeaderListImg img {
-	width: 114px;
+	/*width: 114px;*/
+	width:90%;
+	margin: 19px 0px 20px 0px;
 }
 .subHeaderList {
 	text-align: center;
 	border-right:1px solid white;
 	font-size: 12px;
 	padding-top: 10px;
-	padding-bottom: 10px;
 	width: 9.15%;
 	cursor: pointer;
 	border-bottom: 2px solid #d6d9d9;
+	padding-bottom: 5px;
 }
 .subHeaderList ~ div {
 	text-align: center;
 	border-right:1px solid white;
 	font-size: 12px;
 	padding-top: 10px;
-	padding-bottom: 10px;
 	width: 9.15%;
 	cursor: pointer;
 	border-bottom: 2px solid #d6d9d9;
+	padding-bottom: 5px;
 }
 .subHeaderList span{
 	font-size: 18px;
@@ -128,7 +133,8 @@
 	background-color: white !important;
 }
 .sideNav {
-		width: 114px;
+		width: 112px;
+		overflow:hidden;
 }
 .dynamicSection {
 	background-color: #f5f6f8;
@@ -139,9 +145,6 @@
 .sectionSubHeading {
 	padding-top:30px;
 	color : #0935ae;
-}
-.dynamicSection {
-	padding-left:30px;
 }
 .sectionSubSection .glyphicon {
 	color:lightgrey;
@@ -196,6 +199,64 @@
 .mdtTable .tbodyTrRow td:nth-child(2){
 	border-left:none;
 }
+.inventorySection .mdt-footer {
+	position:absolute;
+	top: -60px;
+    right: 0px;
+}
+.inventorySection .mdt-footer .md-icon-button ng-md-icon {
+	border:1px solid #cacdcd;
+}
+.inventorySection .mdt-footer .md-select-value {
+	border: 1px solid #cacdcd;
+	padding: 0px;
+	height: 25px;
+	overflow:hidden;
+	min-width: 50px;
+	padding-left: 5px;
+}
+.inventorySection .mdt-footer .md-select-icon  {
+	margin-left: 10px;
+    padding: 5px;
+	background-color: #e7e9e9;
+	margin-right:0px;
+}
+md-select.md-default-theme:not([disabled]):focus .md-select-value, md-select:not([disabled]):focus .md-select-value {
+	border-bottom:2px solid #e7e9e9;
+}
+.fontNormal label {
+	font-weight: normal !important;
+	color:black;
+}
+.fontNormal md-select-value span {
+	color:black;
+}
+.description {
+	border-top: 1px solid white;
+    height: 5px;
+    margin-top: 18px;
+    padding-right: 5px;
+    margin-right: 5px;
+}
+.addInventory button.md-raised {
+	color: #0935ae;
+	/*margin-left: 0px;*/
+	font-weight: 400;
+}
+.addInventory button.md-raised.md-primary {
+	background-color: #0935ae !important;
+	/*margin-left: 0px;*/
+	color:white;	
+	font-weight: 400;
+}
+.dashboard .padded h2 {
+	color:#717373;
+	padding-top:10px;
+}
+.dashboard .padded.whiteColor {
+	background-color: white;
+	padding:50px 0px;
+}
 /*Paddings*/
 .noPadding{
 	padding:0px !important;
@@ -212,14 +273,29 @@
 .topPadding20{
 	padding-top:20px !important;
 }
+.topPadding30{
+	padding-top:30px !important;
+}
 .paddingTop70 {
 	padding-top:70px;
+}
+.paddingTop100 {
+	padding-top:100px;
 }
 .paddingLeft30 {
 	padding-left: 30px;
 }
+.paddingLeft60 {
+	padding-left: 60px;
+}
 .paddingRight0 {
 	padding-right:0px;
+}
+.paddingBottom5 {
+	padding-bottom: 5px;
+}
+.paddingBottom10 {
+	padding-bottom: 10px;
 }
 /*Paddings*/
 /*Margins*/
@@ -228,5 +304,17 @@
 }
 .topMargin10 {
 	margin-top:10px;
+}
+.marginLeft0 {
+	margin-left: 0px;
+}
+.marginLeft4cent {
+	margin-left: 4%;
+}
+.marginRight4cent {
+	margin-right: 4%;
+}
+.marginLeft5 {
+	margin-left: 5px;
 }
 /*Margins*/

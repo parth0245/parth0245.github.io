@@ -1,4 +1,4 @@
-<div class="dynamicSection" layout="column">
+<div class="paddingLeft60" layout="column">
     <div class="col-xs-12 sectionSubHeading">
         <h2>Inventory</h2>
     </div>
@@ -11,38 +11,19 @@
             <button class="col-xs-9 btn btn-primary btn-app-white-color fontBold">Search</button>
         </div>
         <div class="col-xs-2 noPadding">
-            <button class="btn btn-primary btn-app-blue-color">Add New Product</button>
+            <button class="col-xs-12 btn btn-primary btn-app-blue-color" ng-click="addProduct()">Add New Product</button>
         </div>
     </div>
-    <div class="col-xs-11">
-    <!--<mdt-table>
-    <mdt-header-row>
-        <mdt-column column-sort="true"><span>Product</span></mdt-column>
-        <mdt-column><span>Ledger</span></mdt-column>
-        <mdt-column><span>Specification</span></mdt-column>
-        <mdt-column><span>Stock Count</span></mdt-column>
-        <mdt-column><span>Vendor</span></mdt-column>
-        <mdt-column><span>Status</span></mdt-column>
-    </mdt-header-row>
-    <mdt-row ng-repeat="nutrition in nutritionList">
-            <mdt-cell editable-field="smallEditDialog"><span>{{nutrition.name}}</span></mdt-cell>
-            <mdt-cell><span>{{nutrition.calories}}</span></mdt-cell>
-            
-            <mdt-cell><span>{{nutrition.fat}}</span></mdt-cell>
-            <mdt-cell><span>{{nutrition.carbs}}</span></mdt-cell>
-            <mdt-cell><span>{{nutrition.protein}}</span></mdt-cell>
-            <mdt-cell><span>{{nutrition.sodium}}</span></mdt-cell>
-     </mdt-row>
-</mdt-table>-->
-<mdt-table mdt-row="{
+    <div class="col-xs-11 paddingTop100 inventorySection">
+<mdt-table paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,100]}" mdt-row="{
     data: nutritionList,
     'column-keys': [
-        'name',
-        'calories',
-        'fat',
-        'carbs',
-        'protein',
-        'sodium',
+        'product',
+        'ledger',
+        'specification',
+        'stockCount',
+        'vendor',
+        'status',
     ]
     }">
     <mdt-header-row>
@@ -54,9 +35,17 @@
             <mdt-column><span>Status</span></mdt-column>
         </mdt-header-row>
 
-        <mdt-custom-cell column-key="name">
-            <span>{{value}}</span><span style="position:absolute;right:20px;top:15px" class="glyphicon glyphicon-pencil"></span>
-         </mdt-custom-cell>
+        <mdt-custom-cell column-key="product">
+                <span>{{value}}</span><span style="position:absolute;right:20px;top:15px" class="glyphicon glyphicon-pencil"></span>
+        </mdt-custom-cell>
+
+        <mdt-custom-cell column-key="ledger">
+                <span>{{value}}</span><span style="position:absolute;right:20px;top:15px" class="glyphicon glyphicon-briefcase"></span>
+        </mdt-custom-cell>
+
+        <mdt-custom-cell column-key="vendor">
+                <span>{{value}}</span><span style="position:absolute;right:20px;top:15px" class="glyphicon glyphicon-pencil"></span>
+        </mdt-custom-cell>
 
 </mdt-table>
     </div>

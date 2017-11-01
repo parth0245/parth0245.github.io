@@ -13,14 +13,20 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
         templateUrl: 'application/Partials/home.html',
         controller : 'homeCtrl'
     })
-    .state('Home.Default', {
+    .state('Home.Dashboard', {
         url: '',
-        templateUrl: 'application/Partials/default.html'
+        templateUrl: 'application/Partials/dashboard.html',
+        controller: 'dashboardCtrl'
     })
     .state('Home.Inventory', {
         url: '/inventory',
         templateUrl: 'application/Partials/inventory.html',
         controller: 'inventoryCtrl'
+    })
+    .state('Home.AddInventory', {
+        url: '/addInventory',
+        templateUrl: 'application/Partials/addInventory.html',
+        controller: 'addInventoryCtrl'
     })
     .state('Home.Customers', {
         url: '/customers',
@@ -42,11 +48,11 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
         templateUrl: 'application/Partials/banking.html',
         controller: 'bankingCtrl'
     })
-    .state('Home.Reports', {
+    /*.state('Home.Reports', {
         url: '/reports',
         templateUrl: 'application/Partials/reports.html',
         controller: 'reportCtrl'
-    })
+    })*/
     .state('Home.Sales', {
         url: '/sales',
         templateUrl: 'application/Partials/sales.html',
@@ -81,6 +87,47 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
         url: '/contra',
         templateUrl: 'application/Partials/contra.html',
         controller: 'contraCtrl'
+    })
+    .state('Home.CreditNote', {
+        url: '/creditNote',
+        templateUrl: 'application/Partials/creditNote.html',
+        controller: 'creditNoteCtrl'
+    })
+    .state('Home.DebitNote', {
+        url: '/debitNote',
+        templateUrl: 'application/Partials/debitNote.html',
+        controller: 'debitNoteCtrl'
+    })
+    .state('Home.SalesOrder', {
+        url: '/salesOrder',
+        templateUrl: 'application/Partials/salesOrder.html',
+        controller: 'salesOrderCtrl'
+    })
+    .state('Home.PurchaseOrder', {
+        url: '/puchaseOrder',
+        templateUrl: 'application/Partials/purchaseOrder.html',
+        controller: 'purchaseOrderCtrl'
+    })
+
+    .state('Home.Organization', {
+        url: '/organizationLevel',
+        templateUrl: 'application/Partials/organizationLevel.html',
+        controller: 'organizationLevelCtrl'
+    })
+    .state('Home.Help', {
+        url: '/help',
+        templateUrl: 'application/Partials/help.html',
+        controller: 'helpCtrl'
+    })
+    .state('Home.Notification', {
+        url: '/notification',
+        templateUrl: 'application/Partials/notification.html',
+        controller: 'notificationCtrl'
+    })
+    .state('Home.Application', {
+        url: '/applicationLevel',
+        templateUrl: 'application/Partials/applicationLevel.html',
+        controller: 'applicationLevelCtrl'
     })
     .state('PageNotFound', {
         url: '/PageNotFound',
