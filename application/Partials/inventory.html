@@ -11,42 +11,26 @@
             <button class="col-xs-9 btn btn-primary btn-app-white-color fontBold">Search</button>
         </div>
         <div class="col-xs-2 noPadding">
-            <button class="col-xs-12 btn btn-primary btn-app-blue-color" ng-click="addProduct()">Add New Product</button>
+            <button class="col-xs-10 btn btn-primary btn-app-blue-color" ng-click="addProduct()">Add New Product</button>
         </div>
     </div>
-    <div class="col-xs-11 paddingTop100 inventorySection">
-<mdt-table paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,100]}" mdt-row="{
-    data: nutritionList,
-    'column-keys': [
-        'product',
-        'ledger',
-        'specification',
-        'stockCount',
-        'vendor',
-        'status',
-    ]
-    }">
-    <mdt-header-row>
-            <mdt-column column-sort="true"><span>Product</span></mdt-column>
-            <mdt-column><span>Ledger</span></mdt-column>
-            <mdt-column><span>Specification</span></mdt-column>
-            <mdt-column><span>Stock Count</span></mdt-column>
-            <mdt-column><span>Vendor</span></mdt-column>
-            <mdt-column><span>Status</span></mdt-column>
-        </mdt-header-row>
-
-        <mdt-custom-cell column-key="product">
-                <span>{{value}}</span><span style="position:absolute;right:20px;top:15px" class="glyphicon glyphicon-pencil"></span>
-        </mdt-custom-cell>
-
-        <mdt-custom-cell column-key="ledger">
-                <span>{{value}}</span><span style="position:absolute;right:20px;top:15px" class="glyphicon glyphicon-briefcase"></span>
-        </mdt-custom-cell>
-
-        <mdt-custom-cell column-key="vendor">
-                <span>{{value}}</span><span style="position:absolute;right:20px;top:15px" class="glyphicon glyphicon-pencil"></span>
-        </mdt-custom-cell>
-
-</mdt-table>
+    <div class="col-xs-3 col-xs-offset-8 paddingTop100 paddingLeft65 paddingBottom10">
+            <span class="buttonBorder" ng-click="gridApi.pagination.previousPage()">
+                <img src="application/Images/Assets/pagination_left.png"/>
+            </span>
+            <span class="pageIndicator">{{ gridApi.pagination.getPage() }} / {{ gridApi.pagination.getTotalPages() }}</span>
+            <span class="buttonBorder" ng-click="gridApi.pagination.nextPage()">
+                <img src="application/Images/Assets/pagination_right.png"/>
+            </span>
+            <span class="ui-grid-pager-row-count-picker">
+                <select class="selectPaginationBox" ng-model="gridOptions.paginationPageSize" 
+                ng-change="changeHeight()"
+                 ng-options="o as o for o in gridOptions.paginationPageSizes">
+                </select>
+            </span>
+    </div>
+    <div class="col-xs-11 inventorySection paddingRight30">
+            
+            <div id="grid1" ui-grid="gridOptions" ui-grid-selection ui-grid-pagination ui-grid-auto-resize class="grid"></div>
     </div>
 </div>

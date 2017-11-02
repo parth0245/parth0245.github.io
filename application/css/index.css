@@ -177,53 +177,6 @@
 .fontBold {
 	font-weight: bold;
 }
-.mdtTable .theadTrRow{
-	background-color: #e7e9e9;
-}
-.mdtTable .theadTrRow th{
-	text-align: center;
-	color: black !important;
-	border-left:1px solid lightgrey;
-	border-top:1px solid lightgrey;
-	padding:0px;
-	font-weight:bold;
-}
-.mdtTable .theadTrRow th:nth-child(2){
-	border-left:none;
-}
-.mdtTable .tbodyTrRow td{
-	text-align: center;
-	padding:0px;
-	border-left:1px solid#cacdcd
-}
-.mdtTable .tbodyTrRow td:nth-child(2){
-	border-left:none;
-}
-.inventorySection .mdt-footer {
-	position:absolute;
-	top: -60px;
-    right: 0px;
-}
-.inventorySection .mdt-footer .md-icon-button ng-md-icon {
-	border:1px solid #cacdcd;
-}
-.inventorySection .mdt-footer .md-select-value {
-	border: 1px solid #cacdcd;
-	padding: 0px;
-	height: 25px;
-	overflow:hidden;
-	min-width: 50px;
-	padding-left: 5px;
-}
-.inventorySection .mdt-footer .md-select-icon  {
-	margin-left: 10px;
-    padding: 5px;
-	background-color: #e7e9e9;
-	margin-right:0px;
-}
-md-select.md-default-theme:not([disabled]):focus .md-select-value, md-select:not([disabled]):focus .md-select-value {
-	border-bottom:2px solid #e7e9e9;
-}
 .fontNormal label {
 	font-weight: normal !important;
 	color:black;
@@ -288,6 +241,9 @@ md-select.md-default-theme:not([disabled]):focus .md-select-value, md-select:not
 .paddingLeft60 {
 	padding-left: 60px;
 }
+.paddingLeft65 {
+	padding-left: 65px;
+}
 .paddingRight0 {
 	padding-right:0px;
 }
@@ -296,6 +252,9 @@ md-select.md-default-theme:not([disabled]):focus .md-select-value, md-select:not
 }
 .paddingBottom10 {
 	padding-bottom: 10px;
+}
+.paddingRight30 {
+	padding-right:45px !important;
 }
 /*Paddings*/
 /*Margins*/
@@ -318,3 +277,48 @@ md-select.md-default-theme:not([disabled]):focus .md-select-value, md-select:not
 	margin-left: 5px;
 }
 /*Margins*/
+/*Grid*/
+.grid .ui-grid-header-cell {
+	height: 40px;
+	padding-left: 15px;
+	background-color: rgb(231, 233, 233);
+}
+.grid .ui-grid-cell-contents {
+	text-align: center;	
+	margin-top:5px;
+}
+/*Grid*/
+.productInactive {
+	float: right;
+    position: relative;
+    right: 10px;
+}
+.grid .ui-grid-row-selected {
+	border : 1px solid #24aaec;
+	overflow: hidden !important;
+}
+.ui-grid-row.ui-grid-row-selected > [ui-grid-row] > .ui-grid-cell {
+	background-color: white;
+}
+.ui-grid-row-selected .ui-grid-cell:first-child {
+	margin-left:-1px !important;
+}
+.ui-grid-row-selected .ui-grid-cell:last-child {
+	margin-right:-1px !important;
+}
+.buttonBorder {
+	border: 1px solid #cccccc;
+    padding: 4px 4px 5px 7px;
+}
+.pageIndicator {
+	padding:0px 10px;
+}
+.selectPaginationBox {
+	height: 28px;
+    top: 0p;
+    margin-top: -5px;
+}
+.ui-grid-pager-row-count-picker {
+    float: none;
+    padding-left: 10px;
+}

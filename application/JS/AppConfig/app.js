@@ -1,4 +1,4 @@
-var app = angular.module('siriBooks',['ui.router','ngMaterial','ngSanitize','ngMdIcons','mdDataTable']);
+var app = angular.module('siriBooks',['ui.router','ngMaterial','ngSanitize','ui.grid','ui.grid.selection','ui.grid.resizeColumns','ui.grid.pagination']);
 
 app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     $stateProvider
