@@ -1,0 +1,58 @@
+[
+    {
+        "name": "Customer Name 1",
+        "ledger": "Rs 5000/-",
+        "address": "Red, 100cc,",
+        "product": "product 1",
+        "contact": "9999999999",
+        "status": "Active"
+    },
+    {
+        "name": "Customer Name 2",
+        "ledger": "Rs 5000/-",
+        "address": "Red, 100cc,",
+        "product": "product 1",
+        "contact": "9999999999",
+        "status": "Active"
+    },
+    {
+        "name": "Customer Name 3",
+        "ledger": "Rs 5000/-",
+        "address": "Red, 100cc,",
+        "product": "product 1",
+        "contact": "9999999999",
+        "status": "Active"
+    },
+    {
+        "name": "Customer Name 4",
+        "ledger": "Rs 5000/-",
+        "address": "Red, 100cc,",
+        "product": "product 1",
+        "contact": "9999999999",
+        "status": "Active"
+    },
+    {
+        "name": "Customer Name 5",
+        "ledger": "Rs 5000/-",
+        "address": "Red, 100cc,",
+        "product": "product 1",
+        "contact": "9999999999",
+        "status": "Active"
+    },
+    {
+        "name": "Customer Name 6",
+        "ledger": "Rs 5000/-",
+        "address": "Red, 100cc,",
+        "product": "product 1",
+        "contact": "9999999999",
+        "status": "Active"
+    },
+    {
+        "name": "Customer Name 7",
+        "ledger": "Rs 5000/-",
+        "address": "Red, 100cc,",
+        "product": "product 1",
+        "contact": "9999999999",
+        "status": "Active"
+    }
+]

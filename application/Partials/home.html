@@ -32,7 +32,7 @@
                                                 <img  height="20" width="20" ng-src="application/Images/Assets/Admin_Icons/notification_active.png"/>
                                         </span>                                     
                         </li>
-                        <li ui-sref="Home.Application" style="padding-right: 10px;">
+                        <li ui-sref="Home.Format" style="padding-right: 10px;">
                                         <span ng-if="isActive !=='Application Level'">
                                                 <img  height="20" width="20" ng-src="application/Images/Assets/Admin_Icons/admin_setting_inactive.png" />
                                         </span>
@@ -74,6 +74,25 @@
                 <div>{{options.name}}</div>
         </div>
 </div>
+
+<div class="col-xs-12 subHeaderOrgLevel noPadding"  ng-if="!showNavigations">
+                <div class="col-xs-1 noPadding subHeaderListImgOrg">
+                        <img src="application/Images/Assets/Main_Menu_Icon.png" height="20" width="30"/>
+                </div>
+                <div class="col-xs-1 subHeaderOrgList" ng-repeat="options in organizationNavigation" ui-sref="{{options.url}}" ng-class="{setActiveSubHeadBar: isSubActive == '{{options.name}}'}">
+                        <div class="paddingBottom10">
+                                <span ng-if="isSubActive === options.name">
+                                        <img  height="25" width="25" ng-src="{{options.SelimgSrc}}" />
+                                </span>
+                                
+                                <span ng-if="isSubActive !== options.name">
+                                        <img  height="25" width="25" ng-src="{{options.imgSrc}}"/>
+                                </span>
+                         </div>
+                        <div>{{options.name}}</div>
+                </div>
+        </div>
+
 </div>
 <div class="container-fluid noPadding noMargin" layout="row" flex>
         <md-sidenav md-is-locked-open="true" class="sideNav sideMenu noPadding text-center" ng-if="showNavigations">

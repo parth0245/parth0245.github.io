@@ -1,18 +1,17 @@
-app.controller('vendorCtrl',function($rootScope , $scope , $state , CONSTANTS ,heightCalc , vendorServices){
-    console.log('Inside Vendor Controller');
+app.controller('importVendorCtrl',function($scope, $rootScope , heightCalc ,CONSTANTS ,vendorServices){
+    console.log('Inside Import Vendor Controller');
     $rootScope.isActive = 'VENDORS';
 
-    $scope.addvendors = function() {
-        $state.go('Home.addVendors');
+    $scope.changeHeight = function(val){
+        heightCalc.calculateGridHeight(val);
     }
-    $scope.importVendor = function(){
-        $state.go('Home.ImportVendors');
-    }
-    
-    $scope.gridOptions = CONSTANTS.gridOptionsConstants('Vendor');
+
+    $scope.gridOptions = CONSTANTS.gridOptionsConstants('ImportVendor');
+    $scope.gridOptions.enableRowSelection = false;
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
     }
+
     $scope.nextPage = function(){
         $scope.gridApi.pagination.nextPage();
         $scope.changeHeight(0);
@@ -21,11 +20,8 @@ app.controller('vendorCtrl',function($rootScope , $scope , $state , CONSTANTS ,h
         $scope.gridApi.pagination.previousPage();
         $scope.changeHeight(0);
     }
-    $scope.changeHeight = function(val){
-        heightCalc.calculateGridHeight(val);
-    }
-    //$scope.gridOptions.data = [];
-    vendorServices.getVendors().then(function(response){
+
+    vendorServices.importVendor().then(function(response){
         $scope.gridOptions.data = response.data;
         if($scope.gridOptions.data.length !== 0){
             $scope.changeHeight(0);
@@ -37,7 +33,5 @@ app.controller('vendorCtrl',function($rootScope , $scope , $state , CONSTANTS ,h
         console.log('error',error);
      });
 
-    $scope.changeHeight(0);
-
-
+   $scope.changeHeight(0);
 });

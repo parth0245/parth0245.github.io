@@ -7,30 +7,31 @@
             <input type="text" class="form-control" id="inputSuccess2"/>
             <span class="glyphicon glyphicon-search form-control-feedback"></span>
         </div>
-        <div class="col-xs-2 paddingLeft30 paddingRight0">
-            <button class="col-xs-9 btn btn-primary btn-app-white-color fontBold">Search</button>
+        <div class="col-xs-2 paddingLeft30">
+            <button class="col-xs-11 btn btn-primary btn-app-white-color fontBold">Search</button>
         </div>
         <div class="col-xs-2 noPadding">
-            <button class="col-xs-10 btn btn-primary btn-app-blue-color" ng-click="addProduct()">Add New Product</button>
+            <button class="col-xs-9 btn btn-primary btn-app-blue-color" ng-click="addProduct()">Add New Product</button>
         </div>
     </div>
     <div class="col-xs-3 col-xs-offset-8 paddingTop100 paddingLeft65 paddingBottom10">
-            <span class="buttonBorder" ng-click="gridApi.pagination.previousPage()">
+            <span class="buttonBorder" ng-click="prevPage()">
                 <img src="application/Images/Assets/pagination_left.png"/>
             </span>
             <span class="pageIndicator">{{ gridApi.pagination.getPage() }} / {{ gridApi.pagination.getTotalPages() }}</span>
-            <span class="buttonBorder" ng-click="gridApi.pagination.nextPage()">
+            <span class="buttonBorder" ng-click="nextPage()">
                 <img src="application/Images/Assets/pagination_right.png"/>
             </span>
             <span class="ui-grid-pager-row-count-picker">
                 <select class="selectPaginationBox" ng-model="gridOptions.paginationPageSize" 
-                ng-change="changeHeight()"
+                ng-change="changeHeight(0)"
                  ng-options="o as o for o in gridOptions.paginationPageSizes">
                 </select>
             </span>
     </div>
     <div class="col-xs-11 inventorySection paddingRight30">
-            
-            <div id="grid1" ui-grid="gridOptions" ui-grid-selection ui-grid-pagination ui-grid-auto-resize class="grid"></div>
+            <div id="grid1" ui-grid="gridOptions" ui-grid-selection ui-grid-pagination ui-grid-auto-resize class="grid">
+                <div class="watermark" ng-show="!gridOptions.data.length">No data available</div>
+            </div>
     </div>
 </div>

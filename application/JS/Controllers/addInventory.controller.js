@@ -15,8 +15,8 @@ app.controller('addInventoryCtrl',function($rootScope , $scope){
     };
 
     $scope.Remove = function(index){
-        //var name = $scope.Description[index].name;
-        $scope.Description.splice(index, 1);
-        console.log($scope.Description);
+        if($scope.Description.length !== 1) {
+           $scope.Description.splice(index, 1);
+        }
     }
 });

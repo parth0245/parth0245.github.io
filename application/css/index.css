@@ -13,6 +13,11 @@
 	color:#0935ae;
 	border-bottom:2px solid #0935ae !important;
 }
+.setActiveSubHeadBar {
+	background-color:white;
+	color: grey !important;
+	border-bottom: 2px solid grey !important;
+}
 .header {
 	background-color: #0935ae;
 	color:white;
@@ -79,6 +84,9 @@
 .subHeader {
 	background-color: #d6d9d9;
 }
+.subHeaderOrgLevel {
+	background-color:white;
+}
 .subHeaderListImg {
 	background-color: grey;
 	text-align: center;
@@ -88,6 +96,16 @@
 	/*width: 114px;*/
 	width:90%;
 	margin: 19px 0px 20px 0px;
+}
+.subHeaderListImgOrg {
+	background-color: grey;
+	text-align: center;
+	border-right: 1px solid grey;
+	width: 5.5%;
+}
+.subHeaderListImgOrg img {
+	/*width: 114px;*/
+	margin: 25px 0px 25px 0px;
 }
 .subHeaderList {
 	text-align: center;
@@ -117,6 +135,36 @@
 	font-size: 18px;
 	margin-bottom: 13px;
 }
+/**/
+
+.subHeaderOrgList {
+	text-align: center;
+	border-right:1px solid #f5f6f8;
+	font-size: 12px;
+	padding-top: 10px;
+	width: 9.15%;
+	cursor: pointer;
+	padding-bottom: 5px;
+	color: #0935ae;
+}
+.subHeaderOrgList ~ div {
+	text-align: center;
+	border-right:1px solid #f5f6f8;
+	font-size: 12px;
+	padding-top: 10px;
+	width: 9.15%;
+	cursor: pointer;
+	padding-bottom: 5px;
+}
+.subHeaderOrgList span{
+	font-size: 18px;
+	margin-bottom: 13px;
+}
+.subHeaderOrgList ~ div span{
+	font-size: 18px;
+	margin-bottom: 13px;
+}
+/**/
 .sideMenu {
 	background-color: #d6d9d9;
 }
@@ -264,6 +312,9 @@
 .topMargin10 {
 	margin-top:10px;
 }
+.marginTop12 {
+	margin-top:12px;
+}
 .marginLeft0 {
 	margin-left: 0px;
 }
@@ -321,4 +372,46 @@
 .ui-grid-pager-row-count-picker {
     float: none;
     padding-left: 10px;
+}
+.watermark {
+    position: absolute;
+    top: 50%;                    
+    transform: translateY(-50%);
+    opacity: 0.25;
+    font-size: 3em;
+    width: 100%;
+    text-align: center;
+    z-index: 1000;
+}
+.sectionSubSection .col-xs-2{
+	width:16%;
+}
+.sectionSubSection .col-xs-2 button{
+	width:100%;
+}
+.addPaddingButtons {
+	padding-top:30px;
+	padding-bottom:100px;
+
+}
+.addPaddingButtons .md-raised {
+	width : 12.6%;
+}
+.nav-tabs {
+	border-bottom:0px;
+}
+.nav-tabs>li>a {
+	width:200px;
+	background-color:rgb(86, 90, 90);
+	color:white;
+	text-align: center;
+}
+.nav-tabs>li>a:hover {
+	background-color:rgb(86, 90, 90);
+	color:white;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+	border: 1px solid #24aaec;
+	box-shadow: 0px 0px 10px 0px #24aaec;
+	border-bottom:0px;
 }

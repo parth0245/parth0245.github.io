@@ -33,10 +33,25 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
         templateUrl: 'application/Partials/customer.html',
         controller: 'customerCtrl'
     })
+    .state('Home.addCustomers', {
+        url: '/addCustomers',
+        templateUrl: 'application/Partials/addCustomer.html',
+        controller: 'addCustomerCtrl'
+    })
     .state('Home.Vendors', {
         url: '/vendors',
         templateUrl: 'application/Partials/vendor.html',
         controller: 'vendorCtrl'
+    })
+    .state('Home.addVendors', {
+        url: '/addVendors',
+        templateUrl: 'application/Partials/addVendor.html',
+        controller: 'addVendorCtrl'
+    })
+    .state('Home.ImportVendors', {
+        url: '/importVendors',
+        templateUrl: 'application/Partials/importVendor.html',
+        controller: 'importVendorCtrl'
     })
     .state('Home.Ledgers', {
         url: '/ledgers',
@@ -48,11 +63,6 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
         templateUrl: 'application/Partials/banking.html',
         controller: 'bankingCtrl'
     })
-    /*.state('Home.Reports', {
-        url: '/reports',
-        templateUrl: 'application/Partials/reports.html',
-        controller: 'reportCtrl'
-    })*/
     .state('Home.Sales', {
         url: '/sales',
         templateUrl: 'application/Partials/sales.html',
@@ -114,6 +124,16 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
         templateUrl: 'application/Partials/organizationLevel.html',
         controller: 'organizationLevelCtrl'
     })
+    .state('Home.User', {
+        url: '/organizationUser',
+        templateUrl: 'application/Partials/organizationUser.html',
+        controller: 'organizationUserCtrl'
+    })
+    .state('Home.Roles', {
+        url: '/organizationRoles',
+        templateUrl: 'application/Partials/organizationRole.html',
+        controller: 'organizationRoleCtrl'
+    })
     .state('Home.Help', {
         url: '/help',
         templateUrl: 'application/Partials/help.html',
@@ -124,11 +144,22 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
         templateUrl: 'application/Partials/notification.html',
         controller: 'notificationCtrl'
     })
-    .state('Home.Application', {
-        url: '/applicationLevel',
-        templateUrl: 'application/Partials/applicationLevel.html',
-        controller: 'applicationLevelCtrl'
+    .state('Home.Format', {
+        url: '/applicationFormat',
+        templateUrl: 'application/Partials/applicationFormatLevel.html',
+        controller: 'applicationFormatLevelCtrl'
     })
+    .state('Home.Tax', {
+        url: '/applicationTax',
+        templateUrl: 'application/Partials/applicationTaxLevel.html',
+        controller: 'applicationTaxLevelCtrl'
+    })
+    .state('Home.Accounting', {
+        url: '/applicationAccounting',
+        templateUrl: 'application/Partials/applicationAccountingLevel.html',
+        controller: 'applicationAccountingLevelCtrl'
+    })
+
     .state('PageNotFound', {
         url: '/PageNotFound',
         templateUrl: 'application/Partials/pageNotFound.html'

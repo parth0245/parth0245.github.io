@@ -1,5 +1,6 @@
 app.run(function($rootScope) {
     console.log('Inside Run');
     $rootScope.isActive = '';
+    $rootScope.isSubActive = '';
     $rootScope.showNavigations = true ;
   });

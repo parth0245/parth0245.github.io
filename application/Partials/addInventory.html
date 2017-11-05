@@ -82,21 +82,20 @@
                                             <input name="value" ng-model="desc.value">
                                     </md-input-container>
                                     <md-input-container flex="5"  flex-offset="5">
-                                            <span class="glyphicon glyphicon-minus" ng-click="Remove($index)"></span>
+                                            <img class="marginTop12" height="30" width="30" src="application/Images/Assets/INVENTORY_page/minus.png" ng-click="Remove($index)"/>
                                     </md-input-container>
                                     <md-input-container flex="5"  flex-offset="2">
-                                            <span class="glyphicon glyphicon-plus" ng-click="Add()" ng-if="$last"></span>
+                                            <img class="marginTop12" height="30" width="30" src="application/Images/Assets/INVENTORY_page/plus.png" ng-click="Add()" ng-if="$last"/>
                                     </md-input-container>
-                               
                             </div>
                             <div layout="row" class="topPadding30">
                                 Image Upload Comes Here...
                             </div>
-    <div layout="row" class="topPadding30">
-            <md-button class="md-raised" flex="10" flex-offset="30">Reset All</md-button>
-            <md-button class="md-raised md-primary" flex="10" flex-offset="3">Save</md-button>
-            <md-button class="md-raised md-primary" flex="20" flex-offset="3">Save & Purchase</md-button>
-            <md-button class="md-raised" flex="10">Cancel</md-button>
+    <div layout="row" class="addPaddingButtons">
+            <md-button class="md-raised" flex-offset="30">Reset All</md-button>
+            <md-button class="md-raised md-primary">Save</md-button>
+            <md-button class="md-raised md-primary" flex="15">Save & Purchase</md-button>
+            <md-button class="md-raised">Cancel</md-button>
     </div>
                 </form>
             </md-content>
