@@ -58,7 +58,7 @@
         </div>
 </div>
 <div class="col-xs-12 subHeader noPadding"  ng-if="showNavigations">
-        <div class="col-xs-1 noPadding subHeaderListImg">
+        <div ui-sref="Home.Dashboard" class="col-xs-1 noPadding subHeaderListImg">
                 <img src="application/Images/Assets/siri_logo.png" height="30"/>
         </div>
         <div class="col-xs-1 subHeaderList" ng-repeat="options in headMenuOptions" ui-sref="{{options.url}}" ng-class="{setActiveHeadBar: isActive == '{{options.name}}'}">
@@ -76,7 +76,7 @@
 </div>
 
 <div class="col-xs-12 subHeaderOrgLevel noPadding"  ng-if="!showNavigations">
-                <div class="col-xs-1 noPadding subHeaderListImgOrg">
+                <div ng-click="backToHome()" class="col-xs-1 noPadding subHeaderListImgOrg">
                         <img src="application/Images/Assets/Main_Menu_Icon.png" height="20" width="30"/>
                 </div>
                 <div class="col-xs-1 subHeaderOrgList" ng-repeat="options in organizationNavigation" ui-sref="{{options.url}}" ng-class="{setActiveSubHeadBar: isSubActive == '{{options.name}}'}">

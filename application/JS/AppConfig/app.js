@@ -58,6 +58,11 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
         templateUrl: 'application/Partials/ledger.html',
         controller: 'ledgerCtrl'
     })
+    .state('Home.addLedgers', {
+        url: '/addLedgers',
+        templateUrl: 'application/Partials/addLedger.html',
+        controller: 'addLedgerCtrl'
+    })
     .state('Home.Banking', {
         url: '/banking',
         templateUrl: 'application/Partials/banking.html',

@@ -58,6 +58,11 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
         templateUrl: 'application/Partials/ledger.html',
         controller: 'ledgerCtrl'
     })
+    .state('Home.addLedgers', {
+        url: '/addLedgers',
+        templateUrl: 'application/Partials/addLedger.html',
+        controller: 'addLedgerCtrl'
+    })
     .state('Home.Banking', {
         url: '/banking',
         templateUrl: 'application/Partials/banking.html',
@@ -181,12 +186,14 @@ app.constant('CONSTANTS', {
                         inventoryList : 'application/fixture/inventoryList.json',
                         customerList : 'application/fixture/customerList.json',
                         vendorList : 'application/fixture/vendorList.json',
-                        importVendor : 'application/fixture/importVendors.json'
+                        importVendor : 'application/fixture/importVendors.json',
+                        receiptList : 'application/fixture/receiptList.json'
                 },{
                         inventoryList : "live url here",
                         customerList : '',
                         vendorList : '',
-                        importVendor :''
+                        importVendor :'',
+                        receiptList :''
                 }
         ],
         headBarNavigator : [
@@ -237,7 +244,35 @@ app.constant('CONSTANTS', {
                         columnDefs : this[gridName+"fields"]
                 }
         },
-Inventoryfields : [
+        Receiptfields :[
+                { field: 'customerName',
+        cellTemplate: '<div class="ui-grid-cell-contents" >'+
+                '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+                '<img height="15" width="15" '+
+                        'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
+                '</span>'+
+                '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+                '<img height="15" width="15" '+
+                        'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
+                '</span>'+
+                '<span>{{grid.getCellValue(row, col)}}</span>'+
+                '</div>' },
+        { field: 'amount',
+        cellTemplate: '<div class="ui-grid-cell-contents" >'+
+                '<span>{{grid.getCellValue(row, col)}}</span>'+
+                '<span class="productInactive" ng-if="!row.isSelected">'+
+                '<img height="20" width="20" '+
+                        'src="application/Images/Assets/INVENTORY_page/ladger_inactive.png"/>'+
+                '</span>'+
+                '<span class="productInactive" ng-if="row.isSelected">'+
+                '<img height="20" width="20" '+
+                        'src="application/Images/Assets/INVENTORY_page/ladger_active.png"/>'+
+                '</span>'+
+                '</div>' },
+        { field: 'date' },
+        { field: 'modeOfPayment'}
+        ],
+        Inventoryfields : [
                 { field: 'product',
                 cellTemplate: '<div class="ui-grid-cell-contents" >'+
                               '<span>{{grid.getCellValue(row, col)}}</span>'+
@@ -484,12 +519,17 @@ app.controller('helpCtrl',function($rootScope){
     console.log('Inside Help Controller');
     $rootScope.isActive = 'Help';
 });
-app.controller('homeCtrl',function($scope,$rootScope,CONSTANTS){
+app.controller('homeCtrl',function($scope,$rootScope,CONSTANTS ,$state){
     console.log('Inside Home Controller');
     $rootScope.isActive = '';
     $scope.sideMenuOptions = CONSTANTS.sideBarNavigator;
     $scope.headMenuOptions = CONSTANTS.headBarNavigator;
     $scope.organizationNavigation = CONSTANTS.organizationNavigation;
+    $scope.backToHome = function(){
+        $rootScope.isActive = '';
+        $rootScope.showNavigations = true ;
+        $state.go('Home.Dashboard');
+    }
 });
 app.controller('importVendorCtrl',function($scope, $rootScope , heightCalc ,CONSTANTS ,vendorServices){
     console.log('Inside Import Vendor Controller');
@@ -540,7 +580,6 @@ app.controller('inventoryCtrl',function($rootScope,$scope ,$state ,$timeout , CO
     }
     
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Inventory');
-    $scope.gridOptions.data = [];
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
     }
@@ -575,8 +614,17 @@ app.controller('journalCtrl',function($rootScope){
     console.log('Inside Journal Controller');
     $rootScope.isActive = 'Journal';
 });
-app.controller('ledgerCtrl',function($rootScope){
+app.controller('ledgerCtrl',function($rootScope , $scope , $state){
     console.log('Inside Ledgers Controller');
+    $rootScope.isActive = 'LEDGERS';
+
+    $scope.addLedger = function(){
+        $state.go('Home.addLedgers');
+    }
+});
+
+app.controller('addLedgerCtrl',function($rootScope , $scope){
+    console.log('Inside Add Inventory Controller');
     $rootScope.isActive = 'LEDGERS';
 });
 app.controller('LoginCtrl',function($scope,$state){
@@ -648,9 +696,45 @@ app.controller('purchaseOrderCtrl',function($rootScope){
     console.log('Inside Purchase Order Controller');
     $rootScope.isActive = 'Purchase Order';
 });
-app.controller('receiptCtrl',function($rootScope){
+app.controller('receiptCtrl',function($rootScope,$scope ,$state ,$timeout , CONSTANTS ,heightCalc , receiptServices){
     console.log('Inside Receipt Controller');
     $rootScope.isActive = 'Receipt';
+
+    $scope.newReceipt = function() {
+        $state.go('Home.newReceipt');
+    }
+
+    $scope.gridOptions = CONSTANTS.gridOptionsConstants('Receipt');
+    $scope.gridOptions.onRegisterApi = function( gridApi ) {
+        $scope.gridApi = gridApi;
+    }
+    
+    $scope.changeHeight = function(val){
+        heightCalc.calculateGridHeight(val);
+    }
+    $scope.nextPage = function(){
+        $scope.gridApi.pagination.nextPage();
+        $scope.changeHeight(0);
+    }
+    $scope.prevPage = function(){
+        $scope.gridApi.pagination.previousPage();
+        $scope.changeHeight(0);
+    }
+
+    receiptServices.getReceipts().then(function(response){
+        $scope.gridOptions.data = response.data;
+        if($scope.gridOptions.data.length !== 0){
+            $scope.changeHeight(0);
+        }
+        else {
+            $scope.changeHeight(200);
+        }   
+       
+          },function(error){
+        console.log('error',error);
+   });
+      
+   $scope.changeHeight(0);
 });
 app.controller('salesCtrl',function($rootScope){
     console.log('Inside Sales Controller');
@@ -728,6 +812,11 @@ app.factory('heightCalc',function($timeout){
 app.service('inventoryServices',function($http , CONSTANTS){
     this.getInventories = function(){
        return $http.get(CONSTANTS.service[CONSTANTS.appLevel].inventoryList);
+    };
+});
+app.service('receiptServices',function($http , CONSTANTS){
+    this.getReceipts = function(){
+       return $http.get(CONSTANTS.service[CONSTANTS.appLevel].receiptList);
     };
 });
 app.service('vendorServices',function($http , CONSTANTS){

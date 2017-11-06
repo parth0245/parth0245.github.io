@@ -9,7 +9,6 @@ app.controller('inventoryCtrl',function($rootScope,$scope ,$state ,$timeout , CO
     }
     
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Inventory');
-    $scope.gridOptions.data = [];
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
     }
