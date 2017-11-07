@@ -20,7 +20,7 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     })
     .state('Home.Inventory', {
         url: '/inventory',
-        templateUrl: 'application/Partials/inventory.html',
+        templateUrl: 'application/Partials/diffModules.html',
         controller: 'inventoryCtrl'
     })
     .state('Home.AddInventory', {
@@ -30,7 +30,7 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     })
     .state('Home.Customers', {
         url: '/customers',
-        templateUrl: 'application/Partials/customer.html',
+        templateUrl: 'application/Partials/diffModules.html',
         controller: 'customerCtrl'
     })
     .state('Home.addCustomers', {
@@ -40,7 +40,7 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     })
     .state('Home.Vendors', {
         url: '/vendors',
-        templateUrl: 'application/Partials/vendor.html',
+        templateUrl: 'application/Partials/diffModules.html',
         controller: 'vendorCtrl'
     })
     .state('Home.addVendors', {
@@ -80,27 +80,27 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     })
     .state('Home.Receipt', {
         url: '/receipt',
-        templateUrl: 'application/Partials/receipt.html',
+        templateUrl: 'application/Partials/diffModules.html',
         controller: 'receiptCtrl'
     })
     .state('Home.Payments', {
         url: '/payment',
-        templateUrl: 'application/Partials/payment.html',
+        templateUrl: 'application/Partials/diffModules.html',
         controller: 'paymentCtrl'
     })
     .state('Home.Expense', {
         url: '/expense',
-        templateUrl: 'application/Partials/expense.html',
+        templateUrl: 'application/Partials/diffModules.html',
         controller: 'expenseCtrl'
     })
     .state('Home.Journal', {
         url: '/journal',
-        templateUrl: 'application/Partials/journal.html',
+        templateUrl: 'application/Partials/diffModules.html',
         controller: 'journalCtrl'
     })
     .state('Home.Contra', {
         url: '/contra',
-        templateUrl: 'application/Partials/contra.html',
+        templateUrl: 'application/Partials/diffModules.html',
         controller: 'contraCtrl'
     })
     .state('Home.CreditNote', {

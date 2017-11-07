@@ -20,7 +20,7 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     })
     .state('Home.Inventory', {
         url: '/inventory',
-        templateUrl: 'application/Partials/inventory.html',
+        templateUrl: 'application/Partials/diffModules.html',
         controller: 'inventoryCtrl'
     })
     .state('Home.AddInventory', {
@@ -30,7 +30,7 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     })
     .state('Home.Customers', {
         url: '/customers',
-        templateUrl: 'application/Partials/customer.html',
+        templateUrl: 'application/Partials/diffModules.html',
         controller: 'customerCtrl'
     })
     .state('Home.addCustomers', {
@@ -40,7 +40,7 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     })
     .state('Home.Vendors', {
         url: '/vendors',
-        templateUrl: 'application/Partials/vendor.html',
+        templateUrl: 'application/Partials/diffModules.html',
         controller: 'vendorCtrl'
     })
     .state('Home.addVendors', {
@@ -80,27 +80,27 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     })
     .state('Home.Receipt', {
         url: '/receipt',
-        templateUrl: 'application/Partials/receipt.html',
+        templateUrl: 'application/Partials/diffModules.html',
         controller: 'receiptCtrl'
     })
     .state('Home.Payments', {
         url: '/payment',
-        templateUrl: 'application/Partials/payment.html',
+        templateUrl: 'application/Partials/diffModules.html',
         controller: 'paymentCtrl'
     })
     .state('Home.Expense', {
         url: '/expense',
-        templateUrl: 'application/Partials/expense.html',
+        templateUrl: 'application/Partials/diffModules.html',
         controller: 'expenseCtrl'
     })
     .state('Home.Journal', {
         url: '/journal',
-        templateUrl: 'application/Partials/journal.html',
+        templateUrl: 'application/Partials/diffModules.html',
         controller: 'journalCtrl'
     })
     .state('Home.Contra', {
         url: '/contra',
-        templateUrl: 'application/Partials/contra.html',
+        templateUrl: 'application/Partials/diffModules.html',
         controller: 'contraCtrl'
     })
     .state('Home.CreditNote', {
@@ -187,13 +187,21 @@ app.constant('CONSTANTS', {
                         customerList : 'application/fixture/customerList.json',
                         vendorList : 'application/fixture/vendorList.json',
                         importVendor : 'application/fixture/importVendors.json',
-                        receiptList : 'application/fixture/receiptList.json'
+                        receiptList : 'application/fixture/receiptList.json',
+                        paymentList : 'application/fixture/paymentList.json',
+                        expenseList : 'application/fixture/expenseList.json',
+                        journalList : 'application/fixture/journalList.json',
+                        contraList : 'application/fixture/contraList.json'
                 },{
                         inventoryList : "live url here",
                         customerList : '',
                         vendorList : '',
                         importVendor :'',
-                        receiptList :''
+                        receiptList :'',
+                        paymentList : '',
+                        expenseList : '',
+                        journalList : '',
+                        contraList : ''
                 }
         ],
         headBarNavigator : [
@@ -244,6 +252,98 @@ app.constant('CONSTANTS', {
                         columnDefs : this[gridName+"fields"]
                 }
         },
+        Paymentfields :[
+                { field: 'vendorName',
+                cellTemplate: '<div class="ui-grid-cell-contents" >'+
+                        '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+                        '<img height="15" width="15" '+
+                                'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
+                        '</span>'+
+                        '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+                        '<img height="15" width="15" '+
+                                'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
+                        '</span>'+
+                        '<span>{{grid.getCellValue(row, col)}}</span>'+
+                        '</div>' },
+                { field: 'amount',
+                cellTemplate: '<div class="ui-grid-cell-contents" >'+
+                        '<span>{{grid.getCellValue(row, col)}}</span>'+
+                        '<span class="productInactive" ng-if="!row.isSelected">'+
+                        '<img height="20" width="20" '+
+                                'src="application/Images/Assets/INVENTORY_page/ladger_inactive.png"/>'+
+                        '</span>'+
+                        '<span class="productInactive" ng-if="row.isSelected">'+
+                        '<img height="20" width="20" '+
+                                'src="application/Images/Assets/INVENTORY_page/ladger_active.png"/>'+
+                        '</span>'+
+                        '</div>' },
+                { field: 'date' },
+                { field: 'modeOfPayment'}       
+        ],
+        Expensefields :[
+                { field: 'vendorName',
+                cellTemplate: '<div class="ui-grid-cell-contents" >'+
+                        '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+                        '<img height="15" width="15" '+
+                                'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
+                        '</span>'+
+                        '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+                        '<img height="15" width="15" '+
+                                'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
+                        '</span>'+
+                        '<span>{{grid.getCellValue(row, col)}}</span>'+
+                        '</div>' },
+                { field: 'amount',
+                cellTemplate: '<div class="ui-grid-cell-contents" >'+
+                        '<span>{{grid.getCellValue(row, col)}}</span>'+
+                        '<span class="productInactive" ng-if="!row.isSelected">'+
+                        '<img height="20" width="20" '+
+                                'src="application/Images/Assets/INVENTORY_page/ladger_inactive.png"/>'+
+                        '</span>'+
+                        '<span class="productInactive" ng-if="row.isSelected">'+
+                        '<img height="20" width="20" '+
+                                'src="application/Images/Assets/INVENTORY_page/ladger_active.png"/>'+
+                        '</span>'+
+                        '</div>' },
+                { field: 'date' },
+                { field: 'expenseDescription'}       
+        ],
+        Journalfields :[
+                { field: 'referance',
+                cellTemplate: '<div class="ui-grid-cell-contents" >'+
+                        '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+                        '<img height="15" width="15" '+
+                                'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
+                        '</span>'+
+                        '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+                        '<img height="15" width="15" '+
+                                'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
+                        '</span>'+
+                        '<span>{{grid.getCellValue(row, col)}}</span>'+
+                        '</div>' },
+                        { field: 'date' },
+                        { field: 'fromLedger'},
+                        { field: 'toLedger'},
+                        { field: 'amount'},
+        ],
+        Contrafields :[
+                { field: 'transferredFrom',
+                cellTemplate: '<div class="ui-grid-cell-contents" >'+
+                        '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+                        '<img height="15" width="15" '+
+                                'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
+                        '</span>'+
+                        '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+                        '<img height="15" width="15" '+
+                                'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
+                        '</span>'+
+                        '<span>{{grid.getCellValue(row, col)}}</span>'+
+                        '</div>' },
+                        { field: 'transferredTo' },
+                        { field: 'date'},
+                        { field: 'reference'},
+                        { field: 'amount'},
+        ],
         Receiptfields :[
                 { field: 'customerName',
         cellTemplate: '<div class="ui-grid-cell-contents" >'+
@@ -457,9 +557,48 @@ app.controller('bankingCtrl',function($rootScope){
     console.log('Inside Banking Controller');
     $rootScope.isActive = 'CASH/BANKING';
 });
-app.controller('contraCtrl',function($rootScope){
+app.controller('contraCtrl',function($rootScope,$scope ,$state ,$timeout , CONSTANTS ,heightCalc , contraServices){
     console.log('Inside Contra Controller');
     $rootScope.isActive = 'Contra';
+
+    $scope.moduleHeading = 'Contra List';
+    $scope.btn1 = 'Search';
+    $scope.btn2 = 'New Contra'
+    $scope.ifThreeBtn = false;
+
+    $scope.changeHeight = function(val){
+        heightCalc.calculateGridHeight(val);
+    }
+
+    $scope.gridOptions = CONSTANTS.gridOptionsConstants('Contra');
+    $scope.gridOptions.onRegisterApi = function( gridApi ) {
+        $scope.gridApi = gridApi;
+    }
+
+    $scope.nextPage = function(){
+        $scope.gridApi.pagination.nextPage();
+        $scope.changeHeight(0);
+    }
+    $scope.prevPage = function(){
+        $scope.gridApi.pagination.previousPage();
+        $scope.changeHeight(0);
+    }
+
+    contraServices.getContraList().then(function(response){
+        $scope.gridOptions.data = response.data;
+        if($scope.gridOptions.data.length !== 0){
+            $scope.changeHeight(0);
+        }
+        else {
+            $scope.changeHeight(200);
+        }   
+       
+          },function(error){
+        console.log('error',error);
+   });
+      
+   $scope.changeHeight(0);
+
 });
 app.controller('creditNoteCtrl',function($rootScope){
     console.log('Inside Credit Note Controller');
@@ -468,8 +607,14 @@ app.controller('creditNoteCtrl',function($rootScope){
 app.controller('customerCtrl',function($rootScope , $scope , $state , CONSTANTS ,heightCalc , customerServices){
     console.log('Inside Customer Controller');
     $rootScope.isActive = 'CUSTOMERS';
+    
+    $scope.moduleHeading = 'Customers List';
+    $scope.btn1 = 'Search';
+    $scope.btn2 = 'Add New';
+    $scope.btn3 = 'Import';
+    $scope.ifThreeBtn = true;
 
-    $scope.addCustomers = function() {
+    $scope.add = function() {
         $state.go('Home.addCustomers');
     }
     
@@ -511,9 +656,47 @@ app.controller('debitNoteCtrl',function($rootScope){
     console.log('Inside Debit Note Controller');
     $rootScope.isActive = 'Debit Note';
 });
-app.controller('expenseCtrl',function($rootScope){
+app.controller('expenseCtrl',function($rootScope,$scope ,$state ,$timeout , CONSTANTS ,heightCalc , expenseServices){
     console.log('Inside Expense Controller');
     $rootScope.isActive = 'Expense';
+
+    $scope.moduleHeading = 'Expenses List';
+    $scope.btn1 = 'Search';
+    $scope.btn2 = 'New Expense'
+    $scope.ifThreeBtn = false;
+
+    $scope.changeHeight = function(val){
+        heightCalc.calculateGridHeight(val);
+    }
+
+    $scope.gridOptions = CONSTANTS.gridOptionsConstants('Expense');
+    $scope.gridOptions.onRegisterApi = function( gridApi ) {
+        $scope.gridApi = gridApi;
+    }
+
+    $scope.nextPage = function(){
+        $scope.gridApi.pagination.nextPage();
+        $scope.changeHeight(0);
+    }
+    $scope.prevPage = function(){
+        $scope.gridApi.pagination.previousPage();
+        $scope.changeHeight(0);
+    }
+
+    expenseServices.getExpenses().then(function(response){
+        $scope.gridOptions.data = response.data;
+        if($scope.gridOptions.data.length !== 0){
+            $scope.changeHeight(0);
+        }
+        else {
+            $scope.changeHeight(200);
+        }   
+       
+          },function(error){
+        console.log('error',error);
+   });
+      
+   $scope.changeHeight(0);
 });
 app.controller('helpCtrl',function($rootScope){
     console.log('Inside Help Controller');
@@ -573,9 +756,13 @@ app.controller('inventoryCtrl',function($rootScope,$scope ,$state ,$timeout , CO
     console.log('Inside Inventory Controller');
     
     $rootScope.isActive = 'INVENTORY';
+    $scope.moduleHeading = 'Inventory';
+    $scope.btn1 = 'Search';
+    $scope.btn2 = 'Add New Product'
+    $scope.ifThreeBtn = false;
     
 
-    $scope.addProduct = function() {
+    $scope.add = function() {
         $state.go('Home.AddInventory');
     }
     
@@ -610,9 +797,48 @@ app.controller('inventoryCtrl',function($rootScope,$scope ,$state ,$timeout , CO
       
    $scope.changeHeight(0);
 });
-app.controller('journalCtrl',function($rootScope){
+app.controller('journalCtrl',function($rootScope,$scope ,$state ,$timeout , CONSTANTS ,heightCalc , journalServices){
     console.log('Inside Journal Controller');
     $rootScope.isActive = 'Journal';
+
+    $scope.moduleHeading = 'Journal List';
+    $scope.btn1 = 'Search';
+    $scope.btn2 = 'New Journal'
+    $scope.ifThreeBtn = false;
+
+    $scope.changeHeight = function(val){
+        heightCalc.calculateGridHeight(val);
+    }
+
+    $scope.gridOptions = CONSTANTS.gridOptionsConstants('Journal');
+    $scope.gridOptions.onRegisterApi = function( gridApi ) {
+        $scope.gridApi = gridApi;
+    }
+
+    $scope.nextPage = function(){
+        $scope.gridApi.pagination.nextPage();
+        $scope.changeHeight(0);
+    }
+    $scope.prevPage = function(){
+        $scope.gridApi.pagination.previousPage();
+        $scope.changeHeight(0);
+    }
+
+    journalServices.getJournals().then(function(response){
+        $scope.gridOptions.data = response.data;
+        if($scope.gridOptions.data.length !== 0){
+            $scope.changeHeight(0);
+        }
+        else {
+            $scope.changeHeight(200);
+        }   
+       
+          },function(error){
+        console.log('error',error);
+   });
+      
+   $scope.changeHeight(0);
+
 });
 app.controller('ledgerCtrl',function($rootScope , $scope , $state){
     console.log('Inside Ledgers Controller');
@@ -684,9 +910,49 @@ app.controller('applicationAccountingLevelCtrl',function($rootScope , $scope , C
     $scope.$parent.organizationNavigation = CONSTANTS.applicationNavigation;
 });
 
-app.controller('paymentCtrl',function($rootScope){
+app.controller('paymentCtrl',function($rootScope,$scope ,$state ,$timeout , CONSTANTS ,heightCalc , paymentServices){
     console.log('Inside Payment Controller');
     $rootScope.isActive = 'Payments';
+    
+    $scope.moduleHeading = 'Payment List';
+    $scope.btn1 = 'Search';
+    $scope.btn2 = 'New Payment'
+    $scope.ifThreeBtn = false;
+
+    $scope.changeHeight = function(val){
+        heightCalc.calculateGridHeight(val);
+    }
+
+    $scope.gridOptions = CONSTANTS.gridOptionsConstants('Payment');
+    $scope.gridOptions.onRegisterApi = function( gridApi ) {
+        $scope.gridApi = gridApi;
+    }
+
+    $scope.nextPage = function(){
+        $scope.gridApi.pagination.nextPage();
+        $scope.changeHeight(0);
+    }
+    $scope.prevPage = function(){
+        $scope.gridApi.pagination.previousPage();
+        $scope.changeHeight(0);
+    }
+
+    paymentServices.getPayments().then(function(response){
+        $scope.gridOptions.data = response.data;
+        if($scope.gridOptions.data.length !== 0){
+            $scope.changeHeight(0);
+        }
+        else {
+            $scope.changeHeight(200);
+        }   
+       
+          },function(error){
+        console.log('error',error);
+   });
+      
+   $scope.changeHeight(0);
+
+
 });
 app.controller('purchaseCtrl',function($rootScope){
     console.log('Inside Purchase Controller');
@@ -700,7 +966,12 @@ app.controller('receiptCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
     console.log('Inside Receipt Controller');
     $rootScope.isActive = 'Receipt';
 
-    $scope.newReceipt = function() {
+    $scope.moduleHeading = 'Receipt List';
+    $scope.btn1 = 'Search';
+    $scope.btn2 = 'New Receipt'
+    $scope.ifThreeBtn = false;
+
+    $scope.add = function() {
         $state.go('Home.newReceipt');
     }
 
@@ -748,10 +1019,16 @@ app.controller('vendorCtrl',function($rootScope , $scope , $state , CONSTANTS ,h
     console.log('Inside Vendor Controller');
     $rootScope.isActive = 'VENDORS';
 
-    $scope.addvendors = function() {
+    $scope.moduleHeading = 'Vendor List';
+    $scope.btn1 = 'Search';
+    $scope.btn2 = 'Add New';
+    $scope.btn3 = 'Import';
+    $scope.ifThreeBtn = true;
+
+    $scope.add = function() {
         $state.go('Home.addVendors');
     }
-    $scope.importVendor = function(){
+    $scope.import = function(){
         $state.go('Home.ImportVendors');
     }
     
@@ -787,9 +1064,19 @@ app.controller('vendorCtrl',function($rootScope , $scope , $state , CONSTANTS ,h
 
 
 });
+app.service('contraServices',function($http , CONSTANTS){
+    this.getContraList = function(){
+       return $http.get(CONSTANTS.service[CONSTANTS.appLevel].contraList);
+    };
+});
 app.service('customerServices',function($http , CONSTANTS){
     this.getCustomer = function(){
        return $http.get(CONSTANTS.service[CONSTANTS.appLevel].customerList);
+    };
+});
+app.service('expenseServices',function($http , CONSTANTS){
+    this.getExpenses = function(){
+       return $http.get(CONSTANTS.service[CONSTANTS.appLevel].expenseList);
     };
 });
 app.factory('heightCalc',function($timeout){
@@ -812,6 +1099,16 @@ app.factory('heightCalc',function($timeout){
 app.service('inventoryServices',function($http , CONSTANTS){
     this.getInventories = function(){
        return $http.get(CONSTANTS.service[CONSTANTS.appLevel].inventoryList);
+    };
+});
+app.service('journalServices',function($http , CONSTANTS){
+    this.getJournals = function(){
+       return $http.get(CONSTANTS.service[CONSTANTS.appLevel].journalList);
+    };
+});
+app.service('paymentServices',function($http , CONSTANTS){
+    this.getPayments = function(){
+       return $http.get(CONSTANTS.service[CONSTANTS.appLevel].paymentList);
     };
 });
 app.service('receiptServices',function($http , CONSTANTS){

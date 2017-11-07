@@ -6,13 +6,21 @@ app.constant('CONSTANTS', {
                         customerList : 'application/fixture/customerList.json',
                         vendorList : 'application/fixture/vendorList.json',
                         importVendor : 'application/fixture/importVendors.json',
-                        receiptList : 'application/fixture/receiptList.json'
+                        receiptList : 'application/fixture/receiptList.json',
+                        paymentList : 'application/fixture/paymentList.json',
+                        expenseList : 'application/fixture/expenseList.json',
+                        journalList : 'application/fixture/journalList.json',
+                        contraList : 'application/fixture/contraList.json'
                 },{
                         inventoryList : "live url here",
                         customerList : '',
                         vendorList : '',
                         importVendor :'',
-                        receiptList :''
+                        receiptList :'',
+                        paymentList : '',
+                        expenseList : '',
+                        journalList : '',
+                        contraList : ''
                 }
         ],
         headBarNavigator : [
@@ -63,6 +71,98 @@ app.constant('CONSTANTS', {
                         columnDefs : this[gridName+"fields"]
                 }
         },
+        Paymentfields :[
+                { field: 'vendorName',
+                cellTemplate: '<div class="ui-grid-cell-contents" >'+
+                        '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+                        '<img height="15" width="15" '+
+                                'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
+                        '</span>'+
+                        '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+                        '<img height="15" width="15" '+
+                                'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
+                        '</span>'+
+                        '<span>{{grid.getCellValue(row, col)}}</span>'+
+                        '</div>' },
+                { field: 'amount',
+                cellTemplate: '<div class="ui-grid-cell-contents" >'+
+                        '<span>{{grid.getCellValue(row, col)}}</span>'+
+                        '<span class="productInactive" ng-if="!row.isSelected">'+
+                        '<img height="20" width="20" '+
+                                'src="application/Images/Assets/INVENTORY_page/ladger_inactive.png"/>'+
+                        '</span>'+
+                        '<span class="productInactive" ng-if="row.isSelected">'+
+                        '<img height="20" width="20" '+
+                                'src="application/Images/Assets/INVENTORY_page/ladger_active.png"/>'+
+                        '</span>'+
+                        '</div>' },
+                { field: 'date' },
+                { field: 'modeOfPayment'}       
+        ],
+        Expensefields :[
+                { field: 'vendorName',
+                cellTemplate: '<div class="ui-grid-cell-contents" >'+
+                        '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+                        '<img height="15" width="15" '+
+                                'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
+                        '</span>'+
+                        '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+                        '<img height="15" width="15" '+
+                                'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
+                        '</span>'+
+                        '<span>{{grid.getCellValue(row, col)}}</span>'+
+                        '</div>' },
+                { field: 'amount',
+                cellTemplate: '<div class="ui-grid-cell-contents" >'+
+                        '<span>{{grid.getCellValue(row, col)}}</span>'+
+                        '<span class="productInactive" ng-if="!row.isSelected">'+
+                        '<img height="20" width="20" '+
+                                'src="application/Images/Assets/INVENTORY_page/ladger_inactive.png"/>'+
+                        '</span>'+
+                        '<span class="productInactive" ng-if="row.isSelected">'+
+                        '<img height="20" width="20" '+
+                                'src="application/Images/Assets/INVENTORY_page/ladger_active.png"/>'+
+                        '</span>'+
+                        '</div>' },
+                { field: 'date' },
+                { field: 'expenseDescription'}       
+        ],
+        Journalfields :[
+                { field: 'referance',
+                cellTemplate: '<div class="ui-grid-cell-contents" >'+
+                        '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+                        '<img height="15" width="15" '+
+                                'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
+                        '</span>'+
+                        '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+                        '<img height="15" width="15" '+
+                                'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
+                        '</span>'+
+                        '<span>{{grid.getCellValue(row, col)}}</span>'+
+                        '</div>' },
+                        { field: 'date' },
+                        { field: 'fromLedger'},
+                        { field: 'toLedger'},
+                        { field: 'amount'},
+        ],
+        Contrafields :[
+                { field: 'transferredFrom',
+                cellTemplate: '<div class="ui-grid-cell-contents" >'+
+                        '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+                        '<img height="15" width="15" '+
+                                'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
+                        '</span>'+
+                        '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+                        '<img height="15" width="15" '+
+                                'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
+                        '</span>'+
+                        '<span>{{grid.getCellValue(row, col)}}</span>'+
+                        '</div>' },
+                        { field: 'transferredTo' },
+                        { field: 'date'},
+                        { field: 'reference'},
+                        { field: 'amount'},
+        ],
         Receiptfields :[
                 { field: 'customerName',
         cellTemplate: '<div class="ui-grid-cell-contents" >'+

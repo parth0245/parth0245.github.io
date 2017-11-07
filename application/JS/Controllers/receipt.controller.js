@@ -2,7 +2,12 @@ app.controller('receiptCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
     console.log('Inside Receipt Controller');
     $rootScope.isActive = 'Receipt';
 
-    $scope.newReceipt = function() {
+    $scope.moduleHeading = 'Receipt List';
+    $scope.btn1 = 'Search';
+    $scope.btn2 = 'New Receipt'
+    $scope.ifThreeBtn = false;
+
+    $scope.add = function() {
         $state.go('Home.newReceipt');
     }
 

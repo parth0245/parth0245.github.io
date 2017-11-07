@@ -1,0 +1,38 @@
+[
+    {
+        "vendorName": "Vendor 1",
+        "amount": "Rs 5000 /-",
+        "date": "1-2-2017",
+        "expenseDescription": "Repair"
+    },
+    {
+        "vendorName": "Vendor 1",
+        "amount": "Rs 5000 /-",
+        "date": "1-2-2017",
+        "expenseDescription": "Electricity"
+    },
+    {
+        "vendorName": "Vendor 1",
+        "amount": "Rs 5000 /-",
+        "date": "1-2-2017",
+        "expenseDescription": "printing"
+    },
+    {
+        "vendorName": "Vendor 1",
+        "amount": "Rs 5000 /-",
+        "date": "1-2-2017",
+        "expenseDescription": "postal"
+    },
+    {
+        "vendorName": "Vendor 1",
+        "amount": "Rs 5000 /-",
+        "date": "1-2-2017",
+        "expenseDescription": "postal"
+    },
+    {
+        "vendorName": "Vendor 1",
+        "amount": "Rs 5000 /-",
+        "date": "1-2-2017",
+        "expenseDescription": "postal"
+    }
+]

@@ -1,8 +1,14 @@
 app.controller('customerCtrl',function($rootScope , $scope , $state , CONSTANTS ,heightCalc , customerServices){
     console.log('Inside Customer Controller');
     $rootScope.isActive = 'CUSTOMERS';
+    
+    $scope.moduleHeading = 'Customers List';
+    $scope.btn1 = 'Search';
+    $scope.btn2 = 'Add New';
+    $scope.btn3 = 'Import';
+    $scope.ifThreeBtn = true;
 
-    $scope.addCustomers = function() {
+    $scope.add = function() {
         $state.go('Home.addCustomers');
     }
     

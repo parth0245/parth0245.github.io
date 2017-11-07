@@ -2,9 +2,13 @@ app.controller('inventoryCtrl',function($rootScope,$scope ,$state ,$timeout , CO
     console.log('Inside Inventory Controller');
     
     $rootScope.isActive = 'INVENTORY';
+    $scope.moduleHeading = 'Inventory';
+    $scope.btn1 = 'Search';
+    $scope.btn2 = 'Add New Product'
+    $scope.ifThreeBtn = false;
     
 
-    $scope.addProduct = function() {
+    $scope.add = function() {
         $state.go('Home.AddInventory');
     }
     

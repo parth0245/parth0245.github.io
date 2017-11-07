@@ -2,10 +2,16 @@ app.controller('vendorCtrl',function($rootScope , $scope , $state , CONSTANTS ,h
     console.log('Inside Vendor Controller');
     $rootScope.isActive = 'VENDORS';
 
-    $scope.addvendors = function() {
+    $scope.moduleHeading = 'Vendor List';
+    $scope.btn1 = 'Search';
+    $scope.btn2 = 'Add New';
+    $scope.btn3 = 'Import';
+    $scope.ifThreeBtn = true;
+
+    $scope.add = function() {
         $state.go('Home.addVendors');
     }
-    $scope.importVendor = function(){
+    $scope.import = function(){
         $state.go('Home.ImportVendors');
     }
     

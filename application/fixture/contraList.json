@@ -1,0 +1,30 @@
+[
+    {
+        "transferredFrom": "Cash",
+        "transferredTo": "Bank",
+        "date": "1-2-2017",
+        "reference": "Cheque No 123",
+        "amount": "Rs 5000/-"
+    },
+    {
+        "transferredFrom": "Cash",
+        "transferredTo": "Bank",
+        "date": "1-2-2017",
+        "reference": "Cheque No 123",
+        "amount": "Rs 5000/-"
+    },
+    {
+        "transferredFrom": "Cash",
+        "transferredTo": "Bank",
+        "date": "1-2-2017",
+        "reference": "Cheque No 123",
+        "amount": "Rs 5000/-"
+    },
+    {
+        "transferredFrom": "Cash",
+        "transferredTo": "Bank",
+        "date": "1-2-2017",
+        "reference": "Cheque No 123",
+        "amount": "Rs 5000/-"
+    }
+]
