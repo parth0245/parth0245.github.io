@@ -402,7 +402,7 @@
 	width:100%;
 }
 .addPaddingButtons {
-	padding-top:30px;
+	padding-top:50px;
 	padding-bottom:100px;
 
 }
@@ -429,4 +429,57 @@
 }
 .borderForRadio {
 	border-bottom: 1px solid grey;
+}
+.downloadPayment {
+	margin-right: 170px;
+    margin-top: 15px;
+}
+.journalTable {
+	width:100%;
+	border:1px solid #d4d4d4;
+}
+.journalTable thead tr{
+	height: 40px;
+	background-color: #e7e9e9;
+}
+.journalTable thead tr th{
+	text-align: center;
+	border-right: 1px solid #d4d4d4;
+}
+.journalTable tbody tr td{
+	border-right: 1px solid #d4d4d4;
+	background-color: white;
+	padding: 15px;
+}
+.journalTable tbody tr td label{
+	margin-top:25px;
+}
+.journalTable tbody tr td:first-child md-input-container {
+	width: 90%;
+	float: right;
+}
+.journalTable tbody tr:first-child td{
+	border-bottom: 1px solid #d4d4d4;
+}
+.journalTable tbody tr td:first-child {
+	width: 550px;
+}
+.journalTable thead tr th:last-child , .journalTable .journalTable tbody tr td:last-child{
+	border-right: none
+}
+/**/
+.md-icon-button + .md-datepicker-input-container {
+	float: left;
+	margin-left: 0px;
+}  
+._md-datepicker-floating-label>md-datepicker .md-datepicker-button {
+	position: absolute;
+	right: -10px;
+	z-index: 99;
+}
+._md-datepicker-floating-label._md-datepicker-has-calendar-icon>label:not(.md-no-float):not(.md-container-ignore) {
+	left:0px !important;
+}
+.md-datepicker-input {
+	min-width: 270px;
 }

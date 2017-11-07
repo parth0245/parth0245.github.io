@@ -113,10 +113,10 @@
                         <label>Opening Balance</label>
                         <input name="balance" ng-model="balance">
                     </md-input-container>
-                    <md-input-container flex="25"  flex-offset="5">
+                    <md-input-container flex="25" flex-offset="5">
                             <label>Date</label>
-                            <input name="date" ng-model="date">
-                    </md-input-container>
+                            <md-datepicker ng-model="date" md-hide-icons="triangle" md-open-on-focus=""></md-datepicker>
+                        </md-input-container>
                  </div>
                 <div layout="row">
                     <md-button class="md-raised" flex="10" flex-offset="75">Reset</md-button>

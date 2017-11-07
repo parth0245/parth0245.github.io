@@ -83,25 +83,50 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
         templateUrl: 'application/Partials/diffModules.html',
         controller: 'receiptCtrl'
     })
+    .state('Home.addReceipt', {
+        url: '/addReceipt',
+        templateUrl: 'application/Partials/addReceipt.html',
+        controller: 'addReceiptCtrl'
+    })
     .state('Home.Payments', {
         url: '/payment',
         templateUrl: 'application/Partials/diffModules.html',
         controller: 'paymentCtrl'
+    })
+    .state('Home.addPayments', {
+        url: '/addPayment',
+        templateUrl: 'application/Partials/addPayment.html',
+        controller: 'addPaymentCtrl'
     })
     .state('Home.Expense', {
         url: '/expense',
         templateUrl: 'application/Partials/diffModules.html',
         controller: 'expenseCtrl'
     })
+    .state('Home.addExpense', {
+        url: '/addExpense',
+        templateUrl: 'application/Partials/addExpense.html',
+        controller: 'addExpenseCtrl'
+    })
     .state('Home.Journal', {
         url: '/journal',
         templateUrl: 'application/Partials/diffModules.html',
         controller: 'journalCtrl'
     })
+    .state('Home.addJournal', {
+        url: '/addJournal',
+        templateUrl: 'application/Partials/addJournal.html',
+        controller: 'addJournalCtrl'
+    })
     .state('Home.Contra', {
         url: '/contra',
         templateUrl: 'application/Partials/diffModules.html',
         controller: 'contraCtrl'
+    })
+    .state('Home.addContra', {
+        url: '/addContra',
+        templateUrl: 'application/Partials/addContra.html',
+        controller: 'addContraCtrl'
     })
     .state('Home.CreditNote', {
         url: '/creditNote',
@@ -178,6 +203,7 @@ app.run(function($rootScope) {
     $rootScope.isActive = '';
     $rootScope.isSubActive = '';
     $rootScope.showNavigations = true ;
+    $rootScope.appTitle = 'Siri-Books';
   });
 app.constant('CONSTANTS', {
         appLevel : 0,
@@ -480,6 +506,11 @@ ImportVendorfields : [
         { field: 'rowNo'}
 ]
 });
+app.controller('addContraCtrl',function($rootScope , $scope){
+    console.log('Inside Add Contra Controller');
+    $rootScope.isActive = 'Contra';
+
+});
 app.controller('addCustomerCtrl',function($rootScope , $scope){
     console.log('Inside Add Customer Controller');
     $rootScope.isActive = 'CUSTOMERS';
@@ -504,6 +535,11 @@ app.controller('addCustomerCtrl',function($rootScope , $scope){
 
 
 });
+app.controller('addExpenseCtrl',function($rootScope , $scope){
+    console.log('Inside Add Expense Controller');
+    $rootScope.isActive = 'Expense';
+
+});
 app.controller('addInventoryCtrl',function($rootScope , $scope){
     console.log('Inside Add Inventory Controller');
     $rootScope.isActive = 'INVENTORY';
@@ -525,6 +561,21 @@ app.controller('addInventoryCtrl',function($rootScope , $scope){
            $scope.Description.splice(index, 1);
         }
     }
+});
+app.controller('addJournalCtrl',function($rootScope , $scope){
+    console.log('Inside Add Journal Controller');
+    $rootScope.isActive = 'Journal';
+
+    
+
+});
+app.controller('addPaymentCtrl',function($rootScope , $scope){
+    console.log('Inside Add Payment Controller');
+    $rootScope.isActive = 'Payments';
+});
+app.controller('addReceiptCtrl',function($rootScope , $scope){
+    console.log('Inside Add Receipt Controller');
+    $rootScope.isActive = 'Receipt';
 });
 app.controller('addVendorCtrl',function($rootScope , $scope){
     console.log('Inside Add Vendor Controller');
@@ -568,6 +619,10 @@ app.controller('contraCtrl',function($rootScope,$scope ,$state ,$timeout , CONST
 
     $scope.changeHeight = function(val){
         heightCalc.calculateGridHeight(val);
+    }
+
+    $scope.add = function(){
+        $state.go('Home.addContra');
     }
 
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Contra');
@@ -669,6 +724,9 @@ app.controller('expenseCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
         heightCalc.calculateGridHeight(val);
     }
 
+    $scope.add = function(){
+        $state.go('Home.addExpense');
+    }
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Expense');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
@@ -810,6 +868,10 @@ app.controller('journalCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
         heightCalc.calculateGridHeight(val);
     }
 
+    $scope.add = function(){
+        $state.go('Home.addJournal');
+    }
+
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Journal');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
@@ -923,6 +985,10 @@ app.controller('paymentCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
         heightCalc.calculateGridHeight(val);
     }
 
+    $scope.add = function(){
+        $state.go('Home.addPayments');
+    }
+
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Payment');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
@@ -972,7 +1038,7 @@ app.controller('receiptCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
     $scope.ifThreeBtn = false;
 
     $scope.add = function() {
-        $state.go('Home.newReceipt');
+        $state.go('Home.addReceipt');
     }
 
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Receipt');

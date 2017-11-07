@@ -11,6 +11,9 @@ app.controller('expenseCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
         heightCalc.calculateGridHeight(val);
     }
 
+    $scope.add = function(){
+        $state.go('Home.addExpense');
+    }
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Expense');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;

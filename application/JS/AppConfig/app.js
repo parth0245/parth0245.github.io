@@ -83,25 +83,50 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
         templateUrl: 'application/Partials/diffModules.html',
         controller: 'receiptCtrl'
     })
+    .state('Home.addReceipt', {
+        url: '/addReceipt',
+        templateUrl: 'application/Partials/addReceipt.html',
+        controller: 'addReceiptCtrl'
+    })
     .state('Home.Payments', {
         url: '/payment',
         templateUrl: 'application/Partials/diffModules.html',
         controller: 'paymentCtrl'
+    })
+    .state('Home.addPayments', {
+        url: '/addPayment',
+        templateUrl: 'application/Partials/addPayment.html',
+        controller: 'addPaymentCtrl'
     })
     .state('Home.Expense', {
         url: '/expense',
         templateUrl: 'application/Partials/diffModules.html',
         controller: 'expenseCtrl'
     })
+    .state('Home.addExpense', {
+        url: '/addExpense',
+        templateUrl: 'application/Partials/addExpense.html',
+        controller: 'addExpenseCtrl'
+    })
     .state('Home.Journal', {
         url: '/journal',
         templateUrl: 'application/Partials/diffModules.html',
         controller: 'journalCtrl'
     })
+    .state('Home.addJournal', {
+        url: '/addJournal',
+        templateUrl: 'application/Partials/addJournal.html',
+        controller: 'addJournalCtrl'
+    })
     .state('Home.Contra', {
         url: '/contra',
         templateUrl: 'application/Partials/diffModules.html',
         controller: 'contraCtrl'
+    })
+    .state('Home.addContra', {
+        url: '/addContra',
+        templateUrl: 'application/Partials/addContra.html',
+        controller: 'addContraCtrl'
     })
     .state('Home.CreditNote', {
         url: '/creditNote',

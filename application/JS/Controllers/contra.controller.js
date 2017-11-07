@@ -11,6 +11,10 @@ app.controller('contraCtrl',function($rootScope,$scope ,$state ,$timeout , CONST
         heightCalc.calculateGridHeight(val);
     }
 
+    $scope.add = function(){
+        $state.go('Home.addContra');
+    }
+
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Contra');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;

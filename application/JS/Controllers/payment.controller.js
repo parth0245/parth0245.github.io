@@ -11,6 +11,10 @@ app.controller('paymentCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
         heightCalc.calculateGridHeight(val);
     }
 
+    $scope.add = function(){
+        $state.go('Home.addPayments');
+    }
+
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Payment');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;

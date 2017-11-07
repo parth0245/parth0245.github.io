@@ -8,7 +8,7 @@ app.controller('receiptCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
     $scope.ifThreeBtn = false;
 
     $scope.add = function() {
-        $state.go('Home.newReceipt');
+        $state.go('Home.addReceipt');
     }
 
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Receipt');

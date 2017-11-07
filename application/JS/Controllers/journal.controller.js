@@ -11,6 +11,10 @@ app.controller('journalCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
         heightCalc.calculateGridHeight(val);
     }
 
+    $scope.add = function(){
+        $state.go('Home.addJournal');
+    }
+
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Journal');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;

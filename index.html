@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="siriBooks">
 	<head>
-		<title>Siri-Books</title>
+		<title ng-bind="appTitle"></title>
 		<base href="/">
 		<!--jquery-->
 		<script src="node_modules/jquery/dist/jquery.min.js"></script>
@@ -41,7 +41,7 @@
 		<!--Main Script File-->
 		<script src="dist/src/js/script.js"></script>
 	</head>
-	<body ng-app="siriBooks" layout="column">
+	<body layout="column">
 		<ui-view></ui-view>		
 	</body>
 </html>
