@@ -1,0 +1,38 @@
+[
+    {
+        "userName": "admin@abc.com",
+        "name": "Abc Company",
+        "createdOn": "8-9-2017",
+        "updatedOn": "10-12-2017",
+        "mobile": "9999996523",
+        "role": "Sales",
+        "status": "Active"
+    }  ,
+    {
+        "userName": "admin@abc.com",
+        "name": "Abc Company",
+        "createdOn": "8-9-2017",
+        "updatedOn": "10-12-2017",
+        "mobile": "9999996523",
+        "role": "Admin",
+        "status": "Active"
+    }  ,
+    {
+        "userName": "admin@abc.com",
+        "name": "Abc Company",
+        "createdOn": "8-9-2017",
+        "updatedOn": "10-12-2017",
+        "mobile": "9999996523",
+        "role": "Admin",
+        "status": "Active"
+    }  ,
+    {
+        "userName": "admin@abc.com",
+        "name": "Abc Company",
+        "createdOn": "8-9-2017",
+        "updatedOn": "10-12-2017",
+        "mobile": "9999996523",
+        "role": "Sales",
+        "status": "Inactive"
+    }  
+]

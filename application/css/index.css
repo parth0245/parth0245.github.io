@@ -298,6 +298,9 @@
 .paddingLeft80 {
 	padding-left: 80px;
 }
+.paddingLeft130 {
+	padding-left: 130px;
+}
 .paddingRight0 {
 	padding-right:0px;
 }
@@ -482,4 +485,10 @@
 }
 .md-datepicker-input {
 	min-width: 270px;
+}
+.ui-grid-header-cell .ui-grid-tree-base-row-header-buttons:first-child {
+	display: none;	
+}
+.ui-grid-tree-header-row {
+	font-weight: normal !important;
 }

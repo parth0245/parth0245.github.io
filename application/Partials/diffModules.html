@@ -1,4 +1,60 @@
-<div class="paddingLeft60" layout="column">
+<div ng-class="moduleHeading == 'Application Users' ? 'paddingLeft130' : 'paddingLeft60'" layout="column" style="overflow-y: hidden">
+
+        <div class="col-xs-12 sectionSubHeading" ng-if="addNewUserPanel">
+            <h2>New User</h2>
+        </div>
+        <div class="topPadding20 fontNormal col-xs-11" ng-if="addNewUserPanel">
+                <md-content>
+                        <form name="addUserForm" style="background-color:#f5f6f8">
+                                <div layout="row" >
+                                        <md-input-container flex="25">
+                                                <label>First Name*</label>
+                                                <input name="fname" ng-model="fname">
+                                            </md-input-container>
+                                        <md-input-container flex="25" flex-offset="10">
+                                            <label>Middle Name</label>
+                                            <input name="mname" ng-model="mname">
+                                        </md-input-container>
+                                        <md-input-container flex="25"  flex-offset="10">
+                                                <label>Last Name</label>
+                                                <input name="lname" ng-model="lname">
+                                        </md-input-container>
+                                </div>
+                                <div layout="row" >
+                                        <md-input-container flex="25">
+                                                <label>e-mail ID</label>
+                                                <input name="email" ng-model="email">
+                                            </md-input-container>
+                                        <md-input-container flex="25" flex-offset="10">
+                                            <label>Mobile</label>
+                                            <input name="mobile" ng-model="mobile">
+                                        </md-input-container>
+                                        <md-input-container flex="25" flex-offset="10">
+                                                <label>Role</label>
+                                                <md-select name="role" ng-model="role">
+                                                    <md-option value="Product 1">Role 1</md-option>
+                                                    <md-option value="Product 2">Role 2</md-option>
+                                                </md-select>
+                                            </md-input-container>
+                                </div>
+                                <div layout="row" >
+                                        <md-input-container flex="25">
+                                                <label>Status</label>
+                                                <md-select name="status" ng-model="status">
+                                                    <md-option value="Product 1">Status 1</md-option>
+                                                    <md-option value="Product 2">Status 2</md-option>
+                                                </md-select>
+                                            </md-input-container>
+                                </div>
+                                <div layout="row" class="addPaddingButtons">
+                                        <md-button class="md-raised" flex-offset="55">Reset</md-button>
+                                        <md-button class="md-raised md-primary">Save</md-button>
+                                        <md-button class="md-raised" ng-click="add()">Cancel</md-button>
+                                </div>
+                        </form>
+                </md-content>
+
+        </div>
     <div class="col-xs-12 sectionSubHeading">
         <h2>{{moduleHeading}}</h2>
     </div>
@@ -29,7 +85,8 @@
             <button class="btn btn-primary btn-app-blue-color" ng-click="import()">{{btn3}}</button>
         </div>
     </div>
-    <div class="col-xs-3 col-xs-offset-8 paddingTop100 paddingLeft80 paddingBottom10">
+    <div ng-if="moduleHeading == 'Ledgers'" class="paddingTop100"></div>
+    <div ng-if="moduleHeading != 'Ledgers'" class="col-xs-3 col-xs-offset-8 paddingTop100 paddingLeft80 paddingBottom10">
             <span class="buttonBorder" ng-click="prevPage()">
                 <img src="application/Images/Assets/pagination_left.png"/>
             </span>
@@ -44,8 +101,8 @@
                 </select>
             </span>
     </div>
-    <div class="col-xs-11 inventorySection paddingRight30">
-            <div id="grid1" ui-grid="gridOptions" ui-grid-selection ui-grid-pagination ui-grid-auto-resize class="grid">
+    <div class="col-xs-11 inventorySection paddingRight30" ng-class="moduleHeading == 'Application Users' ? 'paddingBottom30' : ''">
+            <div id="grid1" ui-grid="gridOptions" ui-grid-selection ui-grid-pagination ui-grid-auto-resize ui-grid-grouping class="grid">
                 <div class="watermark" ng-show="!gridOptions.data.length">No data available</div>
             </div>
     </div>

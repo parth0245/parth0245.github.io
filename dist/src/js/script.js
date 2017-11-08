@@ -1,4 +1,4 @@
-var app = angular.module('siriBooks',['ui.router','ngMaterial','ngSanitize','ui.grid','ui.grid.selection','ui.grid.resizeColumns','ui.grid.pagination']);
+var app = angular.module('siriBooks',['ui.router','ngMaterial','ngSanitize','ui.grid','ui.grid.selection','ui.grid.resizeColumns','ui.grid.pagination','ui.grid.grouping']);
 
 app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     $stateProvider
@@ -55,7 +55,7 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     })
     .state('Home.Ledgers', {
         url: '/ledgers',
-        templateUrl: 'application/Partials/ledger.html',
+        templateUrl: 'application/Partials/diffModules.html',
         controller: 'ledgerCtrl'
     })
     .state('Home.addLedgers', {
@@ -156,7 +156,7 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     })
     .state('Home.User', {
         url: '/organizationUser',
-        templateUrl: 'application/Partials/organizationUser.html',
+        templateUrl: 'application/Partials/diffModules.html',
         controller: 'organizationUserCtrl'
     })
     .state('Home.Roles', {
@@ -217,7 +217,9 @@ app.constant('CONSTANTS', {
                         paymentList : 'application/fixture/paymentList.json',
                         expenseList : 'application/fixture/expenseList.json',
                         journalList : 'application/fixture/journalList.json',
-                        contraList : 'application/fixture/contraList.json'
+                        contraList : 'application/fixture/contraList.json',
+                        ledgerList : 'application/fixture/ledgerList.json',
+                        organizationUserList : 'application/fixture/organizationUserList.json'
                 },{
                         inventoryList : "live url here",
                         customerList : '',
@@ -227,7 +229,9 @@ app.constant('CONSTANTS', {
                         paymentList : '',
                         expenseList : '',
                         journalList : '',
-                        contraList : ''
+                        contraList : '',
+                        ledgerList : 'application/fixture/ledgerList.json',
+                        organizationUserList : ''
                 }
         ],
         headBarNavigator : [
@@ -262,6 +266,24 @@ app.constant('CONSTANTS', {
                 {url : 'Home.Accounting', name : 'Accounting' , SelimgSrc:'application/Images/Assets/Admin-Settings inside/Accounting_active.png' , imgSrc : 'application/Images/Assets/Admin-Settings inside/Accounting_inactive.png', glyphClasses : 'glyphicon glyphicon-home'}
         ],
         gridOptionsConstants : function(gridName){
+                if(gridName == 'Ledger'){
+                        return {
+                                enableSorting: true,
+                                rowHeight: 40,
+                                enableRowSelection: true,
+                                enableColumnResizing: false,
+                                enableRowHeaderSelection: false,
+                                multiSelect : false,
+                                enableColumnMenus : false,
+                                enableSorting :false,
+                                enableVerticalScrollbar : 0 ,
+                                enablePaginationControls: false,
+                                treeRowHeaderAlwaysVisible:false,
+                                showColumnFooter: false,
+                                columnDefs : this[gridName+"fields"]
+                        }
+                }
+                else{
                 return {
                         enableSorting: true,
                         rowHeight: 40,
@@ -275,8 +297,11 @@ app.constant('CONSTANTS', {
                         enablePaginationControls: false,
                         paginationPageSizes: [5 , 10, 20 , 25],
                         paginationPageSize: 5,
+                        treeRowHeaderAlwaysVisible:false,
+                        showColumnFooter: false,
                         columnDefs : this[gridName+"fields"]
                 }
+        }
         },
         Paymentfields :[
                 { field: 'vendorName',
@@ -504,7 +529,28 @@ ImportVendorfields : [
         { field: 'address'},
         { field: 'contact'},
         { field: 'rowNo'}
-]
+],
+OrganizationUserfields : [
+        { field: 'userName' ,
+        cellTemplate: '<div class="ui-grid-cell-contents" >'+
+        '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+        '<img height="15" width="15" '+
+                'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
+        '</span>'+
+        '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+        '<img height="15" width="15" '+
+                'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
+        '</span>'+
+        '<span>{{grid.getCellValue(row, col)}}</span>'+
+        '</div>' },
+        { field: 'name'},
+        { field: 'createdOn'},
+        { field: 'updatedOn'},
+        { field: 'mobile'},
+        { field: 'role'},
+        { field: 'status'}
+],
+Ledgerfields : []
 });
 app.controller('addContraCtrl',function($rootScope , $scope){
     console.log('Inside Add Contra Controller');
@@ -902,19 +948,102 @@ app.controller('journalCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
    $scope.changeHeight(0);
 
 });
-app.controller('ledgerCtrl',function($rootScope , $scope , $state){
+app.controller('ledgerCtrl',function( $rootScope,$scope ,$state ,$timeout , CONSTANTS ,heightCalc , ledgerServices ,uiGridGroupingConstants){
     console.log('Inside Ledgers Controller');
     $rootScope.isActive = 'LEDGERS';
 
-    $scope.addLedger = function(){
+    $scope.add = function(){
         $state.go('Home.addLedgers');
     }
+
+    $scope.moduleHeading = 'Ledgers';
+    $scope.btn1 = 'Search';
+    $scope.btn2 = 'Add New';
+    $scope.ifThreeBtn = false;
+
+    $scope.changeHeight = function(val){
+        heightCalc.calculateGridHeight(val);
+    }
+
+    var setGroupValues = function( columns, rows ) {
+       
+        columns.forEach( function( column ) {
+          if ( column.grouping && column.grouping.groupPriority > -1 ){
+            // Put the balance next to all group labels.
+            column.customTreeAggregationFinalizerFn = function( aggregation ) {
+              if ( typeof(aggregation.groupVal) !== 'undefined') {
+                aggregation.rendered = aggregation.groupVal;
+              } else {
+                aggregation.rendered = null;
+              }
+            };
+          }
+        });
+        return columns;
+      };
+
+    $scope.gridOptions = CONSTANTS.gridOptionsConstants('Ledger');
+    $scope.gridOptions.treeRowHeaderAlwaysVisible = false;
+    $scope.gridOptions.enableRowSelection = false;
+    var cellTemplate = '<div ng-if="!col.grouping || col.grouping.groupPriority === undefined || col.grouping.groupPriority === null || ( row.groupHeader && col.grouping.groupPriority === row.treeLevel )" class="ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>';
+    $scope.gridOptions.columnDefs = [
+        { field: 'primaryGroup' , 
+        grouping: { groupPriority: 0 },
+        cellTemplate : cellTemplate},
+        { field: 'majorGroupName' ,grouping: { groupPriority: 1 },
+        cellTemplate : cellTemplate},
+        { field: 'subGroupName' ,grouping: { groupPriority: 2 },
+        cellTemplate : cellTemplate},
+        { field: 'ledgerName'},
+        { field: 'balance' , 
+        treeAggregationType: uiGridGroupingConstants.aggregation.SUM,
+        customTreeAggregationFinalizerFn: function( aggregation ) {
+          aggregation.rendered = aggregation.value;
+        }}
+];
+$scope.gridOptions.showTreeExpandNoChildren = true;
+    $scope.gridOptions.onRegisterApi = function( gridApi ) {
+        $scope.gridApi = gridApi;
+
+        $scope.gridApi.grid.registerColumnsProcessor( setGroupValues, 410 );
+
+        $scope.gridApi.treeBase.on.rowExpanded($scope, function(row) {
+                 $scope.changeHeight(0);
+         });
+         $scope.gridApi.treeBase.on.rowCollapsed($scope, function(row) {
+                 $scope.changeHeight(0);
+         });
+      }
+     
+    $scope.nextPage = function(){
+        $scope.gridApi.pagination.nextPage();
+        $scope.changeHeight(0);
+    }
+    $scope.prevPage = function(){
+        $scope.gridApi.pagination.previousPage();
+        $scope.changeHeight(0);
+    }
+
+    ledgerServices.getLedgers().then(function(response){
+        $scope.gridOptions.data = response.data;
+        if($scope.gridOptions.data.length !== 0){
+            $scope.changeHeight(0);
+        }
+        else {
+            $scope.changeHeight(200);
+        }   
+          },function(error){
+        console.log('error',error);
+   });
+      
+   $scope.changeHeight(0);
 });
 
 app.controller('addLedgerCtrl',function($rootScope , $scope){
     console.log('Inside Add Inventory Controller');
     $rootScope.isActive = 'LEDGERS';
 });
+
 app.controller('LoginCtrl',function($scope,$state){
     console.log('Inside Login Controller');
     $scope.login = function(){
@@ -933,12 +1062,54 @@ app.controller('organizationLevelCtrl',function($rootScope , $scope , CONSTANTS)
     $scope.$parent.organizationNavigation = CONSTANTS.organizationNavigation;
 });
 
-app.controller('organizationUserCtrl',function($rootScope , $scope , CONSTANTS){
+app.controller('organizationUserCtrl',function($rootScope,$scope ,$state ,$timeout , CONSTANTS ,heightCalc , organizationServices){
     console.log('Inside Organization Level - user Controller');
     $rootScope.isActive = 'Org Level';
     $rootScope.isSubActive = 'User';
     $rootScope.showNavigations = false;
     $scope.$parent.organizationNavigation = CONSTANTS.organizationNavigation;
+
+    $scope.addNewUserPanel = false;
+    $scope.add = function(){
+        //$state.go('Home.addLedgers');
+        $scope.addNewUserPanel = !$scope.addNewUserPanel;
+    }
+
+    $scope.moduleHeading = 'Application Users';
+    $scope.btn1 = 'Search';
+    $scope.btn2 = 'Add New';
+    $scope.ifThreeBtn = false;
+
+    $scope.changeHeight = function(val){
+        heightCalc.calculateGridHeight(val);
+    }
+
+    $scope.gridOptions = CONSTANTS.gridOptionsConstants('OrganizationUser');
+    $scope.gridOptions.onRegisterApi = function( gridApi ) {
+        $scope.gridApi = gridApi;
+    }
+    $scope.nextPage = function(){
+        $scope.gridApi.pagination.nextPage();
+        $scope.changeHeight(0);
+    }
+    $scope.prevPage = function(){
+        $scope.gridApi.pagination.previousPage();
+        $scope.changeHeight(0);
+    }
+
+    organizationServices.getuserList().then(function(response){
+        $scope.gridOptions.data = response.data;
+        if($scope.gridOptions.data.length !== 0){
+            $scope.changeHeight(0);
+        }
+        else {
+            $scope.changeHeight(200);
+        }   
+          },function(error){
+        console.log('error',error);
+   });
+
+    $scope.changeHeight(0);
 });
 app.controller('organizationRoleCtrl',function($rootScope , $scope , CONSTANTS){
     console.log('Inside Organization Level - role Controller');
@@ -1170,6 +1341,16 @@ app.service('inventoryServices',function($http , CONSTANTS){
 app.service('journalServices',function($http , CONSTANTS){
     this.getJournals = function(){
        return $http.get(CONSTANTS.service[CONSTANTS.appLevel].journalList);
+    };
+});
+app.service('ledgerServices',function($http , CONSTANTS){
+    this.getLedgers = function(){
+       return $http.get(CONSTANTS.service[CONSTANTS.appLevel].ledgerList);
+    };
+});
+app.service('organizationServices',function($http , CONSTANTS){
+    this.getuserList = function(){
+       return $http.get(CONSTANTS.service[CONSTANTS.appLevel].organizationUserList);
     };
 });
 app.service('paymentServices',function($http , CONSTANTS){

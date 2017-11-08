@@ -1,4 +1,4 @@
-var app = angular.module('siriBooks',['ui.router','ngMaterial','ngSanitize','ui.grid','ui.grid.selection','ui.grid.resizeColumns','ui.grid.pagination']);
+var app = angular.module('siriBooks',['ui.router','ngMaterial','ngSanitize','ui.grid','ui.grid.selection','ui.grid.resizeColumns','ui.grid.pagination','ui.grid.grouping']);
 
 app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     $stateProvider
@@ -55,7 +55,7 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     })
     .state('Home.Ledgers', {
         url: '/ledgers',
-        templateUrl: 'application/Partials/ledger.html',
+        templateUrl: 'application/Partials/diffModules.html',
         controller: 'ledgerCtrl'
     })
     .state('Home.addLedgers', {
@@ -156,7 +156,7 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     })
     .state('Home.User', {
         url: '/organizationUser',
-        templateUrl: 'application/Partials/organizationUser.html',
+        templateUrl: 'application/Partials/diffModules.html',
         controller: 'organizationUserCtrl'
     })
     .state('Home.Roles', {

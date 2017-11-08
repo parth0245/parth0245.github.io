@@ -10,7 +10,9 @@ app.constant('CONSTANTS', {
                         paymentList : 'application/fixture/paymentList.json',
                         expenseList : 'application/fixture/expenseList.json',
                         journalList : 'application/fixture/journalList.json',
-                        contraList : 'application/fixture/contraList.json'
+                        contraList : 'application/fixture/contraList.json',
+                        ledgerList : 'application/fixture/ledgerList.json',
+                        organizationUserList : 'application/fixture/organizationUserList.json'
                 },{
                         inventoryList : "live url here",
                         customerList : '',
@@ -20,7 +22,9 @@ app.constant('CONSTANTS', {
                         paymentList : '',
                         expenseList : '',
                         journalList : '',
-                        contraList : ''
+                        contraList : '',
+                        ledgerList : 'application/fixture/ledgerList.json',
+                        organizationUserList : ''
                 }
         ],
         headBarNavigator : [
@@ -55,6 +59,24 @@ app.constant('CONSTANTS', {
                 {url : 'Home.Accounting', name : 'Accounting' , SelimgSrc:'application/Images/Assets/Admin-Settings inside/Accounting_active.png' , imgSrc : 'application/Images/Assets/Admin-Settings inside/Accounting_inactive.png', glyphClasses : 'glyphicon glyphicon-home'}
         ],
         gridOptionsConstants : function(gridName){
+                if(gridName == 'Ledger'){
+                        return {
+                                enableSorting: true,
+                                rowHeight: 40,
+                                enableRowSelection: true,
+                                enableColumnResizing: false,
+                                enableRowHeaderSelection: false,
+                                multiSelect : false,
+                                enableColumnMenus : false,
+                                enableSorting :false,
+                                enableVerticalScrollbar : 0 ,
+                                enablePaginationControls: false,
+                                treeRowHeaderAlwaysVisible:false,
+                                showColumnFooter: false,
+                                columnDefs : this[gridName+"fields"]
+                        }
+                }
+                else{
                 return {
                         enableSorting: true,
                         rowHeight: 40,
@@ -68,8 +90,11 @@ app.constant('CONSTANTS', {
                         enablePaginationControls: false,
                         paginationPageSizes: [5 , 10, 20 , 25],
                         paginationPageSize: 5,
+                        treeRowHeaderAlwaysVisible:false,
+                        showColumnFooter: false,
                         columnDefs : this[gridName+"fields"]
                 }
+        }
         },
         Paymentfields :[
                 { field: 'vendorName',
@@ -297,5 +322,26 @@ ImportVendorfields : [
         { field: 'address'},
         { field: 'contact'},
         { field: 'rowNo'}
-]
+],
+OrganizationUserfields : [
+        { field: 'userName' ,
+        cellTemplate: '<div class="ui-grid-cell-contents" >'+
+        '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+        '<img height="15" width="15" '+
+                'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
+        '</span>'+
+        '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+        '<img height="15" width="15" '+
+                'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
+        '</span>'+
+        '<span>{{grid.getCellValue(row, col)}}</span>'+
+        '</div>' },
+        { field: 'name'},
+        { field: 'createdOn'},
+        { field: 'updatedOn'},
+        { field: 'mobile'},
+        { field: 'role'},
+        { field: 'status'}
+],
+Ledgerfields : []
 });
