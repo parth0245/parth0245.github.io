@@ -12,7 +12,8 @@ app.constant('CONSTANTS', {
                         journalList : 'application/fixture/journalList.json',
                         contraList : 'application/fixture/contraList.json',
                         ledgerList : 'application/fixture/ledgerList.json',
-                        organizationUserList : 'application/fixture/organizationUserList.json'
+                        organizationUserList : 'application/fixture/organizationUserList.json',
+                        organizationRoleList : 'application/fixture/organizationRoleList.json'
                 },{
                         inventoryList : "live url here",
                         customerList : '',
@@ -24,7 +25,8 @@ app.constant('CONSTANTS', {
                         journalList : '',
                         contraList : '',
                         ledgerList : 'application/fixture/ledgerList.json',
-                        organizationUserList : ''
+                        organizationUserList : '',
+                        organizationRoleList : ''
                 }
         ],
         headBarNavigator : [
@@ -343,5 +345,6 @@ OrganizationUserfields : [
         { field: 'role'},
         { field: 'status'}
 ],
-Ledgerfields : []
+Ledgerfields : [],
+RoleListfields : []
 });

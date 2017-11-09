@@ -1,0 +1,18 @@
+[
+    {
+        "category" : "Sales",
+        "name" : "Sales",
+        "createdOn" : "4-5-2017",
+        "updatedOn" : "6-7-2017",
+        "modules" : "",
+        "status" : "Active"
+    },
+    {
+        "category" : "Admin",
+        "name" : "Admin",
+        "createdOn" : "4-5-2017",
+        "updatedOn" : "6-7-2017",
+        "modules" : "",
+        "status" : "Active"
+    }
+]

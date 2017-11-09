@@ -280,11 +280,17 @@
 .topPadding30{
 	padding-top:30px !important;
 }
+.paddingTop65 {
+	padding-top:65px;
+}
 .paddingTop70 {
 	padding-top:70px;
 }
 .paddingTop100 {
 	padding-top:100px;
+}
+.paddingLeft25 {
+	padding-left: 25px;
 }
 .paddingLeft30 {
 	padding-left: 30px;
@@ -491,4 +497,16 @@
 }
 .ui-grid-tree-header-row {
 	font-weight: normal !important;
+}
+.clearBoth {
+	clear : both;
+}
+.displayInline {
+	display: inline;
+}
+.moduleSection {
+	padding: 10px 30px;
+}
+.centerItems {
+	padding-top: 50px;
 }
