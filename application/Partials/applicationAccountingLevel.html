@@ -1,4 +1,4 @@
-<div class="col-xs-11 col-xs-offset-1 fontNormal addInventory" layout="column">
+<div class="col-xs-offset-1 fontNormal addInventory container" style="overflow-y:hidden">
         <div class="sectionSubHeading">
             <h3>Edit Restriction</h3>
         </div>
@@ -34,6 +34,24 @@
                 </form>
             </md-content>
         </div>
-        <div class="">
+        <div class="pagingPart col-xs-3 col-xs-offset-8 paddingLeft80 paddingBottom10">
+                <span class="buttonBorder" ng-click="prevPage()">
+                    <img src="application/Images/Assets/pagination_left.png"/>
+                </span>
+                <span class="pageIndicator">{{ gridApi.pagination.getPage() }} / {{ gridApi.pagination.getTotalPages() }}</span>
+                <span class="buttonBorder" ng-click="nextPage()">
+                    <img src="application/Images/Assets/pagination_right.png"/>
+                </span>
+                <span class="ui-grid-pager-row-count-picker">
+                    <select class="selectPaginationBox" ng-model="gridOptions.paginationPageSize" 
+                    ng-change="changeHeight(0)"
+                     ng-options="o as o for o in gridOptions.paginationPageSizes">
+                    </select>
+                </span>
+        </div>
+        <div class="col-xs-11 inventorySection paddingRight30 paddingBottom30" ng-class="moduleHeading == 'Role List' ? 'centerItems' : ''">
+                <div id="grid1" ui-grid="gridOptions" ui-grid-selection ui-grid-pagination ui-grid-auto-resize ui-grid-grouping class="grid">
+                    <div class="watermark" ng-show="!gridOptions.data.length">No data available</div>
+                </div>
         </div>
     </div>

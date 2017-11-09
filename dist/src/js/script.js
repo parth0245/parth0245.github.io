@@ -225,7 +225,8 @@ app.constant('CONSTANTS', {
                         contraList : 'application/fixture/contraList.json',
                         ledgerList : 'application/fixture/ledgerList.json',
                         organizationUserList : 'application/fixture/organizationUserList.json',
-                        organizationRoleList : 'application/fixture/organizationRoleList.json'
+                        organizationRoleList : 'application/fixture/organizationRoleList.json',
+                        accountingList : 'application/fixture/accountingList.json'
                 },{
                         inventoryList : "live url here",
                         customerList : '',
@@ -238,7 +239,8 @@ app.constant('CONSTANTS', {
                         contraList : '',
                         ledgerList : 'application/fixture/ledgerList.json',
                         organizationUserList : '',
-                        organizationRoleList : ''
+                        organizationRoleList : '' ,
+                        accountingList : ''
                 }
         ],
         headBarNavigator : [
@@ -558,7 +560,77 @@ OrganizationUserfields : [
         { field: 'status'}
 ],
 Ledgerfields : [],
-RoleListfields : []
+RoleListfields : [
+        {field : "category" ,
+        cellClass : "paddingTop65" ,
+        cellTemplate: '<div class="ui-grid-cell-contents" >'+
+        '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+        '<img height="15" width="15" '+
+                'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
+        '</span>'+
+        '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+        '<img height="15" width="15" '+
+                'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
+        '</span>'+
+        '<span>{{grid.getCellValue(row, col)}}</span>'+
+        '</div>'},
+        {field : "name" ,
+        cellClass : "paddingTop65"},
+        {field : "createdOn",
+        cellClass : "paddingTop65" },
+        {field : "updatedOn",
+        cellClass : "paddingTop65" },
+        {field : "modules",
+        width : "25%",
+        cellTemplate: '<div class="ui-grid-cell-contents" >'+
+        '<div>'+
+        '<div class="moduleSection">'+
+            '<span class="pull-left">Sales</span>'+
+            '<span class="pull-right">'+
+                '<img src="application/Images/Assets/Module.png"/>'+
+            '</span>'+
+        '</div>'+
+        '<div class="clearBoth moduleSection">'+
+        '<span class="pull-left">Accounting</span>'+
+        '<span class="pull-right">'+
+            '<img src="application/Images/Assets/Module.png"/>'+
+        '</span>'+
+    '</div>'+
+    '<div class="clearBoth moduleSection">'+
+    '<span class="pull-left">Inventory</span>'+
+    '<span class="pull-right">'+
+        '<img src="application/Images/Assets/Module.png"/>'+
+    '</span>'+
+'</div>'+
+'<div class="clearBoth moduleSection">'+
+'<span class="pull-left">Products</span>'+
+'<span class="pull-right">'+
+    '<img src="application/Images/Assets/Module.png"/>'+
+'</span>'+
+'</div>'+
+        '</div>'+
+        '</div>'},
+        {field : "status" ,
+        cellClass : "paddingTop65" }
+],
+Accountingfields : [
+        {field : "updatedBy" ,
+        cellTemplate: '<div class="ui-grid-cell-contents" >'+
+        '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+        '<img height="15" width="15" '+
+                'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
+        '</span>'+
+        '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+        '<img height="15" width="15" '+
+                'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
+        '</span>'+
+        '<span>{{grid.getCellValue(row, col)}}</span>'+
+        '</div>'},
+        {field : "unitOfTime"},
+        {field : "number"},
+        {field : "effectiveDate"},
+        {field : "updatedOn"}
+]
 });
 app.controller('addContraCtrl',function($rootScope , $scope){
     console.log('Inside Add Contra Controller');
@@ -658,6 +730,61 @@ app.controller('applicationLevelCtrl',function($rootScope){
     console.log('Inside Application level Controller');
     $rootScope.isActive = 'Application Level';
 });
+
+
+/* Application Level */
+app.controller('applicationFormatLevelCtrl',function($rootScope , $scope , CONSTANTS){
+    console.log('Inside Application Format Level Controller');
+    $rootScope.isActive = 'Application Level';
+    $rootScope.isSubActive = 'Format';
+    $rootScope.showNavigations = false;
+    $scope.$parent.organizationNavigation = CONSTANTS.applicationNavigation;
+});
+
+app.controller('applicationTaxLevelCtrl',function($rootScope , $scope , CONSTANTS){
+    console.log('Inside Application Level Tax Controller');
+    $rootScope.isActive = 'Application Level';
+    $rootScope.isSubActive = 'Tax';
+    $rootScope.showNavigations = false;
+    $scope.$parent.organizationNavigation = CONSTANTS.applicationNavigation;
+});
+app.controller('applicationAccountingLevelCtrl',function($rootScope,$scope ,$state ,$timeout , CONSTANTS ,heightCalc , applicationServices){
+    console.log('Inside Application Level Accounting Controller');
+    $rootScope.isActive = 'Application Level';
+    $rootScope.isSubActive = 'Accounting';
+    $rootScope.showNavigations = false;
+    $scope.$parent.organizationNavigation = CONSTANTS.applicationNavigation;
+
+    $scope.changeHeight = function(val){
+        heightCalc.calculateGridHeight(val);
+    }
+
+    $scope.gridOptions = CONSTANTS.gridOptionsConstants('Accounting');
+    $scope.gridOptions.onRegisterApi = function( gridApi ) {
+        $scope.gridApi = gridApi;
+    }
+    $scope.nextPage = function(){
+        $scope.gridApi.pagination.nextPage();
+        $scope.changeHeight(0);
+    }
+    $scope.prevPage = function(){
+        $scope.gridApi.pagination.previousPage();
+        $scope.changeHeight(0);
+    }
+    applicationServices.getAccounts().then(function(response){
+        $scope.gridOptions.data = response.data;
+        if($scope.gridOptions.data.length !== 0){
+            $scope.changeHeight(0);
+        }
+        else {
+            $scope.changeHeight(200);
+        }   
+          },function(error){
+        console.log('error',error);
+   });
+   $scope.changeHeight(0);
+});
+
 app.controller('bankingCtrl',function($rootScope){
     console.log('Inside Banking Controller');
     $rootScope.isActive = 'CASH/BANKING';
@@ -1152,59 +1279,6 @@ app.controller('organizationRoleCtrl',function($rootScope,$scope ,$state ,$timeo
         $scope.changeHeight(0);
     }
     $scope.gridOptions.rowHeight = 160;
-    $scope.gridOptions.columnDefs = [
-        {field : "category" ,
-        cellClass : "paddingTop65" ,
-        cellTemplate: '<div class="ui-grid-cell-contents" >'+
-        '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
-        '<img height="15" width="15" '+
-                'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
-        '</span>'+
-        '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
-        '<img height="15" width="15" '+
-                'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
-        '</span>'+
-        '<span>{{grid.getCellValue(row, col)}}</span>'+
-        '</div>'},
-        {field : "name" ,
-        cellClass : "paddingTop65"},
-        {field : "createdOn",
-        cellClass : "paddingTop65" },
-        {field : "updatedOn",
-        cellClass : "paddingTop65" },
-        {field : "modules",
-        width : "25%",
-        cellTemplate: '<div class="ui-grid-cell-contents" >'+
-        '<div>'+
-        '<div class="moduleSection">'+
-            '<span class="pull-left">Sales</span>'+
-            '<span class="pull-right">'+
-                '<img src="application/Images/Assets/Module.png"/>'+
-            '</span>'+
-        '</div>'+
-        '<div class="clearBoth moduleSection">'+
-        '<span class="pull-left">Accounting</span>'+
-        '<span class="pull-right">'+
-            '<img src="application/Images/Assets/Module.png"/>'+
-        '</span>'+
-    '</div>'+
-    '<div class="clearBoth moduleSection">'+
-    '<span class="pull-left">Inventory</span>'+
-    '<span class="pull-right">'+
-        '<img src="application/Images/Assets/Module.png"/>'+
-    '</span>'+
-'</div>'+
-'<div class="clearBoth moduleSection">'+
-'<span class="pull-left">Products</span>'+
-'<span class="pull-right">'+
-    '<img src="application/Images/Assets/Module.png"/>'+
-'</span>'+
-'</div>'+
-        '</div>'+
-        '</div>'},
-        {field : "status" ,
-        cellClass : "paddingTop65" },
-    ];
     organizationServices.getRoleList().then(function(response){
         $scope.gridOptions.data = response.data;
         if($scope.gridOptions.data.length !== 0){
@@ -1231,31 +1305,6 @@ app.controller('addRoleCtrl',function($rootScope , $scope , CONSTANTS){
 
     
 });
-
-/* Application Level */
-app.controller('applicationFormatLevelCtrl',function($rootScope , $scope , CONSTANTS){
-    console.log('Inside Application Format Level Controller');
-    $rootScope.isActive = 'Application Level';
-    $rootScope.isSubActive = 'Format';
-    $rootScope.showNavigations = false;
-    $scope.$parent.organizationNavigation = CONSTANTS.applicationNavigation;
-});
-
-app.controller('applicationTaxLevelCtrl',function($rootScope , $scope , CONSTANTS){
-    console.log('Inside Application Level Tax Controller');
-    $rootScope.isActive = 'Application Level';
-    $rootScope.isSubActive = 'Tax';
-    $rootScope.showNavigations = false;
-    $scope.$parent.organizationNavigation = CONSTANTS.applicationNavigation;
-});
-app.controller('applicationAccountingLevelCtrl',function($rootScope , $scope , CONSTANTS){
-    console.log('Inside Application Level Accounting Controller');
-    $rootScope.isActive = 'Application Level';
-    $rootScope.isSubActive = 'Accounting';
-    $rootScope.showNavigations = false;
-    $scope.$parent.organizationNavigation = CONSTANTS.applicationNavigation;
-});
-
 app.controller('paymentCtrl',function($rootScope,$scope ,$state ,$timeout , CONSTANTS ,heightCalc , paymentServices){
     console.log('Inside Payment Controller');
     $rootScope.isActive = 'Payments';
@@ -1413,6 +1462,11 @@ app.controller('vendorCtrl',function($rootScope , $scope , $state , CONSTANTS ,h
     $scope.changeHeight(0);
 
 
+});
+app.service('applicationServices',function($http , CONSTANTS){
+    this.getAccounts = function(){
+       return $http.get(CONSTANTS.service[CONSTANTS.appLevel].accountingList);
+    };
 });
 app.service('contraServices',function($http , CONSTANTS){
     this.getContraList = function(){

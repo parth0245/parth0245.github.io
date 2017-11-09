@@ -13,7 +13,8 @@ app.constant('CONSTANTS', {
                         contraList : 'application/fixture/contraList.json',
                         ledgerList : 'application/fixture/ledgerList.json',
                         organizationUserList : 'application/fixture/organizationUserList.json',
-                        organizationRoleList : 'application/fixture/organizationRoleList.json'
+                        organizationRoleList : 'application/fixture/organizationRoleList.json',
+                        accountingList : 'application/fixture/accountingList.json'
                 },{
                         inventoryList : "live url here",
                         customerList : '',
@@ -26,7 +27,8 @@ app.constant('CONSTANTS', {
                         contraList : '',
                         ledgerList : 'application/fixture/ledgerList.json',
                         organizationUserList : '',
-                        organizationRoleList : ''
+                        organizationRoleList : '' ,
+                        accountingList : ''
                 }
         ],
         headBarNavigator : [
@@ -346,5 +348,75 @@ OrganizationUserfields : [
         { field: 'status'}
 ],
 Ledgerfields : [],
-RoleListfields : []
+RoleListfields : [
+        {field : "category" ,
+        cellClass : "paddingTop65" ,
+        cellTemplate: '<div class="ui-grid-cell-contents" >'+
+        '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+        '<img height="15" width="15" '+
+                'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
+        '</span>'+
+        '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+        '<img height="15" width="15" '+
+                'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
+        '</span>'+
+        '<span>{{grid.getCellValue(row, col)}}</span>'+
+        '</div>'},
+        {field : "name" ,
+        cellClass : "paddingTop65"},
+        {field : "createdOn",
+        cellClass : "paddingTop65" },
+        {field : "updatedOn",
+        cellClass : "paddingTop65" },
+        {field : "modules",
+        width : "25%",
+        cellTemplate: '<div class="ui-grid-cell-contents" >'+
+        '<div>'+
+        '<div class="moduleSection">'+
+            '<span class="pull-left">Sales</span>'+
+            '<span class="pull-right">'+
+                '<img src="application/Images/Assets/Module.png"/>'+
+            '</span>'+
+        '</div>'+
+        '<div class="clearBoth moduleSection">'+
+        '<span class="pull-left">Accounting</span>'+
+        '<span class="pull-right">'+
+            '<img src="application/Images/Assets/Module.png"/>'+
+        '</span>'+
+    '</div>'+
+    '<div class="clearBoth moduleSection">'+
+    '<span class="pull-left">Inventory</span>'+
+    '<span class="pull-right">'+
+        '<img src="application/Images/Assets/Module.png"/>'+
+    '</span>'+
+'</div>'+
+'<div class="clearBoth moduleSection">'+
+'<span class="pull-left">Products</span>'+
+'<span class="pull-right">'+
+    '<img src="application/Images/Assets/Module.png"/>'+
+'</span>'+
+'</div>'+
+        '</div>'+
+        '</div>'},
+        {field : "status" ,
+        cellClass : "paddingTop65" }
+],
+Accountingfields : [
+        {field : "updatedBy" ,
+        cellTemplate: '<div class="ui-grid-cell-contents" >'+
+        '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+        '<img height="15" width="15" '+
+                'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
+        '</span>'+
+        '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+        '<img height="15" width="15" '+
+                'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
+        '</span>'+
+        '<span>{{grid.getCellValue(row, col)}}</span>'+
+        '</div>'},
+        {field : "unitOfTime"},
+        {field : "number"},
+        {field : "effectiveDate"},
+        {field : "updatedOn"}
+]
 });
