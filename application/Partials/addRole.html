@@ -1,0 +1,135 @@
+<div class="col-xs-11 col-xs-offset-1 fontNormal addInventory" layout="column">
+    <div class="sectionSubHeading">
+        <h3>New Role</h3>
+    </div>
+    <div class="topPadding20">
+        <md-content>
+            <form name="addRoleForm1" style="background-color:#f5f6f8">
+                <div layout="row">
+                        <md-input-container flex="25">
+                                <label>Role Name*</label>
+                                <input name="rname" ng-model="rname">
+                            </md-input-container>
+                        <md-input-container flex="25" flex-offset="5">
+                                <label>Role Category</label>
+                                <md-select name="cat" ng-model="cat">
+                                    <md-option value="one">Category 1</md-option>
+                                    <md-option value="two">Category 2</md-option>
+                                </md-select>
+                        </md-input-container>
+                        <md-input-container flex="25" flex-offset="5">
+                            <label>Note</label>
+                            <input name="note" ng-model="note">
+                        </md-input-container>
+                </div>
+                <div layout="row">
+                        <md-input-container flex="25">
+                                <label>Status</label>
+                                <md-select name="status" ng-model="status">
+                                    <md-option value="one">status 1</md-option>
+                                    <md-option value="two">status 2</md-option>
+                                </md-select>
+                        </md-input-container>
+                </div>
+            </form>
+        </md-content>
+    </div>
+    <div class="sectionSubHeading">
+            <h3>Permissions</h3>
+        </div>
+        <div class="col-xs-8 noPadding">
+                <table class="journalTable withRole">
+                        <thead>
+                            <tr>
+                             <th>Modules</th>
+                             <th>Create</th>
+                             <th>Read</th>
+                             <th>Update</th>
+                             <th>Delete</th>
+                         </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                        <td>Sale</td>
+                                        <td>
+                                                <md-checkbox class="md-primary">
+                                        </td>
+                                        <td>
+                                                <md-checkbox class="md-primary">
+                                        </td>
+                                        <td>
+                                                <md-checkbox class="md-primary">
+                                        </td>
+                                        <td>
+                                                <md-checkbox class="md-primary">
+                                        </td>
+                                </tr>
+                                <tr>
+                                        <td>Inventory</td>
+                                        <td>
+                                                <md-checkbox class="md-primary">
+                                        </td>
+                                        <td>
+                                                <md-checkbox class="md-primary">
+                                        </td>
+                                        <td>
+                                                <md-checkbox class="md-primary">
+                                        </td>
+                                        <td>
+                                                <md-checkbox class="md-primary">
+                                        </td>
+                                </tr>
+                                <tr>
+                                        <td>Users</td>
+                                        <td>
+                                                <md-checkbox class="md-primary">
+                                        </td>
+                                        <td>
+                                                <md-checkbox class="md-primary">
+                                        </td>
+                                        <td>
+                                                <md-checkbox class="md-primary">
+                                        </td>
+                                        <td>
+                                                <md-checkbox class="md-primary">
+                                        </td>
+                                </tr>
+                                <tr>
+                                        <td>Products</td>
+                                        <td>
+                                                <md-checkbox class="md-primary">
+                                        </td>
+                                        <td>
+                                                <md-checkbox class="md-primary">
+                                        </td>
+                                        <td>
+                                                <md-checkbox class="md-primary">
+                                        </td>
+                                        <td>
+                                                <md-checkbox class="md-primary">
+                                        </td>
+                                </tr>
+                                <tr>
+                                        <td>Accounting</td>
+                                        <td>
+                                                <md-checkbox class="md-primary">
+                                        </td>
+                                        <td>
+                                                <md-checkbox class="md-primary">
+                                        </td>
+                                        <td>
+                                                <md-checkbox class="md-primary">
+                                        </td>
+                                        <td>
+                                                <md-checkbox class="md-primary">
+                                        </td>
+                                </tr>
+                        </tbody>
+                    </table>
+        </div>
+        <div layout="row" class="addPaddingButtons">
+                <md-button class="md-raised" flex-offset="45">Reset All</md-button>
+                <md-button class="md-raised md-primary">Save</md-button>
+                <md-button class="md-raised">Cancel</md-button>
+            </div>
+</div>

@@ -1,4 +1,4 @@
-<div ng-class="moduleHeading == 'Application Users' ? 'paddingLeft130' : 'paddingLeft60'" layout="column" style="overflow-y: hidden">
+<div ng-class="moduleHeading == 'Application Users' || moduleHeading == 'Role List'  ? 'paddingLeft130' : 'paddingLeft60'" layout="column" style="overflow-y: hidden">
 
         <div class="col-xs-12 sectionSubHeading" ng-if="addNewUserPanel">
             <h2>New User</h2>
@@ -86,7 +86,7 @@
         </div>
     </div>
     <div ng-if="moduleHeading == 'Ledgers'" class="paddingTop100"></div>
-    <div ng-if="moduleHeading != 'Ledgers'" class="col-xs-3 col-xs-offset-8 paddingTop100 paddingLeft80 paddingBottom10">
+    <div ng-if="moduleHeading != 'Ledgers'" class="pagingPart col-xs-3 col-xs-offset-8 paddingTop100 paddingLeft80 paddingBottom10">
             <span class="buttonBorder" ng-click="prevPage()">
                 <img src="application/Images/Assets/pagination_left.png"/>
             </span>

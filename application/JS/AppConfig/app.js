@@ -164,6 +164,11 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
         templateUrl: 'application/Partials/diffModules.html',
         controller: 'organizationRoleCtrl'
     })
+    .state('Home.addRole', {
+        url: '/addRole',
+        templateUrl: 'application/Partials/addRole.html',
+        controller: 'addRoleCtrl'
+    })
     .state('Home.Help', {
         url: '/help',
         templateUrl: 'application/Partials/help.html',

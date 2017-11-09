@@ -1,3 +1,11 @@
+@font-face {
+	font-family: Montserrat-SemiBold;
+	src: url(/Fonts/Montserrat-SemiBold.ttf);
+}
+@font-face {
+	font-family: Montserrat-Regular;
+	src: url(/Fonts/Montserrat-Regular.ttf);
+}
 .body {
 	margin:0px;
 	padding:0px;
@@ -26,6 +34,7 @@
 	border: 1px solid white;
 	color: white;
 	width:100px;
+	font-family: "Montserrat-Regular";
 }
 .logoutBtn a {
 	font-size: 12px;
@@ -68,15 +77,18 @@
 }
 .brandName {
 	padding: 18px 0px 18px 40px;
-    font-family: sans-serif;
+    font-family: "Montserrat-Regular";
     font-size: 14px;
     font-weight: bold;
 }
 .userProfile {
-	font-family: sans-serif;
+	font-family: "Montserrat-Regular";
+}
+.userProfile .name{
+	font-size: 12px;
 }
 .userProfile .subName{
-	font-size: 11px;
+	font-size: 10px;
 }
 .borderTrue {
 	border:1px solid black;
@@ -85,6 +97,7 @@
 	background-color: #d6d9d9;
 }
 .subHeaderOrgLevel {
+	font-family: "Montserrat-Regular";
 	background-color:white;
 }
 .subHeaderListImg {
@@ -108,6 +121,7 @@
 	margin: 25px 0px 25px 0px;
 }
 .subHeaderList {
+	font-family: "Montserrat-SemiBold";
 	text-align: center;
 	border-right:1px solid white;
 	font-size: 12px;
@@ -118,6 +132,7 @@
 	padding-bottom: 5px;
 }
 .subHeaderList ~ div {
+	font-family: "Montserrat-SemiBold";
 	text-align: center;
 	border-right:1px solid white;
 	font-size: 12px;
@@ -181,8 +196,10 @@
 	background-color: white !important;
 }
 .sideNav {
+	font-family: "Montserrat-Regular";
 		width: 112px;
 		overflow:hidden;
+
 }
 .dynamicSection {
 	background-color: #f5f6f8;
@@ -194,8 +211,22 @@
 	padding-top:30px;
 	color : #0935ae;
 }
+.sectionSubHeading h2 {
+	font-family: "Montserrat-Regular";
+}
+.sectionSubHeading h3 {
+	font-family: "Montserrat-Regular";
+}
 .sectionSubSection .glyphicon {
 	color:lightgrey;
+	padding-top:3px;
+	font-size: 18px;
+}
+.sectionSubSection button{
+	font-family: "Montserrat-SemiBold";
+}
+.sectionSubSection input ,.sectionSubSection button{
+	height : 40px;
 }
 .btn-app-blue-color {
 	color: #fff;
@@ -227,7 +258,11 @@
 }
 .fontNormal label {
 	font-weight: normal !important;
+	font-family: "Montserrat-Regular";
 	color:black;
+}
+.fontNormal md-select {
+	font-family: "Montserrat-Regular";
 }
 .fontNormal md-select-value span {
 	color:black;
@@ -241,14 +276,16 @@
 }
 .addInventory button.md-raised {
 	color: #0935ae;
-	/*margin-left: 0px;*/
-	font-weight: 400;
+	font-family: "Montserrat-SemiBold";
+	font-size: 13px;
+	height : 40px;
+}
+.addInventory table {
+	font-family: "Montserrat-SemiBold";
 }
 .addInventory button.md-raised.md-primary {
 	background-color: #0935ae !important;
-	/*margin-left: 0px;*/
 	color:white;	
-	font-weight: 400;
 }
 .dashboard .padded h2 {
 	color:#717373;
@@ -257,6 +294,7 @@
 .dashboard .padded.whiteColor {
 	background-color: white;
 	padding:50px 0px;
+	font-family: "Montserrat-Regular";
 }
 /*Paddings*/
 .noPadding{
@@ -319,6 +357,9 @@
 .paddingBottom30 {
 	padding-bottom: 30px;
 }
+.paddingBottom200 {
+	padding-bottom: 200px !important;
+}
 .paddingRight30 {
 	padding-right:30px !important;
 }
@@ -348,6 +389,12 @@
 .marginLeft5 {
 	margin-left: 5px;
 }
+.flex-offset-78 {
+	margin-left: 78%;
+}
+.flex-offset-59 {
+	margin-left: 59%;
+}
 /*Margins*/
 /*Grid*/
 .grid .ui-grid-header-cell {
@@ -358,6 +405,18 @@
 .grid .ui-grid-cell-contents {
 	text-align: center;	
 	margin-top:5px;
+	font-family: "Montserrat-Regular";
+}
+.pagingPart {
+	font-family: "Montserrat-Regular";
+}
+.pagingPart select {
+	appearance:none;
+    -moz-appearance:none; /* Firefox */
+	-webkit-appearance:none;
+	background: url(/application/Images/Assets/down_arrow.png) no-repeat 40px 10px;
+	height:30px;
+	font-family: "Montserrat-Regular";
 }
 /*Grid*/
 .productInactive {
@@ -380,7 +439,8 @@
 }
 .buttonBorder {
 	border: 1px solid #cccccc;
-    padding: 4px 4px 5px 7px;
+	padding: 4px 4px 5px 7px;
+	background-color: white;
 }
 .pageIndicator {
 	padding:0px 10px;
@@ -409,6 +469,10 @@
 }
 .sectionSubSection .col-xs-2 button{
 	width:100%;
+}
+.addInventory .paddingBottom30 span , .addInventory .paddingBottom30 md-radio-button {
+	font-family: "Montserrat-Regular";
+	font-size: 12px;
 }
 .addPaddingButtons {
 	padding-top:50px;
@@ -447,6 +511,9 @@
 	width:100%;
 	border:1px solid #d4d4d4;
 }
+.journalTable.withRole tbody tr td:not(:first-child) {
+ 	text-align: center;
+}
 .journalTable thead tr{
 	height: 40px;
 	background-color: #e7e9e9;
@@ -473,6 +540,18 @@
 .journalTable tbody tr td:first-child {
 	width: 550px;
 }
+.journalTable.withRole tbody tr td{
+	border-bottom: 1px solid #d4d4d4;
+}
+.withRole tbody tr td md-checkbox {
+	margin-bottom: 0;
+}
+.withRole tbody tr td md-checkbox .md-icon {
+	margin-left: 5px;
+}
+.journalTable.withRole tbody tr td:first-child {
+	width: initial;
+}
 .journalTable thead tr th:last-child , .journalTable .journalTable tbody tr td:last-child{
 	border-right: none
 }
@@ -491,6 +570,9 @@
 }
 .md-datepicker-input {
 	min-width: 270px;
+}
+.accountForm .md-datepicker-input {
+    min-width: 295px !important;
 }
 .ui-grid-header-cell .ui-grid-tree-base-row-header-buttons:first-child {
 	display: none;	

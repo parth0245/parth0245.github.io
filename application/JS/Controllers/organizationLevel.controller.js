@@ -63,7 +63,7 @@ app.controller('organizationRoleCtrl',function($rootScope,$scope ,$state ,$timeo
     $scope.$parent.organizationNavigation = CONSTANTS.organizationNavigation;
 
     $scope.add = function(){
-        //$state.go('Home.addLedgers');
+        $state.go('Home.addRole');
     }
 
     $scope.moduleHeading = 'Role List';
@@ -156,6 +156,16 @@ app.controller('organizationRoleCtrl',function($rootScope,$scope ,$state ,$timeo
     $scope.changeHeight(0);
 
 
+});
+
+app.controller('addRoleCtrl',function($rootScope , $scope , CONSTANTS){
+    console.log('Inside Organization Add Role Controller');
+    $rootScope.isActive = 'Org Level';
+    $rootScope.isSubActive = 'Roles';
+    $rootScope.showNavigations = false;
+    $scope.$parent.organizationNavigation = CONSTANTS.organizationNavigation;
+
+    
 });
 
 /* Application Level */
