@@ -14,7 +14,8 @@ app.constant('CONSTANTS', {
                         ledgerList : 'application/fixture/ledgerList.json',
                         organizationUserList : 'application/fixture/organizationUserList.json',
                         organizationRoleList : 'application/fixture/organizationRoleList.json',
-                        accountingList : 'application/fixture/accountingList.json'
+                        accountingList : 'application/fixture/accountingList.json',
+                        bankingLedger : 'application/fixture/bankingLedger.json'
                 },{
                         inventoryList : "live url here",
                         customerList : '',
@@ -28,7 +29,8 @@ app.constant('CONSTANTS', {
                         ledgerList : 'application/fixture/ledgerList.json',
                         organizationUserList : '',
                         organizationRoleList : '' ,
-                        accountingList : ''
+                        accountingList : '',
+                        bankingLedger : 'application/fixture/bankingLedger.json'
                 }
         ],
         headBarNavigator : [
@@ -63,7 +65,7 @@ app.constant('CONSTANTS', {
                 {url : 'Home.Accounting', name : 'Accounting' , SelimgSrc:'application/Images/Assets/Admin-Settings inside/Accounting_active.png' , imgSrc : 'application/Images/Assets/Admin-Settings inside/Accounting_inactive.png', glyphClasses : 'glyphicon glyphicon-home'}
         ],
         gridOptionsConstants : function(gridName){
-                if(gridName == 'Ledger'){
+                if(gridName == 'Ledger' || gridName == 'Banking'){
                         return {
                                 enableSorting: true,
                                 rowHeight: 40,
@@ -348,6 +350,7 @@ OrganizationUserfields : [
         { field: 'status'}
 ],
 Ledgerfields : [],
+Bankingfields : [],
 RoleListfields : [
         {field : "category" ,
         cellClass : "paddingTop65" ,

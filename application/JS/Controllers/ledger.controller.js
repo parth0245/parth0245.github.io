@@ -6,6 +6,10 @@ app.controller('ledgerCtrl',function( $rootScope,$scope ,$state ,$timeout , CONS
         $state.go('Home.addLedgers');
     }
 
+    $scope.checkModule = function(){
+        return true;
+    }
+    
     $scope.moduleHeading = 'Ledgers';
     $scope.btn1 = 'Search';
     $scope.btn2 = 'Add New';

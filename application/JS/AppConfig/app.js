@@ -65,7 +65,7 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     })
     .state('Home.Banking', {
         url: '/banking',
-        templateUrl: 'application/Partials/banking.html',
+        templateUrl: 'application/Partials/diffModules.html',
         controller: 'bankingCtrl'
     })
     .state('Home.Sales', {
