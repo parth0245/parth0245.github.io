@@ -6,6 +6,7 @@ app.controller('inventoryCtrl',function($rootScope,$scope ,$state ,$timeout , CO
     $scope.btn1 = 'Search';
     $scope.btn2 = 'Add New Product'
     $scope.ifThreeBtn = false;
+    $scope.showWait = true;
     
 
     $scope.add = function() {
@@ -29,7 +30,11 @@ app.controller('inventoryCtrl',function($rootScope,$scope ,$state ,$timeout , CO
         $scope.changeHeight(0);
     }
    inventoryServices.getInventories().then(function(response){
-        $scope.gridOptions.data = response.data;
+            
+                $scope.gridOptions.data = response.data;
+                $scope.showWait = false;
+            
+       
         if($scope.gridOptions.data.length !== 0){
             $scope.changeHeight(0);
         }
@@ -39,6 +44,7 @@ app.controller('inventoryCtrl',function($rootScope,$scope ,$state ,$timeout , CO
        
           },function(error){
         console.log('error',error);
+        $scope.showWait = false;
    });
       
    $scope.changeHeight(0);

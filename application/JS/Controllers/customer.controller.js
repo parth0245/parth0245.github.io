@@ -11,6 +11,9 @@ app.controller('customerCtrl',function($rootScope , $scope , $state , CONSTANTS 
     $scope.add = function() {
         $state.go('Home.addCustomers');
     }
+    $scope.import = function(){
+        $state.go('Home.ImportCustomer');
+    }
     
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Customer');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {

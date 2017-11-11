@@ -1,0 +1,58 @@
+<div class="paddingLeft60" layout="column">
+    <div class="col-xs-12 sectionSubHeading">
+        <h2>Import Customers</h2>
+    </div>
+    <div class="col-xs-12 sectionSubSection topPadding20">
+        <div class="col-xs-7 form-group has-feedback noPadding">
+            <input type="text" class="form-control" id="inputSuccess2"/>
+            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+        </div>
+        <div class="col-xs-2 paddingLeft30 noPaddingRight">
+            <button class="col-xs-11 btn btn-primary btn-app-blue-color fontBold">Import</button>
+        </div>
+    </div>
+    <div class="col-xs-9 paddingTop100 noPaddingRight">
+        <ul class="nav nav-tabs col-xs-9">
+            <li class="active">
+                <a data-toggle="tab" href="#success">Success ( 10/20 )</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#failure">Failure ( 10/20 )</a>
+            </li>
+          </ul>
+          <div class="col-xs-3">
+            <span class="buttonBorder" ng-click="prevPage()">
+                <img src="application/Images/Assets/pagination_left.png"/>
+            </span>
+            <span class="pageIndicator">{{ gridApi.pagination.getPage()}} / {{ gridApi.pagination.getTotalPages()}}</span>
+            <span class="buttonBorder" ng-click="nextPage()">
+                <img src="application/Images/Assets/pagination_right.png"/>
+            </span>
+            <span class="ui-grid-pager-row-count-picker">
+                <select class="selectPaginationBox" ng-model="gridOptions.paginationPageSize" 
+                ng-change="changeHeight(0)"
+                 ng-options="o as o for o in gridOptions.paginationPageSizes">
+                </select>
+            </span>
+    </div>
+    </div>
+
+    <div class="tab-content">
+            <div id="home" class="tab-pane fade in active col-xs-9">
+                <div id="grid1" ui-grid="gridOptions" ui-grid-selection ui-grid-pagination ui-grid-auto-resize class="grid">
+                    <div class="watermark" ng-show="!gridOptions.data.length">No data available</div>
+                </div>
+            </div>
+           <!-- <div id="menu1" class="tab-pane fade">
+              <h3>Menu 1</h3>
+              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>-->
+          </div>
+    
+    <!--<div class="col-xs-11 inventorySection paddingRight30" >
+            <div id="grid1" ui-grid="gridOptions" ui-grid-selection ui-grid-pagination ui-grid-auto-resize class="grid">
+                <div class="watermark" ng-show="!gridOptions.data.length">No data available</div>
+            </div>
+    </div>-->
+    
+</div>

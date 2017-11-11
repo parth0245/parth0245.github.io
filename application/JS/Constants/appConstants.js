@@ -15,9 +15,10 @@ app.constant('CONSTANTS', {
                         organizationUserList : 'application/fixture/organizationUserList.json',
                         organizationRoleList : 'application/fixture/organizationRoleList.json',
                         accountingList : 'application/fixture/accountingList.json',
-                        bankingLedger : 'application/fixture/bankingLedger.json'
+                        bankingLedger : 'application/fixture/bankingLedger.json',
+                        importCustomer : 'application/fixture/importCustomer.json'
                 },{
-                        inventoryList : "live url here",
+                        inventoryList : '',
                         customerList : '',
                         vendorList : '',
                         importVendor :'',
@@ -30,7 +31,8 @@ app.constant('CONSTANTS', {
                         organizationUserList : '',
                         organizationRoleList : '' ,
                         accountingList : '',
-                        bankingLedger : 'application/fixture/bankingLedger.json'
+                        bankingLedger : 'application/fixture/bankingLedger.json',
+                        importCustomer : ''
                 }
         ],
         headBarNavigator : [
@@ -105,17 +107,18 @@ app.constant('CONSTANTS', {
         Paymentfields :[
                 { field: 'vendorName',
                 cellTemplate: '<div class="ui-grid-cell-contents" >'+
-                        '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+                        '<span class="productInactive" ng-if="!row.isSelected" style="float:left;margin-left:20px;">'+
                         '<img height="15" width="15" '+
                                 'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
                         '</span>'+
-                        '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+                        '<span class="productInactive" ng-if="row.isSelected" style="float:left;margin-left:20px;">'+
                         '<img height="15" width="15" '+
                                 'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
                         '</span>'+
                         '<span>{{grid.getCellValue(row, col)}}</span>'+
                         '</div>' },
                 { field: 'amount',
+                width : '15%',
                 cellTemplate: '<div class="ui-grid-cell-contents" >'+
                         '<span>{{grid.getCellValue(row, col)}}</span>'+
                         '<span class="productInactive" ng-if="!row.isSelected">'+
@@ -133,17 +136,18 @@ app.constant('CONSTANTS', {
         Expensefields :[
                 { field: 'vendorName',
                 cellTemplate: '<div class="ui-grid-cell-contents" >'+
-                        '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+                        '<span class="productInactive" ng-if="!row.isSelected" style="float:left;margin-left:20px;">'+
                         '<img height="15" width="15" '+
                                 'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
                         '</span>'+
-                        '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+                        '<span class="productInactive" ng-if="row.isSelected" style="float:left;margin-left:20px;">'+
                         '<img height="15" width="15" '+
                                 'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
                         '</span>'+
                         '<span>{{grid.getCellValue(row, col)}}</span>'+
                         '</div>' },
                 { field: 'amount',
+                width : '15%',
                 cellTemplate: '<div class="ui-grid-cell-contents" >'+
                         '<span>{{grid.getCellValue(row, col)}}</span>'+
                         '<span class="productInactive" ng-if="!row.isSelected">'+
@@ -160,30 +164,37 @@ app.constant('CONSTANTS', {
         ],
         Journalfields :[
                 { field: 'referance',
+                width : '20%',
                 cellTemplate: '<div class="ui-grid-cell-contents" >'+
-                        '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+                        '<span class="productInactive" ng-if="!row.isSelected" style="float:left;margin-left:20px;">'+
                         '<img height="15" width="15" '+
                                 'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
                         '</span>'+
-                        '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+                        '<span class="productInactive" ng-if="row.isSelected" style="float:left;margin-left:20px;">'+
                         '<img height="15" width="15" '+
                                 'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
                         '</span>'+
                         '<span>{{grid.getCellValue(row, col)}}</span>'+
                         '</div>' },
-                        { field: 'date' },
+                        { field: 'date' ,
+                        width : '15%'
+                },
                         { field: 'fromLedger'},
                         { field: 'toLedger'},
-                        { field: 'amount'},
+                        { field: 'amount',
+                        cellTemplate: '<div class="ui-grid-cell-contents" ng-class="row.isSelected ? \'buleColor\' : \'\' " >'+
+                        '<span>{{grid.getCellValue(row, col)}}</span>'+
+                        '</div>'
+                },
         ],
         Contrafields :[
                 { field: 'transferredFrom',
                 cellTemplate: '<div class="ui-grid-cell-contents" >'+
-                        '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+                        '<span class="productInactive" ng-if="!row.isSelected" style="float:left;margin-left:20px;">'+
                         '<img height="15" width="15" '+
                                 'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
                         '</span>'+
-                        '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+                        '<span class="productInactive" ng-if="row.isSelected" style="float:left;margin-left:20px;">'+
                         '<img height="15" width="15" '+
                                 'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
                         '</span>'+
@@ -192,22 +203,27 @@ app.constant('CONSTANTS', {
                         { field: 'transferredTo' },
                         { field: 'date'},
                         { field: 'reference'},
-                        { field: 'amount'},
+                        { field: 'amount',
+                        cellTemplate: '<div class="ui-grid-cell-contents" ng-class="row.isSelected ? \'buleColor\' : \'\' " >'+
+                        '<span>{{grid.getCellValue(row, col)}}</span>'+
+                        '</div>'},
         ],
         Receiptfields :[
                 { field: 'customerName',
+                width : '35%',
         cellTemplate: '<div class="ui-grid-cell-contents" >'+
-                '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+                '<span class="productInactive" ng-if="!row.isSelected" style="float:left;margin-left:20px;">'+
                 '<img height="15" width="15" '+
                         'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
                 '</span>'+
-                '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+                '<span class="productInactive" ng-if="row.isSelected" style="float:left;margin-left:20px;">'+
                 '<img height="15" width="15" '+
                         'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
                 '</span>'+
                 '<span>{{grid.getCellValue(row, col)}}</span>'+
                 '</div>' },
         { field: 'amount',
+        width : '15%',
         cellTemplate: '<div class="ui-grid-cell-contents" >'+
                 '<span>{{grid.getCellValue(row, col)}}</span>'+
                 '<span class="productInactive" ng-if="!row.isSelected">'+
@@ -224,6 +240,7 @@ app.constant('CONSTANTS', {
         ],
         Inventoryfields : [
                 { field: 'product',
+                width : '20%',
                 cellTemplate: '<div class="ui-grid-cell-contents" >'+
                               '<span>{{grid.getCellValue(row, col)}}</span>'+
                               '<span class="productInactive" ng-if="!row.isSelected">'+
@@ -247,9 +264,11 @@ app.constant('CONSTANTS', {
                                 'src="application/Images/Assets/INVENTORY_page/ladger_active.png"/>'+
                         '</span>'+
                         '</div>' },
-              { field: 'specification' },
+              { field: 'specification',
+              width : '20%' },
               { field: 'stockCount'},
               { field: 'vendor',
+              width : '20%',
                 cellTemplate: '<div class="ui-grid-cell-contents" >'+
                             '<span>{{grid.getCellValue(row, col)}}</span>'+
                             '<span class="productInactive" ng-if="!row.isSelected">'+
@@ -265,12 +284,13 @@ app.constant('CONSTANTS', {
 ],
 Customerfields : [
         { field: 'name',
+        width : '20%',
         cellTemplate: '<div class="ui-grid-cell-contents" >'+
-                '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+                '<span class="productInactive" ng-if="!row.isSelected" style="float:left;margin-left:20px;">'+
                 '<img height="15" width="15" '+
                         'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
                 '</span>'+
-                '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+                '<span class="productInactive" ng-if="row.isSelected" style="float:left;margin-left:20px;">'+
                 '<img height="15" width="15" '+
                         'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
                 '</span>'+
@@ -288,19 +308,22 @@ Customerfields : [
                         'src="application/Images/Assets/INVENTORY_page/ladger_active.png"/>'+
                 '</span>'+
                 '</div>' },
-        { field: 'address' },
+        { field: 'address',
+        width : '20%' },
         { field: 'type'},
         { field: 'contact'},
-        { field: 'status'}
+        { field: 'status',
+width : '20%'}
 ],
 Vendorfields : [
         { field: 'name',
+        width : '20%',
         cellTemplate: '<div class="ui-grid-cell-contents" >'+
-                '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+                '<span class="productInactive" ng-if="!row.isSelected" style="float:left;margin-left:20px;">'+
                 '<img height="15" width="15" '+
                         'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
                 '</span>'+
-                '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+                '<span class="productInactive" ng-if="row.isSelected" style="float:left;margin-left:20px;">'+
                 '<img height="15" width="15" '+
                         'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
                 '</span>'+
@@ -329,14 +352,21 @@ ImportVendorfields : [
         { field: 'contact'},
         { field: 'rowNo'}
 ],
+ImportCustomerfields : [
+        { field: 'vendorName' , fieldName:'Customer Name' },
+        { field: 'address'},
+        { field: 'contact'},
+        { field: 'rowNo'}
+],
 OrganizationUserfields : [
         { field: 'userName' ,
+        width:'20%',
         cellTemplate: '<div class="ui-grid-cell-contents" >'+
-        '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+        '<span class="productInactive" ng-if="!row.isSelected" style="float:left;margin-left:20px;">'+
         '<img height="15" width="15" '+
                 'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
         '</span>'+
-        '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+        '<span class="productInactive" ng-if="row.isSelected" style="float:left;margin-left:20px;">'+
         '<img height="15" width="15" '+
                 'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
         '</span>'+

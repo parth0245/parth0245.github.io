@@ -38,6 +38,11 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
         templateUrl: 'application/Partials/addCustomer.html',
         controller: 'addCustomerCtrl'
     })
+    .state('Home.ImportCustomer', {
+        url: '/importCustomer',
+        templateUrl: 'application/Partials/importCustomer.html',
+        controller: 'importCustomerCtrl'
+    })
     .state('Home.Vendors', {
         url: '/vendors',
         templateUrl: 'application/Partials/diffModules.html',
@@ -227,9 +232,10 @@ app.constant('CONSTANTS', {
                         organizationUserList : 'application/fixture/organizationUserList.json',
                         organizationRoleList : 'application/fixture/organizationRoleList.json',
                         accountingList : 'application/fixture/accountingList.json',
-                        bankingLedger : 'application/fixture/bankingLedger.json'
+                        bankingLedger : 'application/fixture/bankingLedger.json',
+                        importCustomer : 'application/fixture/importCustomer.json'
                 },{
-                        inventoryList : "live url here",
+                        inventoryList : '',
                         customerList : '',
                         vendorList : '',
                         importVendor :'',
@@ -242,7 +248,8 @@ app.constant('CONSTANTS', {
                         organizationUserList : '',
                         organizationRoleList : '' ,
                         accountingList : '',
-                        bankingLedger : 'application/fixture/bankingLedger.json'
+                        bankingLedger : 'application/fixture/bankingLedger.json',
+                        importCustomer : ''
                 }
         ],
         headBarNavigator : [
@@ -317,17 +324,18 @@ app.constant('CONSTANTS', {
         Paymentfields :[
                 { field: 'vendorName',
                 cellTemplate: '<div class="ui-grid-cell-contents" >'+
-                        '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+                        '<span class="productInactive" ng-if="!row.isSelected" style="float:left;margin-left:20px;">'+
                         '<img height="15" width="15" '+
                                 'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
                         '</span>'+
-                        '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+                        '<span class="productInactive" ng-if="row.isSelected" style="float:left;margin-left:20px;">'+
                         '<img height="15" width="15" '+
                                 'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
                         '</span>'+
                         '<span>{{grid.getCellValue(row, col)}}</span>'+
                         '</div>' },
                 { field: 'amount',
+                width : '15%',
                 cellTemplate: '<div class="ui-grid-cell-contents" >'+
                         '<span>{{grid.getCellValue(row, col)}}</span>'+
                         '<span class="productInactive" ng-if="!row.isSelected">'+
@@ -345,17 +353,18 @@ app.constant('CONSTANTS', {
         Expensefields :[
                 { field: 'vendorName',
                 cellTemplate: '<div class="ui-grid-cell-contents" >'+
-                        '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+                        '<span class="productInactive" ng-if="!row.isSelected" style="float:left;margin-left:20px;">'+
                         '<img height="15" width="15" '+
                                 'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
                         '</span>'+
-                        '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+                        '<span class="productInactive" ng-if="row.isSelected" style="float:left;margin-left:20px;">'+
                         '<img height="15" width="15" '+
                                 'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
                         '</span>'+
                         '<span>{{grid.getCellValue(row, col)}}</span>'+
                         '</div>' },
                 { field: 'amount',
+                width : '15%',
                 cellTemplate: '<div class="ui-grid-cell-contents" >'+
                         '<span>{{grid.getCellValue(row, col)}}</span>'+
                         '<span class="productInactive" ng-if="!row.isSelected">'+
@@ -372,30 +381,37 @@ app.constant('CONSTANTS', {
         ],
         Journalfields :[
                 { field: 'referance',
+                width : '20%',
                 cellTemplate: '<div class="ui-grid-cell-contents" >'+
-                        '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+                        '<span class="productInactive" ng-if="!row.isSelected" style="float:left;margin-left:20px;">'+
                         '<img height="15" width="15" '+
                                 'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
                         '</span>'+
-                        '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+                        '<span class="productInactive" ng-if="row.isSelected" style="float:left;margin-left:20px;">'+
                         '<img height="15" width="15" '+
                                 'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
                         '</span>'+
                         '<span>{{grid.getCellValue(row, col)}}</span>'+
                         '</div>' },
-                        { field: 'date' },
+                        { field: 'date' ,
+                        width : '15%'
+                },
                         { field: 'fromLedger'},
                         { field: 'toLedger'},
-                        { field: 'amount'},
+                        { field: 'amount',
+                        cellTemplate: '<div class="ui-grid-cell-contents" ng-class="row.isSelected ? \'buleColor\' : \'\' " >'+
+                        '<span>{{grid.getCellValue(row, col)}}</span>'+
+                        '</div>'
+                },
         ],
         Contrafields :[
                 { field: 'transferredFrom',
                 cellTemplate: '<div class="ui-grid-cell-contents" >'+
-                        '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+                        '<span class="productInactive" ng-if="!row.isSelected" style="float:left;margin-left:20px;">'+
                         '<img height="15" width="15" '+
                                 'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
                         '</span>'+
-                        '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+                        '<span class="productInactive" ng-if="row.isSelected" style="float:left;margin-left:20px;">'+
                         '<img height="15" width="15" '+
                                 'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
                         '</span>'+
@@ -404,22 +420,27 @@ app.constant('CONSTANTS', {
                         { field: 'transferredTo' },
                         { field: 'date'},
                         { field: 'reference'},
-                        { field: 'amount'},
+                        { field: 'amount',
+                        cellTemplate: '<div class="ui-grid-cell-contents" ng-class="row.isSelected ? \'buleColor\' : \'\' " >'+
+                        '<span>{{grid.getCellValue(row, col)}}</span>'+
+                        '</div>'},
         ],
         Receiptfields :[
                 { field: 'customerName',
+                width : '35%',
         cellTemplate: '<div class="ui-grid-cell-contents" >'+
-                '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+                '<span class="productInactive" ng-if="!row.isSelected" style="float:left;margin-left:20px;">'+
                 '<img height="15" width="15" '+
                         'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
                 '</span>'+
-                '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+                '<span class="productInactive" ng-if="row.isSelected" style="float:left;margin-left:20px;">'+
                 '<img height="15" width="15" '+
                         'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
                 '</span>'+
                 '<span>{{grid.getCellValue(row, col)}}</span>'+
                 '</div>' },
         { field: 'amount',
+        width : '15%',
         cellTemplate: '<div class="ui-grid-cell-contents" >'+
                 '<span>{{grid.getCellValue(row, col)}}</span>'+
                 '<span class="productInactive" ng-if="!row.isSelected">'+
@@ -436,6 +457,7 @@ app.constant('CONSTANTS', {
         ],
         Inventoryfields : [
                 { field: 'product',
+                width : '20%',
                 cellTemplate: '<div class="ui-grid-cell-contents" >'+
                               '<span>{{grid.getCellValue(row, col)}}</span>'+
                               '<span class="productInactive" ng-if="!row.isSelected">'+
@@ -459,9 +481,11 @@ app.constant('CONSTANTS', {
                                 'src="application/Images/Assets/INVENTORY_page/ladger_active.png"/>'+
                         '</span>'+
                         '</div>' },
-              { field: 'specification' },
+              { field: 'specification',
+              width : '20%' },
               { field: 'stockCount'},
               { field: 'vendor',
+              width : '20%',
                 cellTemplate: '<div class="ui-grid-cell-contents" >'+
                             '<span>{{grid.getCellValue(row, col)}}</span>'+
                             '<span class="productInactive" ng-if="!row.isSelected">'+
@@ -477,12 +501,13 @@ app.constant('CONSTANTS', {
 ],
 Customerfields : [
         { field: 'name',
+        width : '20%',
         cellTemplate: '<div class="ui-grid-cell-contents" >'+
-                '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+                '<span class="productInactive" ng-if="!row.isSelected" style="float:left;margin-left:20px;">'+
                 '<img height="15" width="15" '+
                         'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
                 '</span>'+
-                '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+                '<span class="productInactive" ng-if="row.isSelected" style="float:left;margin-left:20px;">'+
                 '<img height="15" width="15" '+
                         'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
                 '</span>'+
@@ -500,19 +525,22 @@ Customerfields : [
                         'src="application/Images/Assets/INVENTORY_page/ladger_active.png"/>'+
                 '</span>'+
                 '</div>' },
-        { field: 'address' },
+        { field: 'address',
+        width : '20%' },
         { field: 'type'},
         { field: 'contact'},
-        { field: 'status'}
+        { field: 'status',
+width : '20%'}
 ],
 Vendorfields : [
         { field: 'name',
+        width : '20%',
         cellTemplate: '<div class="ui-grid-cell-contents" >'+
-                '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+                '<span class="productInactive" ng-if="!row.isSelected" style="float:left;margin-left:20px;">'+
                 '<img height="15" width="15" '+
                         'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
                 '</span>'+
-                '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+                '<span class="productInactive" ng-if="row.isSelected" style="float:left;margin-left:20px;">'+
                 '<img height="15" width="15" '+
                         'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
                 '</span>'+
@@ -541,14 +569,21 @@ ImportVendorfields : [
         { field: 'contact'},
         { field: 'rowNo'}
 ],
+ImportCustomerfields : [
+        { field: 'vendorName' , fieldName:'Customer Name' },
+        { field: 'address'},
+        { field: 'contact'},
+        { field: 'rowNo'}
+],
 OrganizationUserfields : [
         { field: 'userName' ,
+        width:'20%',
         cellTemplate: '<div class="ui-grid-cell-contents" >'+
-        '<span class="productInactive" ng-if="!row.isSelected" style="float:none">'+
+        '<span class="productInactive" ng-if="!row.isSelected" style="float:left;margin-left:20px;">'+
         '<img height="15" width="15" '+
                 'src="application/Images/Assets/INVENTORY_page/edit_inactive.png"/>'+
         '</span>'+
-        '<span class="productInactive" ng-if="row.isSelected" style="float:none">'+
+        '<span class="productInactive" ng-if="row.isSelected" style="float:left;margin-left:20px;">'+
         '<img height="15" width="15" '+
                 'src="application/Images/Assets/INVENTORY_page/edit_active.png"/>'+
         '</span>'+
@@ -807,7 +842,12 @@ app.controller('bankingCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
     $scope.changeHeight = function(val){
         heightCalc.calculateGridHeight(val);
     }
-
+    var cellTemplate = '<div '+
+    'ng-if="!col.grouping || col.grouping.groupPriority === undefined ||'+
+    'col.grouping.groupPriority === null ||'+
+    '( row.groupHeader && col.grouping.groupPriority === row.treeLevel )"'+
+    'class="ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}'+
+    '</div>';
     var setGroupValues = function( columns, rows ) {
        
         columns.forEach( function( column ) {
@@ -829,15 +869,7 @@ app.controller('bankingCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Banking');
     $scope.gridOptions.treeRowHeaderAlwaysVisible = false;
     $scope.gridOptions.enableRowSelection = false;
-var cellTemplate = '<div '+
-                'ng-if="!col.grouping || col.grouping.groupPriority === undefined ||'+
-                'col.grouping.groupPriority === null ||'+
-                '( row.groupHeader && col.grouping.groupPriority === row.treeLevel )"'+
-                'class="ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}'+
-                '</div>';
-    $scope.name = function(){
-        console.log("row");
-    }
+
     $scope.gridOptions.columnDefs = [
         { field: 'primaryGroup' , 
         grouping: { groupPriority: 0 },
@@ -862,11 +894,7 @@ function getRowIndex(id , grid) {
         }
     }
     return rowIndex;
-}
-function hideIcon(i) {
- $('.ui-grid-row .ui-grid-cell.ui-grid-row-header-cell i').eq(i).hide();
-
-}
+};
 $scope.gridOptions.showTreeExpandNoChildren = false;
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
@@ -874,33 +902,14 @@ $scope.gridOptions.showTreeExpandNoChildren = false;
         $scope.gridApi.grid.registerColumnsProcessor( setGroupValues, 410 );
 
         $scope.gridApi.treeBase.on.rowExpanded($scope, function(row) {
-        
-            
-
-            var rowIndex = getRowIndex(row .uid, row.grid);
-            console.log(rowIndex);
-            if ($scope.gridApi.treeBase.getRowChildren(row).length == 1 && row.treeLevel != 0){
                 var exp = $scope.gridApi.treeBase.getRowChildren(row)[0];
-                if(angular.isDefined(exp.entity['$$uiGrid-0009'])){
-                    if(exp.entity['$$uiGrid-0009'].groupVal == "") {
+                for (var key in exp.entity) {
+                    var keys = exp.entity[key];
+                    if(keys.groupVal==""){
                         $scope.gridApi.treeBase.toggleRowTreeState(row);
-                        //hideIcon(rowIndex);
                     }
-              }
-           }
-        
-            if ($scope.gridApi.treeBase.getRowChildren(row).length == 1 && row.treeLevel == 0){
-                var exp = $scope.gridApi.treeBase.getRowChildren(row)[0];
-                if(angular.isDefined(exp.entity['$$uiGrid-0008'])){
-                    if(exp.entity['$$uiGrid-0008'].groupVal == "") {
-                        $scope.gridApi.treeBase.toggleRowTreeState(row);
-                        //hideIcon(rowIndex);
-                    }
-              }
-           }
-        
-           
-                 $scope.changeHeight(0);
+                }
+                $scope.changeHeight(0);
          });
          $scope.gridApi.treeBase.on.rowCollapsed($scope, function(row) {
                  $scope.changeHeight(0);
@@ -930,7 +939,6 @@ $scope.gridOptions.showTreeExpandNoChildren = false;
    });
       
    $scope.changeHeight(0);
-
 });
 app.controller('contraCtrl',function($rootScope,$scope ,$state ,$timeout , CONSTANTS ,heightCalc , contraServices){
     console.log('Inside Contra Controller');
@@ -995,6 +1003,9 @@ app.controller('customerCtrl',function($rootScope , $scope , $state , CONSTANTS 
 
     $scope.add = function() {
         $state.go('Home.addCustomers');
+    }
+    $scope.import = function(){
+        $state.go('Home.ImportCustomer');
     }
     
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Customer');
@@ -1096,6 +1107,44 @@ app.controller('homeCtrl',function($scope,$rootScope,CONSTANTS ,$state){
         $state.go('Home.Dashboard');
     }
 });
+app.controller('importCustomerCtrl',function($scope, $rootScope , heightCalc ,CONSTANTS ,customerServices){
+    console.log('Inside Import Cust Controller');
+    $rootScope.isActive = 'CUSTOMER';
+
+    $scope.changeHeight = function(val){
+        heightCalc.calculateGridHeight(val);
+    }
+
+    $scope.gridOptions = CONSTANTS.gridOptionsConstants('ImportCustomer');
+    $scope.gridOptions.enableRowSelection = false;
+    $scope.gridOptions.onRegisterApi = function( gridApi ) {
+        $scope.gridApi = gridApi;
+    }
+
+    $scope.nextPage = function(){
+        $scope.gridApi.pagination.nextPage();
+        $scope.changeHeight(0);
+    }
+    $scope.prevPage = function(){
+        $scope.gridApi.pagination.previousPage();
+        $scope.changeHeight(0);
+    }
+
+    customerServices.importCustomer().then(function(response){
+        $scope.gridOptions.data = response.data;
+        if($scope.gridOptions.data.length !== 0){
+            $scope.changeHeight(0);
+        }
+        else {
+            $scope.changeHeight(200);
+        }   
+          },function(error){
+        console.log('error',error);
+     });
+
+   $scope.changeHeight(0);
+});
+
 app.controller('importVendorCtrl',function($scope, $rootScope , heightCalc ,CONSTANTS ,vendorServices){
     console.log('Inside Import Vendor Controller');
     $rootScope.isActive = 'VENDORS';
@@ -1142,6 +1191,7 @@ app.controller('inventoryCtrl',function($rootScope,$scope ,$state ,$timeout , CO
     $scope.btn1 = 'Search';
     $scope.btn2 = 'Add New Product'
     $scope.ifThreeBtn = false;
+    $scope.showWait = true;
     
 
     $scope.add = function() {
@@ -1165,7 +1215,11 @@ app.controller('inventoryCtrl',function($rootScope,$scope ,$state ,$timeout , CO
         $scope.changeHeight(0);
     }
    inventoryServices.getInventories().then(function(response){
-        $scope.gridOptions.data = response.data;
+            
+                $scope.gridOptions.data = response.data;
+                $scope.showWait = false;
+            
+       
         if($scope.gridOptions.data.length !== 0){
             $scope.changeHeight(0);
         }
@@ -1175,6 +1229,7 @@ app.controller('inventoryCtrl',function($rootScope,$scope ,$state ,$timeout , CO
        
           },function(error){
         console.log('error',error);
+        $scope.showWait = false;
    });
       
    $scope.changeHeight(0);
@@ -1290,6 +1345,13 @@ $scope.gridOptions.showTreeExpandNoChildren = true;
         $scope.gridApi.grid.registerColumnsProcessor( setGroupValues, 410 );
 
         $scope.gridApi.treeBase.on.rowExpanded($scope, function(row) {
+            var exp = $scope.gridApi.treeBase.getRowChildren(row)[0];
+            for (var key in exp.entity) {
+                var keys = exp.entity[key];
+                if(keys.groupVal==""){
+                    $scope.gridApi.treeBase.toggleRowTreeState(row);
+                }
+            }
                  $scope.changeHeight(0);
          });
          $scope.gridApi.treeBase.on.rowCollapsed($scope, function(row) {
@@ -1629,6 +1691,9 @@ app.service('customerServices',function($http , CONSTANTS){
     this.getCustomer = function(){
        return $http.get(CONSTANTS.service[CONSTANTS.appLevel].customerList);
     };
+    this.importCustomer = function(){
+        return $http.get(CONSTANTS.service[CONSTANTS.appLevel].importCustomer);
+    }
 });
 app.service('expenseServices',function($http , CONSTANTS){
     this.getExpenses = function(){

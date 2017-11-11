@@ -62,6 +62,13 @@ $scope.gridOptions.showTreeExpandNoChildren = true;
         $scope.gridApi.grid.registerColumnsProcessor( setGroupValues, 410 );
 
         $scope.gridApi.treeBase.on.rowExpanded($scope, function(row) {
+            var exp = $scope.gridApi.treeBase.getRowChildren(row)[0];
+            for (var key in exp.entity) {
+                var keys = exp.entity[key];
+                if(keys.groupVal==""){
+                    $scope.gridApi.treeBase.toggleRowTreeState(row);
+                }
+            }
                  $scope.changeHeight(0);
          });
          $scope.gridApi.treeBase.on.rowCollapsed($scope, function(row) {

@@ -3,7 +3,7 @@
         <div class="col-xs-12 sectionSubHeading" ng-if="addNewUserPanel">
             <h2>New User</h2>
         </div>
-        <div class="topPadding20 fontNormal col-xs-11" ng-if="addNewUserPanel">
+        <div class="topPadding20 fontNormal col-xs-11 organizationLevelRoute" ng-if="addNewUserPanel">
                 <md-content>
                         <form name="addUserForm" style="background-color:#f5f6f8">
                                 <div layout="row" >
@@ -47,9 +47,9 @@
                                             </md-input-container>
                                 </div>
                                 <div layout="row" class="addPaddingButtons">
-                                        <md-button class="md-raised" flex-offset="55">Reset</md-button>
-                                        <md-button class="md-raised md-primary">Save</md-button>
-                                        <md-button class="md-raised" ng-click="add()">Cancel</md-button>
+                                        <md-button class="md-raised ifBold" flex-offset="55">Reset</md-button>
+                                        <md-button class="md-raised md-primary ifBold">Save</md-button>
+                                        <md-button class="md-raised ifBold" ng-click="add()">Cancel</md-button>
                                 </div>
                         </form>
                 </md-content>
@@ -63,10 +63,10 @@
             <input type="text" class="form-control" id="inputSuccess2"/>
             <span class="glyphicon glyphicon-search form-control-feedback"></span>
         </div>
-        <div class="col-xs-2 paddingLeft30">
+        <div class="col-xs-2 paddingLeft30" style="margin-left:-5px;">
             <button class="col-xs-11 btn btn-primary btn-app-white-color fontBold">{{btn1}}</button>
         </div>
-        <div class="col-xs-2 noPadding">
+        <div class="col-xs-2 noPadding paddingLeft10">
             <button class="col-xs-9 btn btn-primary btn-app-blue-color" ng-click="add()">{{btn2}}</button>
         </div>
     </div>
@@ -75,18 +75,18 @@
             <input type="text" class="form-control" id="inputSuccess2"/>
             <span class="glyphicon glyphicon-search form-control-feedback"></span>
         </div>
-        <div class="col-xs-2">
+        <div class="col-xs-2 paddingLeft30">
             <button class="btn btn-primary btn-app-white-color fontBold">{{btn1}}</button>
         </div>
         <div class="col-xs-2">
             <button class="btn btn-primary btn-app-blue-color" ng-click="add()">{{btn2}}</button>
         </div>
-        <div class="col-xs-2">
+        <div class="col-xs-2 paddingRight0">
             <button class="btn btn-primary btn-app-blue-color" ng-click="import()">{{btn3}}</button>
         </div>
     </div>
     <div ng-if="checkModule() || false" class="paddingTop100"></div>
-    <div ng-if="!checkModule() || false" class="pagingPart col-xs-3 col-xs-offset-8 paddingTop100 paddingLeft80 paddingBottom10">
+    <div ng-if="!checkModule() || false" class="pagingPart col-xs-3 col-xs-offset-8 paddingTop100 paddingBottom10" ng-class="moduleHeading == 'Application Users' || moduleHeading == 'Role List'  ? 'paddingLeft95' : 'paddingLeft85'">
             <span class="buttonBorder" ng-click="prevPage()">
                 <img src="application/Images/Assets/pagination_left.png"/>
             </span>

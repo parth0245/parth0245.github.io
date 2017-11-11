@@ -38,6 +38,11 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
         templateUrl: 'application/Partials/addCustomer.html',
         controller: 'addCustomerCtrl'
     })
+    .state('Home.ImportCustomer', {
+        url: '/importCustomer',
+        templateUrl: 'application/Partials/importCustomer.html',
+        controller: 'importCustomerCtrl'
+    })
     .state('Home.Vendors', {
         url: '/vendors',
         templateUrl: 'application/Partials/diffModules.html',

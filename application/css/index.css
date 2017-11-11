@@ -6,6 +6,11 @@
 	font-family: Montserrat-Regular;
 	src: url(/Fonts/Montserrat-Regular.ttf);
 }
+@font-face {
+	font-family: Montserrat-Medium;
+	src: url(/Fonts/Montserrat-Medium.ttf);
+}
+
 .body {
 	margin:0px;
 	padding:0px;
@@ -15,6 +20,9 @@
 	background-color: #f5f6f8;
 	color:#0935ae;
 	border-left:2px solid #0935ae !important;
+}
+.buleColor {
+	color:#0935ae;
 }
 .setActiveHeadBar {
 	background-color: #f5f6f8;
@@ -208,7 +216,7 @@
 	margin-bottom:30px !important;
 }
 .sectionSubHeading {
-	padding-top:30px;
+	padding-top:35px;
 	color : #0935ae;
 }
 .sectionSubHeading h2 {
@@ -258,30 +266,50 @@
 }
 .fontNormal label {
 	font-weight: normal !important;
-	font-family: "Montserrat-Regular";
+	font-family: "Montserrat-Medium";
 	color:black;
 }
+.fontNormal .addLedger .md-label {
+	font-family: "Montserrat-Medium";
+}
 .fontNormal md-select {
-	font-family: "Montserrat-Regular";
+	font-family: "Montserrat-Medium";
 }
 .fontNormal md-select-value span {
 	color:black;
 }
 .description {
-	border-top: 1px solid white;
+	border-top: 2px solid #fff;
     height: 5px;
+    /* width: 45px; */
     margin-top: 18px;
-    padding-right: 5px;
-    margin-right: 5px;
+    padding-right: 10px;
+    margin-right: 10px;
 }
 .addInventory button.md-raised {
 	color: #0935ae;
-	font-family: "Montserrat-SemiBold";
-	font-size: 13px;
+	font-family: "Montserrat-Regular";
+	font-size: 14px;
 	height : 40px;
 }
+.addInventory button.md-raised.ifBold {
+	font-family: "Montserrat-SemiBold";
+}
+.organizationLevelRoute button.md-raised.ifBold {
+	font-family: "Montserrat-SemiBold";
+	color: #0935ae;
+	font-size: 14px;
+	height : 40px;
+}
+.addInventory button.md-raised.description {
+	font-size: 16px;
+	}
 .addInventory table {
 	font-family: "Montserrat-SemiBold";
+}
+.organizationLevelRoute button.md-raised.md-primary {
+	background-color: #0935ae !important;
+	color:white;	
 }
 .addInventory button.md-raised.md-primary {
 	background-color: #0935ae !important;
@@ -327,11 +355,20 @@
 .paddingTop100 {
 	padding-top:100px;
 }
+.paddingTop120 {
+	padding-top:120px;
+}
+.paddingLeft10 {
+	padding-left: 10px !important;
+}
 .paddingLeft25 {
 	padding-left: 25px;
 }
 .paddingLeft30 {
 	padding-left: 30px;
+}
+.paddingLeft45 {
+	padding-left: 45px;
 }
 .paddingLeft60 {
 	padding-left: 60px;
@@ -341,6 +378,12 @@
 }
 .paddingLeft80 {
 	padding-left: 80px;
+}
+.paddingLeft85 {
+	padding-left: 85px;
+}
+.paddingLeft95 {
+	padding-left: 95px;
 }
 .paddingLeft130 {
 	padding-left: 130px;
@@ -362,6 +405,9 @@
 }
 .paddingRight30 {
 	padding-right:30px !important;
+}
+.paddingRight60 {
+	padding-right:60px !important;
 }
 /*Paddings*/
 /*Margins*/
@@ -389,11 +435,25 @@
 .marginLeft5 {
 	margin-left: 5px;
 }
+.flex-offset-44 {
+	margin-left: 44%;
+}
 .flex-offset-78 {
 	margin-left: 78%;
 }
 .flex-offset-59 {
 	margin-left: 59%;
+}
+.flex-22, .layout-row>.flex-22 {
+	max-width: 22%;
+}
+.flex-22 .description {
+	border-top: 2px solid #fff;
+    height: 5px;
+    margin-top: 18px;
+    padding-right: 7px;
+    margin-right: 5px;
+    margin-left: 15px;
 }
 /*Margins*/
 /*Grid*/
@@ -422,11 +482,13 @@
 .productInactive {
 	float: right;
     position: relative;
-    right: 10px;
+	right: 10px;
 }
 .grid .ui-grid-row-selected {
 	border : 1px solid #24aaec;
 	overflow: hidden !important;
+	/*box-shadow: 2px 1px 5px 1px #24aaec;
+    position: absolute;*/
 }
 .ui-grid-row.ui-grid-row-selected > [ui-grid-row] > .ui-grid-cell {
 	background-color: white;
@@ -471,8 +533,9 @@
 	width:100%;
 }
 .addInventory .paddingBottom30 span , .addInventory .paddingBottom30 md-radio-button {
-	font-family: "Montserrat-Regular";
+	font-family: "Montserrat-Medium";
 	font-size: 12px;
+	font-weight: 400;
 }
 .addPaddingButtons {
 	padding-top:50px;
@@ -572,7 +635,7 @@
 	min-width: 270px;
 }
 .accountForm .md-datepicker-input {
-    min-width: 295px !important;
+    min-width: 285px !important;
 }
 .ui-grid-header-cell .ui-grid-tree-base-row-header-buttons:first-child {
 	display: none;	
@@ -590,5 +653,27 @@
 	padding: 10px 30px;
 }
 .centerItems {
-	padding-top: 50px;
+	/*padding-top: 50px;*/
 }
+.loader {
+	position: absolute;
+	top:50%;
+	left:50%;
+	border: 5px solid #cccccc;
+    border-radius: 50%;
+    border-top: 7px solid #0935ae;
+    width: 50px;
+    height: 50px;
+	-webkit-animation: spin 2s linear infinite;
+	animation: spin 2s linear infinite;
+  }
+  
+  @-webkit-keyframes spin {
+	0% { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+  }

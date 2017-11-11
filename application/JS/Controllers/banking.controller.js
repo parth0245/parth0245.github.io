@@ -17,7 +17,12 @@ app.controller('bankingCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
     $scope.changeHeight = function(val){
         heightCalc.calculateGridHeight(val);
     }
-
+    var cellTemplate = '<div '+
+    'ng-if="!col.grouping || col.grouping.groupPriority === undefined ||'+
+    'col.grouping.groupPriority === null ||'+
+    '( row.groupHeader && col.grouping.groupPriority === row.treeLevel )"'+
+    'class="ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}'+
+    '</div>';
     var setGroupValues = function( columns, rows ) {
        
         columns.forEach( function( column ) {
@@ -39,15 +44,7 @@ app.controller('bankingCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Banking');
     $scope.gridOptions.treeRowHeaderAlwaysVisible = false;
     $scope.gridOptions.enableRowSelection = false;
-var cellTemplate = '<div '+
-                'ng-if="!col.grouping || col.grouping.groupPriority === undefined ||'+
-                'col.grouping.groupPriority === null ||'+
-                '( row.groupHeader && col.grouping.groupPriority === row.treeLevel )"'+
-                'class="ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}'+
-                '</div>';
-    $scope.name = function(){
-        console.log("row");
-    }
+
     $scope.gridOptions.columnDefs = [
         { field: 'primaryGroup' , 
         grouping: { groupPriority: 0 },
@@ -72,11 +69,7 @@ function getRowIndex(id , grid) {
         }
     }
     return rowIndex;
-}
-function hideIcon(i) {
- $('.ui-grid-row .ui-grid-cell.ui-grid-row-header-cell i').eq(i).hide();
-
-}
+};
 $scope.gridOptions.showTreeExpandNoChildren = false;
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
@@ -84,33 +77,14 @@ $scope.gridOptions.showTreeExpandNoChildren = false;
         $scope.gridApi.grid.registerColumnsProcessor( setGroupValues, 410 );
 
         $scope.gridApi.treeBase.on.rowExpanded($scope, function(row) {
-        
-            
-
-            var rowIndex = getRowIndex(row .uid, row.grid);
-            console.log(rowIndex);
-            if ($scope.gridApi.treeBase.getRowChildren(row).length == 1 && row.treeLevel != 0){
                 var exp = $scope.gridApi.treeBase.getRowChildren(row)[0];
-                if(angular.isDefined(exp.entity['$$uiGrid-0009'])){
-                    if(exp.entity['$$uiGrid-0009'].groupVal == "") {
+                for (var key in exp.entity) {
+                    var keys = exp.entity[key];
+                    if(keys.groupVal==""){
                         $scope.gridApi.treeBase.toggleRowTreeState(row);
-                        //hideIcon(rowIndex);
                     }
-              }
-           }
-        
-            if ($scope.gridApi.treeBase.getRowChildren(row).length == 1 && row.treeLevel == 0){
-                var exp = $scope.gridApi.treeBase.getRowChildren(row)[0];
-                if(angular.isDefined(exp.entity['$$uiGrid-0008'])){
-                    if(exp.entity['$$uiGrid-0008'].groupVal == "") {
-                        $scope.gridApi.treeBase.toggleRowTreeState(row);
-                        //hideIcon(rowIndex);
-                    }
-              }
-           }
-        
-           
-                 $scope.changeHeight(0);
+                }
+                $scope.changeHeight(0);
          });
          $scope.gridApi.treeBase.on.rowCollapsed($scope, function(row) {
                  $scope.changeHeight(0);
@@ -140,5 +114,4 @@ $scope.gridOptions.showTreeExpandNoChildren = false;
    });
       
    $scope.changeHeight(0);
-
 });

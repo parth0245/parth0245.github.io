@@ -54,7 +54,7 @@
                                         <input name="desc" ng-model="descript">
                                 </md-input-container>
                         </div>
-                        <div layout="row" class="topPadding25 paddingBottom30">
+                        <div layout="row" class="topPadding25 paddingBottom30 addLedger">
                             <span class="marginRight20">Opening Balance</span> 
                             <md-radio-group ng-model="group1" layout="row" flex="25">
                                 <md-radio-button value="Apple" class="md-primary">Debit</md-radio-button>
@@ -65,9 +65,9 @@
                             <hr />
                         </div>
 <div layout="row" class="addPaddingButtons">
-        <md-button class="md-raised" flex-offset="45">Reset All</md-button>
-        <md-button class="md-raised md-primary">Create</md-button>
-        <md-button class="md-raised">Cancel</md-button>
+        <md-button class="md-raised ifBold" flex-offset="45">Reset All</md-button>
+        <md-button class="md-raised md-primary ifBold">Create</md-button>
+        <md-button class="md-raised ifBold">Cancel</md-button>
 </div>
             </form>
         </md-content>
