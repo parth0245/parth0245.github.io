@@ -1,4 +1,4 @@
-var app = angular.module('siriBooks',['ui.router','ngMaterial','ngSanitize','ui.grid','ui.grid.selection','ui.grid.resizeColumns','ui.grid.pagination','ui.grid.grouping']);
+var app = angular.module('siriBooks',['ui.router','ngMaterial','ngSanitize','ui.grid','ui.grid.selection','ui.grid.resizeColumns','ui.grid.pagination','ui.grid.grouping','ngMessages']);
 
 app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     $stateProvider
@@ -1109,7 +1109,7 @@ app.controller('homeCtrl',function($scope,$rootScope,CONSTANTS ,$state){
 });
 app.controller('importCustomerCtrl',function($scope, $rootScope , heightCalc ,CONSTANTS ,customerServices){
     console.log('Inside Import Cust Controller');
-    $rootScope.isActive = 'CUSTOMER';
+    $rootScope.isActive = 'CUSTOMERS';
 
     $scope.changeHeight = function(val){
         heightCalc.calculateGridHeight(val);

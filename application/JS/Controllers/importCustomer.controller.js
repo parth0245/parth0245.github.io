@@ -1,6 +1,6 @@
 app.controller('importCustomerCtrl',function($scope, $rootScope , heightCalc ,CONSTANTS ,customerServices){
     console.log('Inside Import Cust Controller');
-    $rootScope.isActive = 'CUSTOMER';
+    $rootScope.isActive = 'CUSTOMERS';
 
     $scope.changeHeight = function(val){
         heightCalc.calculateGridHeight(val);

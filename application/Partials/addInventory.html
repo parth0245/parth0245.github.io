@@ -8,7 +8,7 @@
                         <div layout="row">
                                 <md-input-container flex="25">
                                     <label>Product / Sevice</label>
-                                    <md-select name="product" ng-model="product">
+                                    <md-select name="product" ng-model="product" required>
                                         <md-option value="Product 1">Product 1</md-option>
                                         <md-option value="Product 2">Product 2</md-option>
                                     </md-select>
@@ -17,11 +17,11 @@
 
                             <div layout="row" class="topPadding10">
                                     <md-input-container flex="25">
-                                        <label>Name*</label>
-                                        <input name="name" ng-model="name">
-                                        <!--<div ng-messages="projectForm.clientName.$error">
+                                        <label>Name</label>
+                                        <input name="name" ng-model="name" required>
+                                       <div ng-messages="addExpenseForm.name.$error">
                                             <div ng-message="required">This is required.</div>
-                                        </div>-->
+                                        </div>
                                     </md-input-container>
                                     <md-input-container flex="25"  flex-offset="5">
                                             <label>Category</label>
@@ -76,7 +76,7 @@
                                    
                                     <md-input-container flex="25">
                                             <label>Name</label>
-                                            <input name="name" ng-model="desc.name">
+                                            <input name="wew" ng-model="desc.name">
                                     </md-input-container>
                                     <md-input-container flex="25"  flex-offset="5">
                                             <label>Value</label>

@@ -275,8 +275,11 @@
 .fontNormal md-select {
 	font-family: "Montserrat-Medium";
 }
-.fontNormal md-select-value span {
+.fontNormal .md-select-value span{
 	color:black;
+}
+.fontNormal md-select.md-default-theme.ng-invalid.ng-touched .md-select-value span, md-select.ng-invalid.ng-touched .md-select-value span {
+	color: rgb(221,44,0) !important;
 }
 .description {
 	border-top: 2px solid #fff;
@@ -342,6 +345,9 @@
 }
 .topPadding25{
 	padding-top:25px !important;
+}
+.paddingTop28 {
+	padding-top:28px !important;
 }
 .topPadding30{
 	padding-top:30px !important;
@@ -420,6 +426,9 @@
 .marginTop12 {
 	margin-top:12px;
 }
+.marginTop20 {
+	margin-top:20px;
+}
 .marginLeft0 {
 	margin-left: 0px;
 }
@@ -428,6 +437,9 @@
 }
 .marginLeft4cent {
 	margin-left: 4%;
+}
+.marginLeft5Cent {
+	margin-left: 5%;
 }
 .marginRight4cent {
 	margin-right: 4%;
@@ -676,4 +688,12 @@
   @keyframes spin {
 	0% { transform: rotate(0deg); }
 	100% { transform: rotate(360deg); }
+  }
+  .purchaseSpecification {
+	  color: #0935ae;
+	  font-family: "Montserrat-Regular";
+	  font-size: 12px;
+  }
+  .borderRadio {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   }

@@ -1,1 +1,221 @@
-<div>Purchase HTML</div>
+<div class="col-xs-11 col-xs-offset-1 fontNormal addInventory" layout="column">
+    <div class="sectionSubHeading">
+        <h3>Purchase</h3>
+    </div>
+    <div class="topPadding20">
+        <md-content>
+            <form name="purchaseForm" style="background-color:#f5f6f8">
+                    <div layout="row">
+                            <md-input-container flex="85">
+                                <label>Vendor Name*</label>
+                                <md-select name="name" ng-model="name">
+                                    <md-option value="Product 1">name 1</md-option>
+                                    <md-option value="Product 2">name 2</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+
+                        <div layout="row" class="topPadding10">
+                            <md-input-container flex="25">
+                                <label>Date</label>
+                                <md-datepicker ng-model="date" md-hide-icons="triangle" md-open-on-focus=""></md-datepicker>
+                            </md-input-container>
+                                <md-input-container flex="25"  flex-offset="5">
+                                        <label>Purchase Type</label>
+                                        <input name="type" ng-model="type">
+                                </md-input-container>
+                                <md-input-container flex="25" flex-offset="5">
+                                    <label>GST Reverse Charge  Applicability</label>
+                                    <md-select name="unit" ng-model="unit">
+                                        <md-option value="one">One</md-option>
+                                        <md-option value="two">Two</md-option>
+                                    </md-select>
+                                </md-input-container>
+                        </div>
+                        <div layout="row">
+                                <md-input-container flex="25">
+                                    <label>Invoice No.</label>
+                                    <input name="hsnCode" ng-model="hsnCode">
+                                </md-input-container>
+                                <md-input-container flex="25" flex-offset="5">
+                                    <label>Invoice Date</label>
+                                    <md-datepicker ng-model="date" md-hide-icons="triangle" md-open-on-focus=""></md-datepicker>
+                                </md-input-container>
+                                <md-input-container flex="25"  flex-offset="5">
+                                        <label>Purchase Order No.</label>
+                                        <input name="sku" ng-model="sku">
+                                </md-input-container>
+                        </div>
+                        <div layout="row">
+                                <md-input-container flex="25">
+                                    <label>Due Date of Payment</label>
+                                    <md-select name="vendor" ng-model="vendor">
+                                        <md-option value="one">Vendor 1</md-option>
+                                        <md-option value="two">Vendor 2</md-option>
+                                    </md-select>
+                                </md-input-container>
+                        </div>
+                        <div layout="row" class="topPadding20">
+                                <md-button class="md-raised md-primary marginLeft0" flex="20" style="text-align:left;">Identity<span class="pull-right description">-</span></md-button>
+                        </div>
+                        <div layout="row" class="topPadding20">
+                            <md-input-container flex="25">
+                                <label>Address 1</label>
+                                <input name="add1" ng-model="add1">
+                            </md-input-container>
+                            <md-input-container flex="25"  flex-offset="5">
+                                    <label>Address 2</label>
+                                    <input name="add2" ng-model="add2">
+                            </md-input-container>
+                            <md-input-container flex="25"  flex-offset="5">
+                                    <label>City</label>
+                                    <input name="sku" ng-model="sku">
+                            </md-input-container>
+                        </div>
+                        <div layout="row" class="topPadding10">
+                            <md-input-container flex="25">
+                                <label>State</label>
+                                <md-select name="state" ng-model="state">
+                                    <md-option value="Product 1">state 1</md-option>
+                                    <md-option value="Product 2">state 2</md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-input-container flex="25" flex-offset="5">
+                                <label>Country</label>
+                                <md-select name="ctry" ng-model="ctry">
+                                    <md-option value="Product 1">Country 1</md-option>
+                                    <md-option value="Product 2">Country 2</md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-input-container flex="25"  flex-offset="5">
+                                <label>PIN</label>
+                                <input name="pin" ng-model="pin">
+                        </md-input-container>
+                        </div>
+                        <div layout="row" class="topPadding10">
+                            <md-input-container flex="25">
+                                <label>GST</label>
+                                <input name="gst" ng-model="gst">
+                            </md-input-container>
+                        <md-input-container flex="25" flex-offset="5">
+                                <label>PAN</label>
+                                <input name="pan" ng-model="pan">
+                        </md-input-container>
+                        <md-input-container flex="25"  flex-offset="5">
+                                <label>Aadhar</label>
+                                <input name="aadhar" ng-model="aadhar">
+                        </md-input-container>
+                        </div>
+                        <div layout="row" class="topPadding10">
+                            <md-input-container flex="25">
+                                <label>Nature of Business</label>
+                                <md-select name="nob" ng-model="nob">
+                                    <md-option value="Product 1">NOB 1</md-option>
+                                    <md-option value="Product 2">NOB 2</md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-input-container flex="25" flex-offset="5">
+                                <label>Type</label>
+                                <md-select name="type" ng-model="type">
+                                    <md-option value="Product 1">Country 1</md-option>
+                                    <md-option value="Product 2">Country 2</md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-input-container flex="25"  flex-offset="5">
+                                <label>Registration Number</label>
+                                <input name="nopin" ng-model="nopin">
+                        </md-input-container>
+                        </div>
+  <!--                     
+<div layout="row" class="addPaddingButtons">
+        <md-button class="md-raised ifBold" flex-offset="30">Reset All</md-button>
+        <md-button class="md-raised md-primary ifBold">Save</md-button>
+        <md-button class="md-raised md-primary ifBold" flex="15">Save & Purchase</md-button>
+        <md-button class="md-raised ifBold">Cancel</md-button>
+</div>-->
+                    <div class="sectionSubHeading">
+                        <h3>Enter Line Item</h3>
+                    </div>
+                    <div layout="row">
+                        <md-input-container flex="85">
+                            <label>Product</label>
+                            <md-select name="prod" ng-model="prod">
+                                <md-option value="Product 1">prod 1</md-option>
+                                <md-option value="Product 2">prod 2</md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" class="topPadding20">
+                        <md-input-container flex="25">
+                            <label>Quantity</label>
+                            <input name="gst" ng-model="qtyty">
+                        </md-input-container>
+                    <md-input-container flex="25" flex-offset="5">
+                            <label>Rate</label>
+                            <input name="pan" ng-model="rate">
+                    </md-input-container>
+                    <md-input-container flex="25"  flex-offset="5">
+                            <label>Discount</label>
+                            <input name="aadhar" ng-model="discount">
+                    </md-input-container>
+                    </div>
+                    <div layout="row">
+                        <md-input-container flex="25">
+                            <label>Batch No.</label>
+                            <input name="gst" ng-model="bno">
+                        </md-input-container>
+                    </div>
+                    <div layout="row" class="topPadding20 purchaseSpecification">
+                        <div>Add Additional Specification for each Item of Quantity</div>
+                    </div>
+                    <div layout="row" class="topPadding20">
+                        <md-input-container flex="25">
+                            <label>How many specification per item ?</label>
+                            <input name="aadhar" ng-model="spec">
+                     </md-input-container>
+                    </div>
+
+
+            </form>
+        </md-content>
+    </div>
+</div>
+<div class="addInventory fontNormal">
+
+        <div class="panel panel-default col-xs-11 marginLeft5Cent paddingLeft45 topPadding20">
+                <div class="panel-body">
+                    <div layout="row" class="">
+                        <md-input-container flex="25">
+                            <label>Specification Name</label>
+                            <input name="gst" ng-model="qtyty">
+                        </md-input-container>
+                    <md-input-container flex="25" flex-offset="5">
+                            <label>Value</label>
+                            <input name="pan" ng-model="rate">
+                    </md-input-container>
+                    <md-checkbox class="md-primary" style="margin-left:5%;">
+                        <label class="paddingTop28">Print</label>
+                    </md-checkbox>
+                    </div>
+                    <div layout="row" class="">
+                        <md-input-container flex="25">
+                            <label>Specification Name</label>
+                            <input name="gst" ng-model="qtyty">
+                        </md-input-container>
+                    <md-input-container flex="25" flex-offset="5">
+                            <label>Value</label>
+                            <input name="pan" ng-model="rate">
+                    </md-input-container>
+                    <md-checkbox class="md-primary" style="margin-left:5%;">
+                            <label class="paddingTop28">Print</label>
+                    </md-checkbox>
+                    <md-button class="md-raised md-primary ifBold" flex="10" flex-offset="10">Add</md-button>
+
+                    </div>
+                    <div layout="row" class="purchaseSpecification">
+                            <div>Adding Specification for 1/10 quantity</div>
+                    </div>
+
+                </div>
+              </div>
+</div>
