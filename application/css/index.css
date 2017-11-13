@@ -282,12 +282,20 @@
 	color: rgb(221,44,0) !important;
 }
 .description {
-	border-top: 2px solid #fff;
-    height: 5px;
-    /* width: 45px; */
-    margin-top: 18px;
-    padding-right: 10px;
-    margin-right: 10px;
+    margin-top: 0px;
+    padding-right: 5px;
+    margin-right: 5px;
+    margin-left: 15px;
+	font-size: 25px;
+	width:14px;
+}
+.flex-22 .description {
+    margin-top: 0px;
+    padding-right: 5px;
+    margin-right: 5px;
+    margin-left: 15px;
+	font-size: 25px;
+	width:14px;
 }
 .addInventory button.md-raised {
 	color: #0935ae;
@@ -457,15 +465,7 @@
 	margin-left: 59%;
 }
 .flex-22, .layout-row>.flex-22 {
-	max-width: 22%;
-}
-.flex-22 .description {
-	border-top: 2px solid #fff;
-    height: 5px;
-    margin-top: 18px;
-    padding-right: 7px;
-    margin-right: 5px;
-    margin-left: 15px;
+	width: 22%;
 }
 /*Margins*/
 /*Grid*/
@@ -696,4 +696,16 @@
   }
   .borderRadio {
 	border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  .imageUpload .file-input {
+	display: none;
+  }
+  .imageUpload md-content.md-default-theme, .imageUpload md-content {
+	       background-color:initial; 
+  }
+  .imageUpload md-button label {
+	color:white !important;
+  }
+  .flex-16, .layout-row>.flex-16 {
+	  width:16%;
   }

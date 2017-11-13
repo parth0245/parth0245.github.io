@@ -10,14 +10,17 @@ app.controller('contraCtrl',function($rootScope,$scope ,$state ,$timeout , CONST
     $scope.changeHeight = function(val){
         heightCalc.calculateGridHeight(val);
     }
-
+    $scope.myObj = {};
     $scope.add = function(){
-        $state.go('Home.addContra');
+        $state.go('Home.addContra', { data: $scope.myObj });
     }
 
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Contra');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
+        $scope.gridApi.selection.on.rowSelectionChanged($scope, function(row){
+            $state.go('Home.addContra' , { data: row.entity });
+        });
     }
 
     $scope.nextPage = function(){

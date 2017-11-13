@@ -4,6 +4,21 @@ app.controller('organizationLevelCtrl',function($rootScope , $scope , CONSTANTS)
     $rootScope.isSubActive = 'Organization';
     $rootScope.showNavigations = false;
     $scope.$parent.organizationNavigation = CONSTANTS.organizationNavigation;
+
+    $scope.panelShow1 = false;
+    $scope.panelShow2 = false;
+    $scope.panelShow3 = false;    
+ 
+    $scope.togglePannel1 = function(){
+        $scope.panelShow1 = !$scope.panelShow1;
+    }
+    $scope.togglePannel2 = function(){
+        $scope.panelShow2 = !$scope.panelShow2;
+    }
+    $scope.togglePannel3 = function(){
+        $scope.panelShow3 = !$scope.panelShow3;
+    }
+
 });
 
 app.controller('organizationUserCtrl',function($rootScope,$scope ,$state ,$timeout , CONSTANTS ,heightCalc , organizationServices){

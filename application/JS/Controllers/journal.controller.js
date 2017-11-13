@@ -10,14 +10,17 @@ app.controller('journalCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
     $scope.changeHeight = function(val){
         heightCalc.calculateGridHeight(val);
     }
-
+    $scope.myObj = {};
     $scope.add = function(){
-        $state.go('Home.addJournal');
+        $state.go('Home.addJournal', { data: $scope.myObj });
     }
 
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Journal');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
+        $scope.gridApi.selection.on.rowSelectionChanged($scope, function(row){
+            $state.go('Home.addJournal' , { data: row.entity });
+        });
     }
 
     $scope.nextPage = function(){

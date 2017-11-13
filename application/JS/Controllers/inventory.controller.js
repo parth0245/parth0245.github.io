@@ -8,14 +8,18 @@ app.controller('inventoryCtrl',function($rootScope,$scope ,$state ,$timeout , CO
     $scope.ifThreeBtn = false;
     $scope.showWait = true;
     
+    $scope.myObj = {};
 
     $scope.add = function() {
-        $state.go('Home.AddInventory');
+        $state.go('Home.AddInventory' , { data: $scope.myObj });
     }
     
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Inventory');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
+        $scope.gridApi.selection.on.rowSelectionChanged($scope, function(row){
+            $state.go('Home.AddInventory' , { data: row.entity });
+        });
     }
     
     $scope.changeHeight = function(val){

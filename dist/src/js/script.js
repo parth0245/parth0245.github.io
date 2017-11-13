@@ -1,6 +1,6 @@
-var app = angular.module('siriBooks',['ui.router','ngMaterial','ngSanitize','ui.grid','ui.grid.selection','ui.grid.resizeColumns','ui.grid.pagination','ui.grid.grouping','ngMessages']);
+var app = angular.module('siriBooks',['ui.router','ngMaterial','ngSanitize','ui.grid','ui.grid.selection','ui.grid.resizeColumns','ui.grid.pagination','ui.grid.grouping','ngMessages','flow']);
 
-app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
+app.config(function($stateProvider , $urlRouterProvider,  $locationProvider , flowFactoryProvider) {
     $stateProvider
     .state('Login', {
         url: '/login',
@@ -26,7 +26,8 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     .state('Home.AddInventory', {
         url: '/addInventory',
         templateUrl: 'application/Partials/addInventory.html',
-        controller: 'addInventoryCtrl'
+        controller: 'addInventoryCtrl',
+        params: {data : ''}
     })
     .state('Home.Customers', {
         url: '/customers',
@@ -36,7 +37,8 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     .state('Home.addCustomers', {
         url: '/addCustomers',
         templateUrl: 'application/Partials/addCustomer.html',
-        controller: 'addCustomerCtrl'
+        controller: 'addCustomerCtrl',
+        params: {data : ''}
     })
     .state('Home.ImportCustomer', {
         url: '/importCustomer',
@@ -51,7 +53,8 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     .state('Home.addVendors', {
         url: '/addVendors',
         templateUrl: 'application/Partials/addVendor.html',
-        controller: 'addVendorCtrl'
+        controller: 'addVendorCtrl',
+        params: {data : ''}
     })
     .state('Home.ImportVendors', {
         url: '/importVendors',
@@ -91,7 +94,8 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     .state('Home.addReceipt', {
         url: '/addReceipt',
         templateUrl: 'application/Partials/addReceipt.html',
-        controller: 'addReceiptCtrl'
+        controller: 'addReceiptCtrl',
+        params: {data : ''}
     })
     .state('Home.Payments', {
         url: '/payment',
@@ -101,7 +105,8 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     .state('Home.addPayments', {
         url: '/addPayment',
         templateUrl: 'application/Partials/addPayment.html',
-        controller: 'addPaymentCtrl'
+        controller: 'addPaymentCtrl',
+        params: {data : ''}
     })
     .state('Home.Expense', {
         url: '/expense',
@@ -111,7 +116,8 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     .state('Home.addExpense', {
         url: '/addExpense',
         templateUrl: 'application/Partials/addExpense.html',
-        controller: 'addExpenseCtrl'
+        controller: 'addExpenseCtrl',
+        params: {data : ''}
     })
     .state('Home.Journal', {
         url: '/journal',
@@ -121,7 +127,8 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     .state('Home.addJournal', {
         url: '/addJournal',
         templateUrl: 'application/Partials/addJournal.html',
-        controller: 'addJournalCtrl'
+        controller: 'addJournalCtrl',
+        params: {data : ''}
     })
     .state('Home.Contra', {
         url: '/contra',
@@ -131,7 +138,8 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     .state('Home.addContra', {
         url: '/addContra',
         templateUrl: 'application/Partials/addContra.html',
-        controller: 'addContraCtrl'
+        controller: 'addContraCtrl',
+        params: {data : ''}
     })
     .state('Home.CreditNote', {
         url: '/creditNote',
@@ -204,6 +212,18 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
         url: '/PageNotFound',
         templateUrl: 'application/Partials/pageNotFound.html'
     });
+    flowFactoryProvider.defaults = {
+        target: '',
+        permanentErrors: [500, 501],
+        maxChunkRetries: 1,
+        chunkRetryInterval: 5000,
+        simultaneousUploads: 1
+      };
+      flowFactoryProvider.on('catchAll', function (event) {
+        console.log('catchAll', arguments);
+      });
+      // Can be used with different implementations of Flow.js
+      // flowFactoryProvider.factory = fustyFlowFactory;
     $locationProvider.html5Mode(true);
     $urlRouterProvider.otherwise('/PageNotFound');
   });
@@ -670,14 +690,32 @@ Accountingfields : [
         {field : "updatedOn"}
 ]
 });
-app.controller('addContraCtrl',function($rootScope , $scope){
+app.controller('addContraCtrl',function($rootScope , $scope , $stateParams){
     console.log('Inside Add Contra Controller');
     $rootScope.isActive = 'Contra';
 
+    if(angular.isDefined($stateParams.data.transferredFrom)) {
+        $scope.heading = "Update";
+        $scope.btnLabel = "Update";
+    }
+    else {
+        $scope.heading = "New";
+        $scope.btnLabel = "Save";
+    }
+
 });
-app.controller('addCustomerCtrl',function($rootScope , $scope){
+app.controller('addCustomerCtrl',function($rootScope , $scope ,$stateParams){
     console.log('Inside Add Customer Controller');
     $rootScope.isActive = 'CUSTOMERS';
+
+    if(angular.isDefined($stateParams.data.name)) {
+        $scope.heading = "Update";
+        $scope.btnLabel = "Update";
+    }
+    else {
+        $scope.heading = "New";
+        $scope.btnLabel = "Save";
+    }
 
 
     $scope.additionalData = [
@@ -697,16 +735,53 @@ app.controller('addCustomerCtrl',function($rootScope , $scope){
          }
     }
 
+    $scope.panelShow1 = false;
+    $scope.panelShow2 = false;
+    $scope.panelShow3 = false;    
+    $scope.panelShow4 = false;    
+    $scope.togglePannel1 = function(){
+        $scope.panelShow1 = !$scope.panelShow1;
+    }
+    $scope.togglePannel2 = function(){
+        $scope.panelShow2 = !$scope.panelShow2;
+    }
+    $scope.togglePannel3 = function(){
+        $scope.panelShow3 = !$scope.panelShow3;
+    }
+    $scope.togglePannel4 = function(){
+        $scope.panelShow4 = !$scope.panelShow4;
+    }
 
 });
-app.controller('addExpenseCtrl',function($rootScope , $scope){
+app.controller('addExpenseCtrl',function($rootScope , $scope ,$stateParams){
     console.log('Inside Add Expense Controller');
     $rootScope.isActive = 'Expense';
 
+    if(angular.isDefined($stateParams.data.vendorName)) {
+        $scope.heading = "Update";
+        $scope.btnLabel = "Update";
+    }
+    else {
+        $scope.heading = "New";
+        $scope.btnLabel = "Save";
+    }
+
+    $scope.panelShow1 = false;
+    $scope.togglePannel1 = function(){
+        $scope.panelShow1 = !$scope.panelShow1;
+    }
 });
-app.controller('addInventoryCtrl',function($rootScope , $scope){
+app.controller('addInventoryCtrl',function($rootScope , $scope ,$stateParams){
     console.log('Inside Add Inventory Controller');
     $rootScope.isActive = 'INVENTORY';
+    if(angular.isDefined($stateParams.data.product)) {
+        $scope.heading = "Update";
+        $scope.btnLabel = "Update";
+    }
+    else {
+        $scope.heading = "New";
+        $scope.btnLabel = "Save";
+    }
 
     $scope.Description = [
         { name: "", value: "" }
@@ -725,25 +800,68 @@ app.controller('addInventoryCtrl',function($rootScope , $scope){
            $scope.Description.splice(index, 1);
         }
     }
+
+    $scope.panelShow = false ;
+
+    $scope.togglePannel = function(){
+        $scope.panelShow = !$scope.panelShow;
+    }
 });
-app.controller('addJournalCtrl',function($rootScope , $scope){
+app.controller('addJournalCtrl',function($rootScope , $scope , $stateParams){
     console.log('Inside Add Journal Controller');
     $rootScope.isActive = 'Journal';
 
+    if(angular.isDefined($stateParams.data.referance)) {
+        $scope.heading = "Update";
+        $scope.btnLabel = "Update";
+    }
+    else {
+        $scope.heading = "New";
+        $scope.btnLabel = "Save";
+    }
     
 
 });
-app.controller('addPaymentCtrl',function($rootScope , $scope){
+app.controller('addPaymentCtrl',function($rootScope , $scope , $stateParams){
     console.log('Inside Add Payment Controller');
     $rootScope.isActive = 'Payments';
+
+    if(angular.isDefined($stateParams.data.vendorName)) {
+        $scope.heading = "Update";
+        $scope.btnLabel = "Update";
+    }
+    else {
+        $scope.heading = "New";
+        $scope.btnLabel = "Save";
+    }
+
+
 });
-app.controller('addReceiptCtrl',function($rootScope , $scope){
+app.controller('addReceiptCtrl',function($rootScope , $scope , $stateParams){
     console.log('Inside Add Receipt Controller');
     $rootScope.isActive = 'Receipt';
+    if(angular.isDefined($stateParams.data.customerName)) {
+        $scope.heading = "Update";
+        $scope.btnLabel = "Update";
+    }
+    else {
+        $scope.heading = "New";
+        $scope.btnLabel = "Save";
+    }
 });
-app.controller('addVendorCtrl',function($rootScope , $scope){
+app.controller('addVendorCtrl',function($rootScope , $scope , $stateParams){
     console.log('Inside Add Vendor Controller');
     $rootScope.isActive = 'VENDORS';
+
+
+    if(angular.isDefined($stateParams.data.name)) {
+        $scope.heading = "Update";
+        $scope.btnLabel = "Update";
+    }
+    else {
+        $scope.heading = "New";
+        $scope.btnLabel = "Save";
+    }
 
     $scope.vendorsData = [
         { name: "", value: "" }
@@ -762,7 +880,22 @@ app.controller('addVendorCtrl',function($rootScope , $scope){
          }
     }
 
-
+    $scope.panelShow1 = false;
+    $scope.panelShow2 = false;
+    $scope.panelShow3 = false;    
+    $scope.panelShow4 = false;    
+    $scope.togglePannel1 = function(){
+        $scope.panelShow1 = !$scope.panelShow1;
+    }
+    $scope.togglePannel2 = function(){
+        $scope.panelShow2 = !$scope.panelShow2;
+    }
+    $scope.togglePannel3 = function(){
+        $scope.panelShow3 = !$scope.panelShow3;
+    }
+    $scope.togglePannel4 = function(){
+        $scope.panelShow4 = !$scope.panelShow4;
+    }
 });
 app.controller('applicationLevelCtrl',function($rootScope){
     console.log('Inside Application level Controller');
@@ -952,14 +1085,17 @@ app.controller('contraCtrl',function($rootScope,$scope ,$state ,$timeout , CONST
     $scope.changeHeight = function(val){
         heightCalc.calculateGridHeight(val);
     }
-
+    $scope.myObj = {};
     $scope.add = function(){
-        $state.go('Home.addContra');
+        $state.go('Home.addContra', { data: $scope.myObj });
     }
 
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Contra');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
+        $scope.gridApi.selection.on.rowSelectionChanged($scope, function(row){
+            $state.go('Home.addContra' , { data: row.entity });
+        });
     }
 
     $scope.nextPage = function(){
@@ -1001,8 +1137,10 @@ app.controller('customerCtrl',function($rootScope , $scope , $state , CONSTANTS 
     $scope.btn3 = 'Import';
     $scope.ifThreeBtn = true;
 
+    $scope.myObj = {};
+
     $scope.add = function() {
-        $state.go('Home.addCustomers');
+        $state.go('Home.addCustomers', { data: $scope.myObj });
     }
     $scope.import = function(){
         $state.go('Home.ImportCustomer');
@@ -1011,6 +1149,9 @@ app.controller('customerCtrl',function($rootScope , $scope , $state , CONSTANTS 
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Customer');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
+        $scope.gridApi.selection.on.rowSelectionChanged($scope, function(row){
+            $state.go('Home.addCustomers' , { data: row.entity });
+        });
     }
     $scope.nextPage = function(){
         $scope.gridApi.pagination.nextPage();
@@ -1059,12 +1200,16 @@ app.controller('expenseCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
         heightCalc.calculateGridHeight(val);
     }
 
+    $scope.myObj = {};
     $scope.add = function(){
-        $state.go('Home.addExpense');
+        $state.go('Home.addExpense', { data: $scope.myObj });
     }
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Expense');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
+        $scope.gridApi.selection.on.rowSelectionChanged($scope, function(row){
+            $state.go('Home.addExpense' , { data: row.entity });
+        });
     }
 
     $scope.nextPage = function(){
@@ -1193,14 +1338,18 @@ app.controller('inventoryCtrl',function($rootScope,$scope ,$state ,$timeout , CO
     $scope.ifThreeBtn = false;
     $scope.showWait = true;
     
+    $scope.myObj = {};
 
     $scope.add = function() {
-        $state.go('Home.AddInventory');
+        $state.go('Home.AddInventory' , { data: $scope.myObj });
     }
     
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Inventory');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
+        $scope.gridApi.selection.on.rowSelectionChanged($scope, function(row){
+            $state.go('Home.AddInventory' , { data: row.entity });
+        });
     }
     
     $scope.changeHeight = function(val){
@@ -1246,14 +1395,17 @@ app.controller('journalCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
     $scope.changeHeight = function(val){
         heightCalc.calculateGridHeight(val);
     }
-
+    $scope.myObj = {};
     $scope.add = function(){
-        $state.go('Home.addJournal');
+        $state.go('Home.addJournal', { data: $scope.myObj });
     }
 
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Journal');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
+        $scope.gridApi.selection.on.rowSelectionChanged($scope, function(row){
+            $state.go('Home.addJournal' , { data: row.entity });
+        });
     }
 
     $scope.nextPage = function(){
@@ -1404,6 +1556,21 @@ app.controller('organizationLevelCtrl',function($rootScope , $scope , CONSTANTS)
     $rootScope.isSubActive = 'Organization';
     $rootScope.showNavigations = false;
     $scope.$parent.organizationNavigation = CONSTANTS.organizationNavigation;
+
+    $scope.panelShow1 = false;
+    $scope.panelShow2 = false;
+    $scope.panelShow3 = false;    
+ 
+    $scope.togglePannel1 = function(){
+        $scope.panelShow1 = !$scope.panelShow1;
+    }
+    $scope.togglePannel2 = function(){
+        $scope.panelShow2 = !$scope.panelShow2;
+    }
+    $scope.togglePannel3 = function(){
+        $scope.panelShow3 = !$scope.panelShow3;
+    }
+
 });
 
 app.controller('organizationUserCtrl',function($rootScope,$scope ,$state ,$timeout , CONSTANTS ,heightCalc , organizationServices){
@@ -1526,14 +1693,17 @@ app.controller('paymentCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
     $scope.changeHeight = function(val){
         heightCalc.calculateGridHeight(val);
     }
-
+    $scope.myObj = {};
     $scope.add = function(){
-        $state.go('Home.addPayments');
+        $state.go('Home.addPayments', { data: $scope.myObj });
     }
 
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Payment');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
+        $scope.gridApi.selection.on.rowSelectionChanged($scope, function(row){
+            $state.go('Home.addPayments' , { data: row.entity });
+        });
     }
 
     $scope.nextPage = function(){
@@ -1579,13 +1749,17 @@ app.controller('receiptCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
     $scope.btn2 = 'New Receipt'
     $scope.ifThreeBtn = false;
 
+    $scope.myObj = {};
     $scope.add = function() {
-        $state.go('Home.addReceipt');
+        $state.go('Home.addReceipt', { data: $scope.myObj });
     }
 
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Receipt');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
+        $scope.gridApi.selection.on.rowSelectionChanged($scope, function(row){
+            $state.go('Home.addReceipt' , { data: row.entity });
+        });
     }
     
     $scope.changeHeight = function(val){
@@ -1632,9 +1806,9 @@ app.controller('vendorCtrl',function($rootScope , $scope , $state , CONSTANTS ,h
     $scope.btn2 = 'Add New';
     $scope.btn3 = 'Import';
     $scope.ifThreeBtn = true;
-
+    $scope.myObj = {};
     $scope.add = function() {
-        $state.go('Home.addVendors');
+        $state.go('Home.addVendors', { data: $scope.myObj });
     }
     $scope.import = function(){
         $state.go('Home.ImportVendors');
@@ -1643,6 +1817,9 @@ app.controller('vendorCtrl',function($rootScope , $scope , $state , CONSTANTS ,h
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Vendor');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
+        $scope.gridApi.selection.on.rowSelectionChanged($scope, function(row){
+            $state.go('Home.addVendors' , { data: row.entity });
+        });
     }
     $scope.nextPage = function(){
         $scope.gridApi.pagination.nextPage();

@@ -3,9 +3,13 @@
             <h3>Your Organization</h3>
         </div>
         <div layout="row" class="topPadding20">
-                <md-button class="md-raised md-primary marginLeft0" style="text-align:left" flex="20">Location<span class="pull-right description">-</span></md-button>
+                <md-button ng-click="togglePannel1()" class="md-raised md-primary marginLeft0" flex="22" style="text-align:left;">
+                                Location
+                                <span ng-hide="!panelShow1" class="pull-right description">+</span>
+                                <span ng-hide="panelShow1" class="pull-right description">-</span>
+                    </md-button>
         </div>
-        <div class="topPadding20">
+        <div class="topPadding20" ng-hide="panelShow1">
                 <md-content>
                     <form name="yourOrganization" style="background-color:#f5f6f8">
                             <div layout="row">
@@ -51,13 +55,17 @@
                     </form>
                 </md-content>
         </div>
-        <div layout="row" class="">
+        <div layout="row" class="" ng-hide="panelShow1">
                 <md-button class="md-raised ifBold" flex-offset="78">Reset</md-button>
         </div>
         <div layout="row" class="">
-                <md-button class="md-raised md-primary marginLeft0" style="text-align:left" flex="20">Registration<span class="pull-right description">-</span></md-button>
+                <md-button ng-click="togglePannel2()" class="md-raised md-primary marginLeft0" flex="22" style="text-align:left;">
+                                Registration
+                                <span ng-hide="!panelShow2" class="pull-right description">+</span>
+                                <span ng-hide="panelShow2" class="pull-right description">-</span>
+                    </md-button>
         </div>
-        <div class="topPadding20">
+        <div class="topPadding20" ng-hide="panelShow2">
                 <md-content>
                     <form name="yourOrganization" style="background-color:#f5f6f8">
                             <div layout="row">
@@ -118,13 +126,17 @@
                     </form>
                 </md-content>
         </div>
-        <div layout="row" class="">
+        <div layout="row" class="" ng-hide="panelShow2">
                 <md-button class="md-raised ifBold" flex-offset="78">Reset</md-button>
         </div>
         <div layout="row" class="">
-                <md-button class="md-raised md-primary marginLeft0" style="text-align:left" flex="20">Contacts<span class="pull-right description">-</span></md-button>
+                <md-button ng-click="togglePannel3()" class="md-raised md-primary marginLeft0" flex="22" style="text-align:left;">
+                        Contacts
+                        <span ng-hide="!panelShow3" class="pull-right description">+</span>
+                        <span ng-hide="panelShow3" class="pull-right description">-</span>
+                    </md-button>
         </div>
-        <div class="topPadding20">
+        <div class="topPadding20" ng-hide="panelShow3">
                 <md-content>
                     <form name="yourOrganization" style="background-color:#f5f6f8">
                             <div layout="row">
@@ -155,7 +167,7 @@
                     </form>
                 </md-content>
         </div>
-        <div layout="row" class="">
+        <div layout="row" class="" ng-hide="panelShow3">
                 <md-button class="md-raised ifBold" flex-offset="78">Reset</md-button>
         </div>
         <div layout="row" class="addPaddingButtons">

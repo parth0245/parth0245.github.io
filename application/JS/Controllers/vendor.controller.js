@@ -7,9 +7,9 @@ app.controller('vendorCtrl',function($rootScope , $scope , $state , CONSTANTS ,h
     $scope.btn2 = 'Add New';
     $scope.btn3 = 'Import';
     $scope.ifThreeBtn = true;
-
+    $scope.myObj = {};
     $scope.add = function() {
-        $state.go('Home.addVendors');
+        $state.go('Home.addVendors', { data: $scope.myObj });
     }
     $scope.import = function(){
         $state.go('Home.ImportVendors');
@@ -18,6 +18,9 @@ app.controller('vendorCtrl',function($rootScope , $scope , $state , CONSTANTS ,h
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Vendor');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
+        $scope.gridApi.selection.on.rowSelectionChanged($scope, function(row){
+            $state.go('Home.addVendors' , { data: row.entity });
+        });
     }
     $scope.nextPage = function(){
         $scope.gridApi.pagination.nextPage();

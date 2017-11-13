@@ -10,14 +10,17 @@ app.controller('paymentCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
     $scope.changeHeight = function(val){
         heightCalc.calculateGridHeight(val);
     }
-
+    $scope.myObj = {};
     $scope.add = function(){
-        $state.go('Home.addPayments');
+        $state.go('Home.addPayments', { data: $scope.myObj });
     }
 
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Payment');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
+        $scope.gridApi.selection.on.rowSelectionChanged($scope, function(row){
+            $state.go('Home.addPayments' , { data: row.entity });
+        });
     }
 
     $scope.nextPage = function(){

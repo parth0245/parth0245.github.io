@@ -1,6 +1,14 @@
-app.controller('addInventoryCtrl',function($rootScope , $scope){
+app.controller('addInventoryCtrl',function($rootScope , $scope ,$stateParams){
     console.log('Inside Add Inventory Controller');
     $rootScope.isActive = 'INVENTORY';
+    if(angular.isDefined($stateParams.data.product)) {
+        $scope.heading = "Update";
+        $scope.btnLabel = "Update";
+    }
+    else {
+        $scope.heading = "New";
+        $scope.btnLabel = "Save";
+    }
 
     $scope.Description = [
         { name: "", value: "" }
@@ -18,5 +26,11 @@ app.controller('addInventoryCtrl',function($rootScope , $scope){
         if($scope.Description.length !== 1) {
            $scope.Description.splice(index, 1);
         }
+    }
+
+    $scope.panelShow = false ;
+
+    $scope.togglePannel = function(){
+        $scope.panelShow = !$scope.panelShow;
     }
 });

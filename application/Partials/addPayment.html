@@ -1,6 +1,6 @@
 <div class="col-xs-11 col-xs-offset-1 fontNormal addInventory topPadding20" layout="column">
         <div class="sectionSubHeading noPadding">
-            <h3 class="pull-left">New Payment</h3>
+            <h3 class="pull-left">{{heading}} Payment</h3>
             <img class="pull-right downloadPayment" src="application/Images/Assets/download_icon.png" height="40" width="40"/>
        </div>
         
@@ -149,15 +149,14 @@
                                         </md-input-container>
                             </div>
                             
-    <div layout="row" class="addPaddingButtons">
-            <md-button class="md-raised ifBold" flex-offset="30">Reset All</md-button>
-            <md-button class="md-raised md-primary ifBold">Save</md-button>
-            <md-button class="md-raised md-primary ifBold" flex="15">Save & Print</md-button>
-            <md-button class="md-raised ifBold">Cancel</md-button>
-    </div>
+
                 </form>
             </md-content>
         </div>
-        <div class="">
+        <div layout="row" class="addPaddingButtons">
+                <md-button class="md-raised ifBold" flex-offset="30">Reset All</md-button>
+                <md-button class="md-raised md-primary ifBold">{{btnLabel}}</md-button>
+                <md-button class="md-raised md-primary ifBold" flex="15">{{btnLabel}} & Print</md-button>
+                <md-button class="md-raised ifBold">Cancel</md-button>
         </div>
     </div>

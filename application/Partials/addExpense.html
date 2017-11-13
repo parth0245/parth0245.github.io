@@ -1,6 +1,6 @@
 <div class="col-xs-11 col-xs-offset-1 fontNormal addInventory" layout="column">
         <div class="sectionSubHeading">
-            <h3>New Expense</h3>
+            <h3>{{heading}} Expense</h3>
         </div>
         <div class="topPadding20">
             <md-content>
@@ -15,9 +15,13 @@
                                 </md-input-container>
                             </div>
                             <div layout="row" class="topPadding20">
-                                    <md-button class="md-raised marginLeft0" style="text-align:left;" flex="20">Vendor Details<span  class="pull-right description" style="border-top:2px solid #0935ae;">-</span></md-button>
-                                    </div>
-                            <div layout="row" class="topPadding10">
+                                    <md-button ng-click="togglePannel1()" class="md-raised md-primary marginLeft0" flex="22" style="text-align:left;">
+                                                Vendor Details
+                                                <span ng-hide="!panelShow1" class="pull-right description">+</span>
+                                                <span ng-hide="panelShow1" class="pull-right description">-</span>
+                                    </md-button>
+                        </div>
+                            <div layout="row" class="topPadding10" ng-hide="panelShow1">
                                     <md-input-container flex="25" >
                                             <label>Address 1</label>
                                             <input name="add1" ng-model="add1">
@@ -31,7 +35,7 @@
                                                 <input name="city" ng-model="city">
                                             </md-input-container>
                             </div>
-                            <div layout="row">
+                            <div layout="row" ng-hide="panelShow1">
                                     <md-input-container flex="25" >
                                             <label>State</label>
                                             <input name="state" ng-model="state">
@@ -45,7 +49,7 @@
                                             <input name="pin" ng-model="pin">
                                     </md-input-container>
                             </div>
-                            <div layout="row">
+                            <div layout="row" ng-hide="panelShow1">
                                     <md-input-container flex="25">
                                             <label>GST Number</label>
                                             <md-select name="gst" ng-model="gst">
@@ -62,7 +66,7 @@
                                             <input name="aadhar" ng-model="aadhar">
                                     </md-input-container>
                             </div>
-                            <div layout="row" class="">
+                            <div layout="row" class="" ng-hide="panelShow1">
                                     <md-input-container flex="25">
                                             <label>Mobile</label>
                                             <input name="mobile" ng-model="mobile">
@@ -79,7 +83,7 @@
                                             <input name="aadhar" ng-model="aadhar">
                                     </md-input-container>
                             </div>
-                            <div layout="row" class="topPadding20">
+                            <div layout="row" class="topPadding20" ng-hide="panelShow1">
                                     <md-input-container flex="25">
                                             <label>Invoice Number</label>
                                             <input name="invoice" ng-model="invoice">
@@ -92,7 +96,7 @@
                                             </md-select>
                                         </md-input-container>
                             </div>
-                            <div layout="row">
+                            <div layout="row" ng-hide="panelShow1">
                                         <md-input-container flex="25">
                                                         <label>Date</label>
                                                         <md-datepicker ng-model="date" md-hide-icons="triangle" md-open-on-focus=""></md-datepicker>
@@ -107,7 +111,7 @@
                                             </md-input-container>
                                        
                             </div>
-                            <div layout="row">
+                            <div layout="row" ng-hide="panelShow1">
                                     <md-input-container flex="25" >
                                         <label>TDS Section</label>
                                         <md-select name="tdsSec" ng-model="tdsSec">
@@ -120,20 +124,19 @@
                                                 <input name="amt" ng-model="amt">
                                         </md-input-container>
                             </div>
-                            <div layout="row">
+                            <div layout="row" ng-hide="panelShow1">
                                     <md-input-container flex="85">
                                             <label>Narration</label>
                                             <input name="narration" ng-model="narration">
                                     </md-input-container>
                             </div>
-    <div layout="row" class="addPaddingButtons">
-            <md-button class="md-raised ifBold" flex-offset="45">Reset All</md-button>
-            <md-button class="md-raised md-primary ifBold">Save</md-button>
-            <md-button class="md-raised ifBold">Cancel</md-button>
-    </div>
+
                 </form>
             </md-content>
         </div>
-        <div class="">
-        </div>
+        <div layout="row" class="addPaddingButtons">
+                        <md-button class="md-raised ifBold" flex-offset="45">Reset All</md-button>
+                        <md-button class="md-raised md-primary ifBold">{{btnLabel}}</md-button>
+                        <md-button class="md-raised ifBold">Cancel</md-button>
+                </div>
     </div>

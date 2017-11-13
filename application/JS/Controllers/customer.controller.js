@@ -8,8 +8,10 @@ app.controller('customerCtrl',function($rootScope , $scope , $state , CONSTANTS 
     $scope.btn3 = 'Import';
     $scope.ifThreeBtn = true;
 
+    $scope.myObj = {};
+
     $scope.add = function() {
-        $state.go('Home.addCustomers');
+        $state.go('Home.addCustomers', { data: $scope.myObj });
     }
     $scope.import = function(){
         $state.go('Home.ImportCustomer');
@@ -18,6 +20,9 @@ app.controller('customerCtrl',function($rootScope , $scope , $state , CONSTANTS 
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Customer');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
+        $scope.gridApi.selection.on.rowSelectionChanged($scope, function(row){
+            $state.go('Home.addCustomers' , { data: row.entity });
+        });
     }
     $scope.nextPage = function(){
         $scope.gridApi.pagination.nextPage();

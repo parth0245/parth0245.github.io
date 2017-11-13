@@ -1,11 +1,15 @@
 <div class="col-xs-11 col-xs-offset-1 fontNormal addInventory" layout="column">
     <div class="sectionSubHeading">
-        <h3>New Vendor</h3>
+        <h3>{{heading}} Vendor</h3>
     </div>
     <div layout="row" class="topPadding20">
-        <md-button class="md-raised md-primary marginLeft0" style="text-align:left" flex="20">Location<span class="pull-right description">-</span></md-button>
+            <md-button ng-click="togglePannel1()" class="md-raised md-primary marginLeft0" flex="22" style="text-align:left;">
+                    Location
+                    <span ng-hide="!panelShow1" class="pull-right description">+</span>
+                    <span ng-hide="panelShow1" class="pull-right description">-</span>
+        </md-button>
     </div>
-    <div class="topPadding20">
+    <div class="topPadding20" ng-hide="panelShow1">
         <md-content>
             <form name="addVendorForm1" style="background-color:#f5f6f8">
                 <div layout="row" class="topPadding10">
@@ -48,7 +52,7 @@
                         <input name="pin" ng-model="pin">
                     </md-input-container>
                 </div>
-                <div layout="row">
+                <div layout="row" ng-if="heading=='New'">
                     <md-button class="md-raised ifBold" flex="10" flex-offset="75">Reset</md-button>
                 </div>
             </form>
@@ -56,9 +60,13 @@
     </div>
 
     <div layout="row" class="topPadding20">
-        <md-button class="md-raised md-primary marginLeft0" style="text-align:left" flex="20">Identity<span class="pull-right description">-</span></md-button>
+            <md-button ng-click="togglePannel2()" class="md-raised md-primary marginLeft0" flex="22" style="text-align:left;">
+                    Identity
+                    <span ng-hide="!panelShow2" class="pull-right description">+</span>
+                    <span ng-hide="panelShow2" class="pull-right description">-</span>
+        </md-button>
     </div>
-    <div class="topPadding20">
+    <div class="topPadding20" ng-hide="panelShow2">
         <md-content>
             <form name="addVendorForm2" style="background-color:#f5f6f8">
                 <div layout="row" class="topPadding10">
@@ -95,7 +103,7 @@
                         <input name="RN" ng-model="RN">
                     </md-input-container>
                 </div>
-                <div layout="row">
+                <div layout="row" ng-if="heading=='New'">
                     <md-button class="md-raised ifBold" flex="10" flex-offset="75">Reset</md-button>
                 </div>
             </form>
@@ -103,9 +111,13 @@
     </div>
 
     <div layout="row" class="topPadding20">
-        <md-button class="md-raised md-primary marginLeft0" style="text-align:left" flex="20">Books<span class="pull-right description">-</span></md-button>
+            <md-button ng-click="togglePannel3()" class="md-raised md-primary marginLeft0" flex="22" style="text-align:left;">
+                    Books
+                    <span ng-hide="!panelShow3" class="pull-right description">+</span>
+                    <span ng-hide="panelShow3" class="pull-right description">-</span>
+        </md-button>
     </div>
-    <div class="topPadding20">
+    <div class="topPadding20" ng-hide="panelShow3">
         <md-content>
             <form name="addVendorForm3" style="background-color:#f5f6f8">
                 <div layout="row" class="topPadding10">
@@ -118,7 +130,7 @@
                             <md-datepicker ng-model="date" md-hide-icons="triangle" md-open-on-focus=""></md-datepicker>
                         </md-input-container>
                  </div>
-                <div layout="row">
+                <div layout="row" ng-if="heading=='New'">
                     <md-button class="md-raised ifBold" flex="10" flex-offset="75">Reset</md-button>
                 </div>
             </form>
@@ -126,10 +138,14 @@
     </div>
 
     <div layout="row" class="topPadding20">
-        <md-button class="md-raised md-primary marginLeft0" style="text-align:left" flex="20">Additional Data<span class="pull-right description">-</span></md-button>
+            <md-button ng-click="togglePannel4()" class="md-raised md-primary marginLeft0" flex="22" style="text-align:left;">
+                    Additional Data
+                    <span ng-hide="!panelShow4" class="pull-right description">+</span>
+                    <span ng-hide="panelShow4" class="pull-right description">-</span>
+        </md-button>
     </div>
 
-    <div class="topPadding20">
+    <div class="topPadding20" ng-hide="panelShow4">
         <md-content>
             <form name="addVendorForm4" style="background-color:#f5f6f8">
                 <div layout="row" class="topPadding10" ng-repeat="vendorData in vendorsData">
@@ -148,16 +164,14 @@
                         <img class="marginTop12" height="30" width="30" src="application/Images/Assets/INVENTORY_page/plus.png" ng-click="Add()" ng-if="$last"/>
                 </md-input-container>
                  </div>
-                <div layout="row" class="addPaddingButtons">
-                    <md-button class="md-raised ifBold" flex-offset="30">Reset All</md-button>
-                    <md-button class="md-raised md-primary ifBold">Save</md-button>
-                    <md-button class="md-raised md-primary ifBold">Save & Sell</md-button>
-                    <md-button class="md-raised ifBold">Cancel</md-button>
-                </div>
+
             </form>
         </md-content>
     </div>
-
-    <div class="">
-    </div>
+    <div layout="row" class="addPaddingButtons">
+            <md-button class="md-raised ifBold" flex-offset="30">Reset All</md-button>
+            <md-button class="md-raised md-primary ifBold">{{btnLabel}}</md-button>
+            <md-button class="md-raised md-primary ifBold">{{btnLabel}} & Sell</md-button>
+            <md-button class="md-raised ifBold">Cancel</md-button>
+        </div>
 </div>

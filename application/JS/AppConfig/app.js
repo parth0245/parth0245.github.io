@@ -1,6 +1,6 @@
-var app = angular.module('siriBooks',['ui.router','ngMaterial','ngSanitize','ui.grid','ui.grid.selection','ui.grid.resizeColumns','ui.grid.pagination','ui.grid.grouping','ngMessages']);
+var app = angular.module('siriBooks',['ui.router','ngMaterial','ngSanitize','ui.grid','ui.grid.selection','ui.grid.resizeColumns','ui.grid.pagination','ui.grid.grouping','ngMessages','flow']);
 
-app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
+app.config(function($stateProvider , $urlRouterProvider,  $locationProvider , flowFactoryProvider) {
     $stateProvider
     .state('Login', {
         url: '/login',
@@ -26,7 +26,8 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     .state('Home.AddInventory', {
         url: '/addInventory',
         templateUrl: 'application/Partials/addInventory.html',
-        controller: 'addInventoryCtrl'
+        controller: 'addInventoryCtrl',
+        params: {data : ''}
     })
     .state('Home.Customers', {
         url: '/customers',
@@ -36,7 +37,8 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     .state('Home.addCustomers', {
         url: '/addCustomers',
         templateUrl: 'application/Partials/addCustomer.html',
-        controller: 'addCustomerCtrl'
+        controller: 'addCustomerCtrl',
+        params: {data : ''}
     })
     .state('Home.ImportCustomer', {
         url: '/importCustomer',
@@ -51,7 +53,8 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     .state('Home.addVendors', {
         url: '/addVendors',
         templateUrl: 'application/Partials/addVendor.html',
-        controller: 'addVendorCtrl'
+        controller: 'addVendorCtrl',
+        params: {data : ''}
     })
     .state('Home.ImportVendors', {
         url: '/importVendors',
@@ -91,7 +94,8 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     .state('Home.addReceipt', {
         url: '/addReceipt',
         templateUrl: 'application/Partials/addReceipt.html',
-        controller: 'addReceiptCtrl'
+        controller: 'addReceiptCtrl',
+        params: {data : ''}
     })
     .state('Home.Payments', {
         url: '/payment',
@@ -101,7 +105,8 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     .state('Home.addPayments', {
         url: '/addPayment',
         templateUrl: 'application/Partials/addPayment.html',
-        controller: 'addPaymentCtrl'
+        controller: 'addPaymentCtrl',
+        params: {data : ''}
     })
     .state('Home.Expense', {
         url: '/expense',
@@ -111,7 +116,8 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     .state('Home.addExpense', {
         url: '/addExpense',
         templateUrl: 'application/Partials/addExpense.html',
-        controller: 'addExpenseCtrl'
+        controller: 'addExpenseCtrl',
+        params: {data : ''}
     })
     .state('Home.Journal', {
         url: '/journal',
@@ -121,7 +127,8 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     .state('Home.addJournal', {
         url: '/addJournal',
         templateUrl: 'application/Partials/addJournal.html',
-        controller: 'addJournalCtrl'
+        controller: 'addJournalCtrl',
+        params: {data : ''}
     })
     .state('Home.Contra', {
         url: '/contra',
@@ -131,7 +138,8 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
     .state('Home.addContra', {
         url: '/addContra',
         templateUrl: 'application/Partials/addContra.html',
-        controller: 'addContraCtrl'
+        controller: 'addContraCtrl',
+        params: {data : ''}
     })
     .state('Home.CreditNote', {
         url: '/creditNote',
@@ -204,6 +212,18 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider) {
         url: '/PageNotFound',
         templateUrl: 'application/Partials/pageNotFound.html'
     });
+    flowFactoryProvider.defaults = {
+        target: '',
+        permanentErrors: [500, 501],
+        maxChunkRetries: 1,
+        chunkRetryInterval: 5000,
+        simultaneousUploads: 1
+      };
+      flowFactoryProvider.on('catchAll', function (event) {
+        console.log('catchAll', arguments);
+      });
+      // Can be used with different implementations of Flow.js
+      // flowFactoryProvider.factory = fustyFlowFactory;
     $locationProvider.html5Mode(true);
     $urlRouterProvider.otherwise('/PageNotFound');
   });

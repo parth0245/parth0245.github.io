@@ -7,13 +7,17 @@ app.controller('receiptCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
     $scope.btn2 = 'New Receipt'
     $scope.ifThreeBtn = false;
 
+    $scope.myObj = {};
     $scope.add = function() {
-        $state.go('Home.addReceipt');
+        $state.go('Home.addReceipt', { data: $scope.myObj });
     }
 
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Receipt');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
+        $scope.gridApi.selection.on.rowSelectionChanged($scope, function(row){
+            $state.go('Home.addReceipt' , { data: row.entity });
+        });
     }
     
     $scope.changeHeight = function(val){

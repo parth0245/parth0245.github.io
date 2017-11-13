@@ -11,12 +11,16 @@ app.controller('expenseCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
         heightCalc.calculateGridHeight(val);
     }
 
+    $scope.myObj = {};
     $scope.add = function(){
-        $state.go('Home.addExpense');
+        $state.go('Home.addExpense', { data: $scope.myObj });
     }
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Expense');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
+        $scope.gridApi.selection.on.rowSelectionChanged($scope, function(row){
+            $state.go('Home.addExpense' , { data: row.entity });
+        });
     }
 
     $scope.nextPage = function(){
