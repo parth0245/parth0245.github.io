@@ -335,7 +335,7 @@ app.constant('CONSTANTS', {
                         enableVerticalScrollbar : 0 ,
                         enablePaginationControls: false,
                         paginationPageSizes: [5 , 10, 20 , 25],
-                        paginationPageSize: 10,
+                        paginationPageSize: 5,
                         treeRowHeaderAlwaysVisible:false,
                         showColumnFooter: false,
                         columnDefs : this[gridName+"fields"]
@@ -1101,15 +1101,44 @@ app.controller('contraCtrl',function($rootScope,$scope ,$state ,$timeout , CONST
 
     $scope.nextPage = function(){
         $scope.gridApi.pagination.nextPage();
+        if($scope.paging.pageSelected != $scope.totalPages) {
+            $scope.paging.pageSelected = $scope.paging.pageSelected + 1;
+        }
+        else{
+            $scope.paging.pageSelected = $scope.paging.pageSelected;
+        }
         $scope.changeHeight(0);
     }
     $scope.prevPage = function(){
         $scope.gridApi.pagination.previousPage();
+        if($scope.paging.pageSelected != 1) {
+            $scope.paging.pageSelected = $scope.paging.pageSelected - 1;
+        }
+        else{
+            $scope.paging.pageSelected = $scope.paging.pageSelected;
+        }
         $scope.changeHeight(0);
     }
+    $scope.seek = function(pageSelected){
+        $scope.paging.pageSelected = pageSelected;
+        $scope.gridApi.pagination.seek($scope.paging.pageSelected);
+        $scope.changeHeight(0);
+    }
+    $scope.totalPages = 0;
+    $scope.paging = {
+        pageSelected : 1
+    };
+    $scope.pageNumber = [];
+    $scope.$watch('totalPages',function(newVal , oldVal){
+        $scope.totalPages = newVal;
+        for(i=0;i<newVal;i++){
+            $scope.pageNumber[i] = i+1; 
+        }
+    });
 
     contraServices.getContraList().then(function(response){
         $scope.gridOptions.data = response.data;
+        $scope.totalPages = Math.ceil(response.data.length / $scope.gridOptions.paginationPageSize);
         if($scope.gridOptions.data.length !== 0){
             $scope.changeHeight(0);
         }
@@ -1154,20 +1183,51 @@ app.controller('customerCtrl',function($rootScope , $scope , $state , CONSTANTS 
             $state.go('Home.addCustomers' , { data: row.entity });
         });
     }
-    $scope.nextPage = function(){
-        $scope.gridApi.pagination.nextPage();
-        $scope.changeHeight(0);
-    }
-    $scope.prevPage = function(){
-        $scope.gridApi.pagination.previousPage();
-        $scope.changeHeight(0);
-    }
+    
     $scope.changeHeight = function(val){
         heightCalc.calculateGridHeight(val);
     }
 
+    $scope.nextPage = function(){
+        $scope.gridApi.pagination.nextPage();
+        if($scope.paging.pageSelected != $scope.totalPages) {
+            $scope.paging.pageSelected = $scope.paging.pageSelected + 1;
+        }
+        else{
+            $scope.paging.pageSelected = $scope.paging.pageSelected;
+        }
+        $scope.changeHeight(0);
+    }
+    $scope.prevPage = function(){
+        $scope.gridApi.pagination.previousPage();
+        if($scope.paging.pageSelected != 1) {
+            $scope.paging.pageSelected = $scope.paging.pageSelected - 1;
+        }
+        else{
+            $scope.paging.pageSelected = $scope.paging.pageSelected;
+        }
+        $scope.changeHeight(0);
+    }
+    $scope.seek = function(pageSelected){
+        $scope.paging.pageSelected = pageSelected;
+        $scope.gridApi.pagination.seek($scope.paging.pageSelected);
+        $scope.changeHeight(0);
+    }
+    $scope.totalPages = 0;
+    $scope.paging = {
+        pageSelected : 1
+    };
+    $scope.pageNumber = [];
+    $scope.$watch('totalPages',function(newVal , oldVal){
+        $scope.totalPages = newVal;
+        for(i=0;i<newVal;i++){
+            $scope.pageNumber[i] = i+1; 
+        }
+    });
+
     customerServices.getCustomer().then(function(response){
-        $scope.gridOptions.data = response.data;
+         $scope.gridOptions.data = response.data;
+        $scope.totalPages = Math.ceil(response.data.length / $scope.gridOptions.paginationPageSize);
         if($scope.gridOptions.data.length !== 0){
             $scope.changeHeight(0);
         }
@@ -1215,15 +1275,44 @@ app.controller('expenseCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
 
     $scope.nextPage = function(){
         $scope.gridApi.pagination.nextPage();
+        if($scope.paging.pageSelected != $scope.totalPages) {
+            $scope.paging.pageSelected = $scope.paging.pageSelected + 1;
+        }
+        else{
+            $scope.paging.pageSelected = $scope.paging.pageSelected;
+        }
         $scope.changeHeight(0);
     }
     $scope.prevPage = function(){
         $scope.gridApi.pagination.previousPage();
+        if($scope.paging.pageSelected != 1) {
+            $scope.paging.pageSelected = $scope.paging.pageSelected - 1;
+        }
+        else{
+            $scope.paging.pageSelected = $scope.paging.pageSelected;
+        }
         $scope.changeHeight(0);
     }
+    $scope.seek = function(pageSelected){
+        $scope.paging.pageSelected = pageSelected;
+        $scope.gridApi.pagination.seek($scope.paging.pageSelected);
+        $scope.changeHeight(0);
+    }
+    $scope.totalPages = 0;
+    $scope.paging = {
+        pageSelected : 1
+    };
+    $scope.pageNumber = [];
+    $scope.$watch('totalPages',function(newVal , oldVal){
+        $scope.totalPages = newVal;
+        for(i=0;i<newVal;i++){
+            $scope.pageNumber[i] = i+1; 
+        }
+    });
 
     expenseServices.getExpenses().then(function(response){
         $scope.gridOptions.data = response.data;
+        $scope.totalPages = Math.ceil(response.data.length / $scope.gridOptions.paginationPageSize);
         if($scope.gridOptions.data.length !== 0){
             $scope.changeHeight(0);
         }
@@ -1344,8 +1433,7 @@ app.controller('inventoryCtrl',function($rootScope,$scope ,$state ,$timeout , CO
     $scope.add = function() {
         $state.go('Home.AddInventory' , { data: $scope.myObj });
     }
-    $scope.pageNumber = 1;
-    $scope.seekPageArray = [];
+    
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('Inventory');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
@@ -1358,23 +1446,51 @@ app.controller('inventoryCtrl',function($rootScope,$scope ,$state ,$timeout , CO
         heightCalc.calculateGridHeight(val);
     }
     $scope.nextPage = function(){
-       $scope.gridApi.pagination.nextPage();
+        $scope.gridApi.pagination.nextPage();
+        if($scope.paging.pageSelected != $scope.totalPages) {
+            $scope.paging.pageSelected = $scope.paging.pageSelected + 1;
+        }
+        else{
+            $scope.paging.pageSelected = $scope.paging.pageSelected;
+        }
         $scope.changeHeight(0);
     }
     $scope.prevPage = function(){
         $scope.gridApi.pagination.previousPage();
+        if($scope.paging.pageSelected != 1) {
+            $scope.paging.pageSelected = $scope.paging.pageSelected - 1;
+        }
+        else{
+            $scope.paging.pageSelected = $scope.paging.pageSelected;
+        }
         $scope.changeHeight(0);
     }
+    $scope.seek = function(pageSelected){
+        $scope.paging.pageSelected = pageSelected;
+        $scope.gridApi.pagination.seek($scope.paging.pageSelected);
+        $scope.changeHeight(0);
+    }
+    $scope.totalPages = 0;
+    $scope.paging = {
+        pageSelected : 1
+    };
+    $scope.pageNumber = [];
+    $scope.$watch('totalPages',function(newVal , oldVal){
+        $scope.totalPages = newVal;
+        for(i=0;i<newVal;i++){
+            $scope.pageNumber[i] = i+1; 
+        }
+    });
    inventoryServices.getInventories().then(function(response){
         $scope.gridOptions.data = response.data;
-      
+        $scope.totalPages = Math.ceil(response.data.length / $scope.gridOptions.paginationPageSize);
+        $scope.showWait = false;
         if($scope.gridOptions.data.length !== 0){
             $scope.changeHeight(0);
         }
         else {
             $scope.changeHeight(200);
-        }   
-       
+        }
           },function(error){
         console.log('error',error);
         $scope.showWait = false;
@@ -1409,15 +1525,44 @@ app.controller('journalCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
 
     $scope.nextPage = function(){
         $scope.gridApi.pagination.nextPage();
+        if($scope.paging.pageSelected != $scope.totalPages) {
+            $scope.paging.pageSelected = $scope.paging.pageSelected + 1;
+        }
+        else{
+            $scope.paging.pageSelected = $scope.paging.pageSelected;
+        }
         $scope.changeHeight(0);
     }
     $scope.prevPage = function(){
         $scope.gridApi.pagination.previousPage();
+        if($scope.paging.pageSelected != 1) {
+            $scope.paging.pageSelected = $scope.paging.pageSelected - 1;
+        }
+        else{
+            $scope.paging.pageSelected = $scope.paging.pageSelected;
+        }
         $scope.changeHeight(0);
     }
+    $scope.seek = function(pageSelected){
+        $scope.paging.pageSelected = pageSelected;
+        $scope.gridApi.pagination.seek($scope.paging.pageSelected);
+        $scope.changeHeight(0);
+    }
+    $scope.totalPages = 0;
+    $scope.paging = {
+        pageSelected : 1
+    };
+    $scope.pageNumber = [];
+    $scope.$watch('totalPages',function(newVal , oldVal){
+        $scope.totalPages = newVal;
+        for(i=0;i<newVal;i++){
+            $scope.pageNumber[i] = i+1; 
+        }
+    });
 
     journalServices.getJournals().then(function(response){
         $scope.gridOptions.data = response.data;
+        $scope.totalPages = Math.ceil(response.data.length / $scope.gridOptions.paginationPageSize);
         if($scope.gridOptions.data.length !== 0){
             $scope.changeHeight(0);
         }
@@ -1586,7 +1731,7 @@ app.controller('organizationUserCtrl',function($rootScope,$scope ,$state ,$timeo
         $scope.usertypeBtn = "Save";
     }
     $scope.cancel = function(){
-        $scope.addNewUserPanel = true;
+        $scope.addNewUserPanel = false;
     }
 
     $scope.moduleHeading = 'Application Users';
@@ -1609,15 +1754,44 @@ app.controller('organizationUserCtrl',function($rootScope,$scope ,$state ,$timeo
     }
     $scope.nextPage = function(){
         $scope.gridApi.pagination.nextPage();
+        if($scope.paging.pageSelected != $scope.totalPages) {
+            $scope.paging.pageSelected = $scope.paging.pageSelected + 1;
+        }
+        else{
+            $scope.paging.pageSelected = $scope.paging.pageSelected;
+        }
         $scope.changeHeight(0);
     }
     $scope.prevPage = function(){
         $scope.gridApi.pagination.previousPage();
+        if($scope.paging.pageSelected != 1) {
+            $scope.paging.pageSelected = $scope.paging.pageSelected - 1;
+        }
+        else{
+            $scope.paging.pageSelected = $scope.paging.pageSelected;
+        }
         $scope.changeHeight(0);
     }
+    $scope.seek = function(pageSelected){
+        $scope.paging.pageSelected = pageSelected;
+        $scope.gridApi.pagination.seek($scope.paging.pageSelected);
+        $scope.changeHeight(0);
+    }
+    $scope.totalPages = 0;
+    $scope.paging = {
+        pageSelected : 1
+    };
+    $scope.pageNumber = [];
+    $scope.$watch('totalPages',function(newVal , oldVal){
+        $scope.totalPages = newVal;
+        for(i=0;i<newVal;i++){
+            $scope.pageNumber[i] = i+1; 
+        }
+    });
 
     organizationServices.getuserList().then(function(response){
         $scope.gridOptions.data = response.data;
+        $scope.totalPages = Math.ceil(response.data.length / $scope.gridOptions.paginationPageSize);
         if($scope.gridOptions.data.length !== 0){
             $scope.changeHeight(0);
         }
@@ -1660,15 +1834,44 @@ app.controller('organizationRoleCtrl',function($rootScope,$scope ,$state ,$timeo
     }
     $scope.nextPage = function(){
         $scope.gridApi.pagination.nextPage();
+        if($scope.paging.pageSelected != $scope.totalPages) {
+            $scope.paging.pageSelected = $scope.paging.pageSelected + 1;
+        }
+        else{
+            $scope.paging.pageSelected = $scope.paging.pageSelected;
+        }
         $scope.changeHeight(0);
     }
     $scope.prevPage = function(){
         $scope.gridApi.pagination.previousPage();
+        if($scope.paging.pageSelected != 1) {
+            $scope.paging.pageSelected = $scope.paging.pageSelected - 1;
+        }
+        else{
+            $scope.paging.pageSelected = $scope.paging.pageSelected;
+        }
         $scope.changeHeight(0);
     }
+    $scope.seek = function(pageSelected){
+        $scope.paging.pageSelected = pageSelected;
+        $scope.gridApi.pagination.seek($scope.paging.pageSelected);
+        $scope.changeHeight(0);
+    }
+    $scope.totalPages = 0;
+    $scope.paging = {
+        pageSelected : 1
+    };
+    $scope.pageNumber = [];
+    $scope.$watch('totalPages',function(newVal , oldVal){
+        $scope.totalPages = newVal;
+        for(i=0;i<newVal;i++){
+            $scope.pageNumber[i] = i+1; 
+        }
+    });
     $scope.gridOptions.rowHeight = 160;
     organizationServices.getRoleList().then(function(response){
         $scope.gridOptions.data = response.data;
+        $scope.totalPages = Math.ceil(response.data.length / $scope.gridOptions.paginationPageSize);
         if($scope.gridOptions.data.length !== 0){
             $scope.changeHeight(0);
         }
@@ -1727,15 +1930,43 @@ app.controller('paymentCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
 
     $scope.nextPage = function(){
         $scope.gridApi.pagination.nextPage();
+        if($scope.paging.pageSelected != $scope.totalPages) {
+            $scope.paging.pageSelected = $scope.paging.pageSelected + 1;
+        }
+        else{
+            $scope.paging.pageSelected = $scope.paging.pageSelected;
+        }
         $scope.changeHeight(0);
     }
     $scope.prevPage = function(){
         $scope.gridApi.pagination.previousPage();
+        if($scope.paging.pageSelected != 1) {
+            $scope.paging.pageSelected = $scope.paging.pageSelected - 1;
+        }
+        else{
+            $scope.paging.pageSelected = $scope.paging.pageSelected;
+        }
         $scope.changeHeight(0);
     }
-
+    $scope.seek = function(pageSelected){
+        $scope.paging.pageSelected = pageSelected;
+        $scope.gridApi.pagination.seek($scope.paging.pageSelected);
+        $scope.changeHeight(0);
+    }
+    $scope.totalPages = 0;
+    $scope.paging = {
+        pageSelected : 1
+    };
+    $scope.pageNumber = [];
+    $scope.$watch('totalPages',function(newVal , oldVal){
+        $scope.totalPages = newVal;
+        for(i=0;i<newVal;i++){
+            $scope.pageNumber[i] = i+1; 
+        }
+    });
     paymentServices.getPayments().then(function(response){
         $scope.gridOptions.data = response.data;
+        $scope.totalPages = Math.ceil(response.data.length / $scope.gridOptions.paginationPageSize);
         if($scope.gridOptions.data.length !== 0){
             $scope.changeHeight(0);
         }
@@ -1786,15 +2017,44 @@ app.controller('receiptCtrl',function($rootScope,$scope ,$state ,$timeout , CONS
     }
     $scope.nextPage = function(){
         $scope.gridApi.pagination.nextPage();
+        if($scope.paging.pageSelected != $scope.totalPages) {
+            $scope.paging.pageSelected = $scope.paging.pageSelected + 1;
+        }
+        else{
+            $scope.paging.pageSelected = $scope.paging.pageSelected;
+        }
         $scope.changeHeight(0);
     }
     $scope.prevPage = function(){
         $scope.gridApi.pagination.previousPage();
+        if($scope.paging.pageSelected != 1) {
+            $scope.paging.pageSelected = $scope.paging.pageSelected - 1;
+        }
+        else{
+            $scope.paging.pageSelected = $scope.paging.pageSelected;
+        }
         $scope.changeHeight(0);
     }
+    $scope.seek = function(pageSelected){
+        $scope.paging.pageSelected = pageSelected;
+        $scope.gridApi.pagination.seek($scope.paging.pageSelected);
+        $scope.changeHeight(0);
+    }
+    $scope.totalPages = 0;
+    $scope.paging = {
+        pageSelected : 1
+    };
+    $scope.pageNumber = [];
+    $scope.$watch('totalPages',function(newVal , oldVal){
+        $scope.totalPages = newVal;
+        for(i=0;i<newVal;i++){
+            $scope.pageNumber[i] = i+1; 
+        }
+    });
 
     receiptServices.getReceipts().then(function(response){
         $scope.gridOptions.data = response.data;
+        $scope.totalPages = Math.ceil(response.data.length / $scope.gridOptions.paginationPageSize);
         if($scope.gridOptions.data.length !== 0){
             $scope.changeHeight(0);
         }
@@ -1840,20 +2100,49 @@ app.controller('vendorCtrl',function($rootScope , $scope , $state , CONSTANTS ,h
             $state.go('Home.addVendors' , { data: row.entity });
         });
     }
+    $scope.changeHeight = function(val){
+        heightCalc.calculateGridHeight(val);
+    }
     $scope.nextPage = function(){
         $scope.gridApi.pagination.nextPage();
+        if($scope.paging.pageSelected != $scope.totalPages) {
+            $scope.paging.pageSelected = $scope.paging.pageSelected + 1;
+        }
+        else{
+            $scope.paging.pageSelected = $scope.paging.pageSelected;
+        }
         $scope.changeHeight(0);
     }
     $scope.prevPage = function(){
         $scope.gridApi.pagination.previousPage();
+        if($scope.paging.pageSelected != 1) {
+            $scope.paging.pageSelected = $scope.paging.pageSelected - 1;
+        }
+        else{
+            $scope.paging.pageSelected = $scope.paging.pageSelected;
+        }
         $scope.changeHeight(0);
     }
-    $scope.changeHeight = function(val){
-        heightCalc.calculateGridHeight(val);
+    $scope.seek = function(pageSelected){
+        $scope.paging.pageSelected = pageSelected;
+        $scope.gridApi.pagination.seek($scope.paging.pageSelected);
+        $scope.changeHeight(0);
     }
+    $scope.totalPages = 0;
+    $scope.paging = {
+        pageSelected : 1
+    };
+    $scope.pageNumber = [];
+    $scope.$watch('totalPages',function(newVal , oldVal){
+        $scope.totalPages = newVal;
+        for(i=0;i<newVal;i++){
+            $scope.pageNumber[i] = i+1; 
+        }
+    });
     //$scope.gridOptions.data = [];
     vendorServices.getVendors().then(function(response){
         $scope.gridOptions.data = response.data;
+        $scope.totalPages = Math.ceil(response.data.length / $scope.gridOptions.paginationPageSize);
         if($scope.gridOptions.data.length !== 0){
             $scope.changeHeight(0);
         }

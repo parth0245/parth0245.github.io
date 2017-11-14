@@ -97,7 +97,7 @@ app.constant('CONSTANTS', {
                         enableVerticalScrollbar : 0 ,
                         enablePaginationControls: false,
                         paginationPageSizes: [5 , 10, 20 , 25],
-                        paginationPageSize: 10,
+                        paginationPageSize: 5,
                         treeRowHeaderAlwaysVisible:false,
                         showColumnFooter: false,
                         columnDefs : this[gridName+"fields"]

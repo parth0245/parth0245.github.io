@@ -95,9 +95,9 @@
                 <img src="application/Images/Assets/pagination_right.png"/>
             </span>
             <span class="ui-grid-pager-row-count-picker">
-                <select class="selectPaginationBox" ng-model="gridOptions.paginationPageSize" 
-                ng-change="changeHeight(0)"
-                 ng-options="o as o for o in gridOptions.paginationPageSizes">
+                <select class="selectPaginationBox" ng-model="paging.pageSelected" 
+                ng-change="seek(paging.pageSelected)"
+                 ng-options="o for o in pageNumber">
                 </select>
             </span>
     </div>
