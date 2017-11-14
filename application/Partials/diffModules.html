@@ -1,7 +1,7 @@
 <div ng-class="moduleHeading == 'Application Users' || moduleHeading == 'Role List'  ? 'paddingLeft130' : 'paddingLeft60'" layout="column" style="overflow-y: hidden">
 
         <div class="col-xs-12 sectionSubHeading" ng-if="addNewUserPanel">
-            <h2>New User</h2>
+            <h2>{{userType}} User</h2>
         </div>
         <div class="topPadding20 fontNormal col-xs-11 organizationLevelRoute" ng-if="addNewUserPanel">
                 <md-content>
@@ -48,8 +48,8 @@
                                 </div>
                                 <div layout="row" class="addPaddingButtons">
                                         <md-button class="md-raised ifBold" flex-offset="55">Reset</md-button>
-                                        <md-button class="md-raised md-primary ifBold">Save</md-button>
-                                        <md-button class="md-raised ifBold" ng-click="add()">Cancel</md-button>
+                                        <md-button class="md-raised md-primary ifBold">{{usertypeBtn}}</md-button>
+                                        <md-button class="md-raised ifBold" ng-click="cancel()">Cancel</md-button>
                                 </div>
                         </form>
                 </md-content>

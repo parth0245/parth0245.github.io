@@ -30,8 +30,12 @@ app.controller('organizationUserCtrl',function($rootScope,$scope ,$state ,$timeo
 
     $scope.addNewUserPanel = false;
     $scope.add = function(){
-        //$state.go('Home.addLedgers');
-        $scope.addNewUserPanel = !$scope.addNewUserPanel;
+        $scope.addNewUserPanel = true;
+        $scope.userType = "New";
+        $scope.usertypeBtn = "Save";
+    }
+    $scope.cancel = function(){
+        $scope.addNewUserPanel = false;
     }
 
     $scope.moduleHeading = 'Application Users';
@@ -46,6 +50,11 @@ app.controller('organizationUserCtrl',function($rootScope,$scope ,$state ,$timeo
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('OrganizationUser');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
+        $scope.gridApi.selection.on.rowSelectionChanged($scope, function(row){
+            $scope.addNewUserPanel = true;
+            $scope.userType = "Update";
+            $scope.usertypeBtn = "Update";
+        });
     }
     $scope.nextPage = function(){
         $scope.gridApi.pagination.nextPage();
@@ -76,9 +85,10 @@ app.controller('organizationRoleCtrl',function($rootScope,$scope ,$state ,$timeo
     $rootScope.isSubActive = 'Roles';
     $rootScope.showNavigations = false;
     $scope.$parent.organizationNavigation = CONSTANTS.organizationNavigation;
+    $scope.myObj = {};
 
     $scope.add = function(){
-        $state.go('Home.addRole');
+        $state.go('Home.addRole', { data: $scope.myObj });
     }
 
     $scope.moduleHeading = 'Role List';
@@ -93,6 +103,9 @@ app.controller('organizationRoleCtrl',function($rootScope,$scope ,$state ,$timeo
     $scope.gridOptions = CONSTANTS.gridOptionsConstants('RoleList');
     $scope.gridOptions.onRegisterApi = function( gridApi ) {
         $scope.gridApi = gridApi;
+        $scope.gridApi.selection.on.rowSelectionChanged($scope, function(row){
+            $state.go('Home.addRole' , { data: row.entity });
+        });
     }
     $scope.nextPage = function(){
         $scope.gridApi.pagination.nextPage();
@@ -120,12 +133,19 @@ app.controller('organizationRoleCtrl',function($rootScope,$scope ,$state ,$timeo
 
 });
 
-app.controller('addRoleCtrl',function($rootScope , $scope , CONSTANTS){
+app.controller('addRoleCtrl',function($rootScope , $scope , CONSTANTS , $stateParams){
     console.log('Inside Organization Add Role Controller');
     $rootScope.isActive = 'Org Level';
     $rootScope.isSubActive = 'Roles';
     $rootScope.showNavigations = false;
     $scope.$parent.organizationNavigation = CONSTANTS.organizationNavigation;
 
-    
+    if(angular.isDefined($stateParams.data.category)) {
+        $scope.heading = "Update";
+        $scope.btnLabel = "Update";
+    }
+    else {
+        $scope.heading = "New";
+        $scope.btnLabel = "Save";
+    }
 });

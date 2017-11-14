@@ -180,7 +180,8 @@ app.config(function($stateProvider , $urlRouterProvider,  $locationProvider , fl
     .state('Home.addRole', {
         url: '/addRole',
         templateUrl: 'application/Partials/addRole.html',
-        controller: 'addRoleCtrl'
+        controller: 'addRoleCtrl',
+        params: {data : ''}
     })
     .state('Home.Help', {
         url: '/help',
